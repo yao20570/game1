@@ -1,0 +1,5 @@
+{
+ "1" : {"ID" : 1 ,"type" : 1 ,"soldier" : [1,2] ,"skillgroup" : [601,602,603,604,605,606,607,608,609] ,"auragroup" : [201]  },
+ "2" : {"ID" : 2 ,"type" : 2 ,"soldier" : [2,3] ,"skillgroup" : [] ,"auragroup" : [202,203]  },
+ "3" : {"ID" : 3 ,"type" : 3 ,"soldier" : [3,4] ,"skillgroup" : [701,702,703,704,705,706,707,708,709] ,"auragroup" : [204]  }
+}

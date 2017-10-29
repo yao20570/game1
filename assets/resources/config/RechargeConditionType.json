@@ -1,0 +1,22 @@
+{
+ "1" : {"ID" : 1 ,"conditionID" : 1 ,"conditionTime" : 100 ,"rate" : 20  },
+ "2" : {"ID" : 2 ,"conditionID" : 1 ,"conditionTime" : 300 ,"rate" : 30  },
+ "3" : {"ID" : 3 ,"conditionID" : 1 ,"conditionTime" : 500 ,"rate" : 100  },
+ "4" : {"ID" : 4 ,"conditionID" : 1 ,"conditionTime" : 1000 ,"rate" : 100  },
+ "5" : {"ID" : 5 ,"conditionID" : 1 ,"conditionTime" : 1980 ,"rate" : 250  },
+ "6" : {"ID" : 6 ,"conditionID" : 1 ,"conditionTime" : 5000 ,"rate" : 20  },
+ "7" : {"ID" : 7 ,"conditionID" : 1 ,"conditionTime" : 6480 ,"rate" : 300  },
+ "8" : {"ID" : 8 ,"conditionID" : 1 ,"conditionTime" : 10000 ,"rate" : 50  },
+ "9" : {"ID" : 9 ,"conditionID" : 1 ,"conditionTime" : 20000 ,"rate" : 100  },
+ "10" : {"ID" : 10 ,"conditionID" : 1 ,"conditionTime" : 30000 ,"rate" : 30  },
+ "11" : {"ID" : 11 ,"conditionID" : 2 ,"conditionTime" : 100 ,"rate" : 10  },
+ "12" : {"ID" : 12 ,"conditionID" : 2 ,"conditionTime" : 200 ,"rate" : 10  },
+ "13" : {"ID" : 13 ,"conditionID" : 2 ,"conditionTime" : 300 ,"rate" : 10  },
+ "14" : {"ID" : 14 ,"conditionID" : 2 ,"conditionTime" : 400 ,"rate" : 10  },
+ "15" : {"ID" : 15 ,"conditionID" : 2 ,"conditionTime" : 500 ,"rate" : 10  },
+ "16" : {"ID" : 16 ,"conditionID" : 2 ,"conditionTime" : 600 ,"rate" : 10  },
+ "17" : {"ID" : 17 ,"conditionID" : 2 ,"conditionTime" : 700 ,"rate" : 10  },
+ "18" : {"ID" : 18 ,"conditionID" : 2 ,"conditionTime" : 800 ,"rate" : 10  },
+ "19" : {"ID" : 19 ,"conditionID" : 2 ,"conditionTime" : 900 ,"rate" : 10  },
+ "20" : {"ID" : 20 ,"conditionID" : 2 ,"conditionTime" : 1000 ,"rate" : 10  }
+}

@@ -1,0 +1,14 @@
+{
+ "1" : {"ID" : 1 ,"chapterID" : 1 ,"sort" : 1 ,"type" : 67 ,"finishcond1" : 0 ,"finishcond2" : 20 ,"reward" : [[401,1038,1],[401,4061,10]]  },
+ "2" : {"ID" : 2 ,"chapterID" : 1 ,"sort" : 2 ,"type" : 72 ,"finishcond1" : 0 ,"finishcond2" : 3 ,"reward" : [[401,1042,1],[401,3134,10]]  },
+ "3" : {"ID" : 3 ,"chapterID" : 1 ,"sort" : 3 ,"type" : 71 ,"finishcond1" : 2 ,"finishcond2" : 5 ,"reward" : [[401,1003,1],[401,3144,5]]  },
+ "4" : {"ID" : 4 ,"chapterID" : 1 ,"sort" : 4 ,"type" : 73 ,"finishcond1" : 0 ,"finishcond2" : 10 ,"reward" : [[401,1031,1],[401,3154,5]]  },
+ "5" : {"ID" : 5 ,"chapterID" : 2 ,"sort" : 1 ,"type" : 65 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"reward" : [[401,1038,2],[401,4086,10]]  },
+ "6" : {"ID" : 6 ,"chapterID" : 2 ,"sort" : 2 ,"type" : 60 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"reward" : [[401,1043,1],[401,3135,10]]  },
+ "7" : {"ID" : 7 ,"chapterID" : 2 ,"sort" : 3 ,"type" : 66 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"reward" : [[401,1032,2],[401,3146,10]]  },
+ "8" : {"ID" : 8 ,"chapterID" : 2 ,"sort" : 4 ,"type" : 64 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"reward" : [[401,1043,1],[401,3155,15]]  },
+ "9" : {"ID" : 9 ,"chapterID" : 3 ,"sort" : 1 ,"type" : 69 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"reward" : [[401,1039,1],[401,4087,10]]  },
+ "10" : {"ID" : 10 ,"chapterID" : 3 ,"sort" : 2 ,"type" : 61 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"reward" : [[401,1044,1],[401,3131,10]]  },
+ "11" : {"ID" : 11 ,"chapterID" : 3 ,"sort" : 3 ,"type" : 62 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"reward" : [[401,1033,1],[401,3141,5]]  },
+ "12" : {"ID" : 12 ,"chapterID" : 3 ,"sort" : 4 ,"type" : 63 ,"finishcond1" : 3 ,"finishcond2" : 1 ,"reward" : [[401,1044,1],[401,3151,10]]  }
+}

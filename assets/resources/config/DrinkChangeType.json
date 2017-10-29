@@ -1,0 +1,17 @@
+{
+ "1" : {"ID" : 1 ,"target" : [[401,4229,1]] ,"consume" : [[407,223,268]] ,"condition" : [114,0,12] ,"daymax" : 3 ,"firstAward" : [[409,8,1]]  },
+ "2" : {"ID" : 2 ,"target" : [[401,4230,1]] ,"consume" : [[407,223,7888]] ,"condition" : [114,0,12] ,"daymax" : 3 ,"firstAward" : []  },
+ "3" : {"ID" : 3 ,"target" : [[412,16,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,15,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "4" : {"ID" : 4 ,"target" : [[412,18,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,20,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "5" : {"ID" : 5 ,"target" : [[412,13,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,25,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "6" : {"ID" : 6 ,"target" : [[412,21,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,30,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "7" : {"ID" : 7 ,"target" : [[412,19,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,35,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "8" : {"ID" : 8 ,"target" : [[412,17,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,40,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "9" : {"ID" : 9 ,"target" : [[412,20,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,45,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "10" : {"ID" : 10 ,"target" : [[412,23,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,50,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "11" : {"ID" : 11 ,"target" : [[412,24,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,50,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "12" : {"ID" : 12 ,"target" : [[412,22,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,55,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "13" : {"ID" : 13 ,"target" : [[412,25,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,55,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "14" : {"ID" : 14 ,"target" : [[412,26,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,60,80] ,"daymax" : 5 ,"firstAward" : []  },
+ "15" : {"ID" : 15 ,"target" : [[412,27,1]] ,"consume" : [[407,223,188]] ,"condition" : [110,60,80] ,"daymax" : 5 ,"firstAward" : []  }
+}

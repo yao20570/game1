@@ -1,0 +1,47 @@
+package M53;
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M53"; // 军功相关协议
+
+import "Common.proto";
+
+message MilitaryExploitInfo{ // 军功信息
+	optional int32 value = 1;		// 今日军功
+	optional int32 totalReward = 2;	// 今日已获得宝箱
+	optional int32 rewardNum = 3;	// 当前拥有的宝箱
+	optional int32 usedTimes = 4;	// 已用重置次数
+	optional int32 groupId = 5;	// 奖励组Id
+}
+
+message GetRewardInfo{ // 奖励信息
+	repeated Common.RewardInfo rewards = 1;	// 获得奖励
+	optional int32 multiple = 2;			// 暴击倍数
+}
+
+message M530000{ // 打开宝箱
+	message S2C{
+		required int32 rs = 1;					// 错误码
+		repeated GetRewardInfo rewards = 2;		// 奖励信息
+		optional MilitaryExploitInfo info = 3;	// 军功信息
+	}
+
+	message C2S{
+		required int32 times = 1;				// 开启个数
+	}
+}
+
+message M530001{ // 手动重置
+	message S2C{
+		required int32 rs = 1;					// 错误码
+		optional MilitaryExploitInfo info = 2;	// 军功信息
+	}
+
+	message C2S{
+	}
+}
+
+message M530002 { // 军功变动时推送
+	message S2C{
+		optional MilitaryExploitInfo info = 1;	// 军功信息
+	}
+}

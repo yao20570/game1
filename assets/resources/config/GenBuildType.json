@@ -1,0 +1,4 @@
+{
+ "1" : {"ID" : 1 ,"info" : "{{txt='本次群雄逐鹿获得第',color='#fcda7e'},{txt='$XXX',color='#81c5ff'},{txt='名。发放奖励',color='#fcda7e'},{txt='$NAME1',color='#fcda7e'}}" ,"type" : 1  },
+ "2" : {"ID" : 2 ,"info" : "{{txt='本次同盟占领',color='#fcda7e'},{txt='$XXX',color='#81c5ff'},{txt='个郡城，发放整点奖励',color='#fcda7e'},{txt='$NAME1',color='#fcda7e'},{txt='（发放到福利院）',color='#fcda7e'}}" ,"type" : 2  }
+}

@@ -1,0 +1,53 @@
+package M57;
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M57"; // 限时活动——富贵豪庄相关协议
+
+import "Common.proto";
+
+message RichManorInfo{ // 富贵豪庄信息
+	required int32 activityId = 1;			// 活动id
+	optional int32 changeTimes = 2;			// 剩余改命次数
+	repeated int32 diceInfo = 3;			// 骰子点数信息
+	optional int32 state = 4;				// 当前状态，0：未开局，1：进行中
+	repeated ItemExchangeInfo itemInfo = 5;	// 道具兑换信息
+}
+
+message ItemExchangeInfo{ // 道具兑换信息
+	optional int32 id = 1;		// 兑换表的ID
+	optional int32 times = 2;	// 已兑换次数
+}
+
+message M570000{ // 开局或改命
+	message S2C{
+		required int32 rs = 1;				// 错误码
+		optional RichManorInfo info = 2;	// 富贵豪庄信息
+	}
+
+	message C2S{
+		required int32 activityId = 1;		// 活动id
+	}
+}
+
+message M570001{ // 确定骰子点数
+	message S2C{
+		required int32 rs = 1;				// 错误码
+		optional RichManorInfo info = 2;	// 富贵豪庄信息
+	}
+
+	message C2S{
+		required int32 activityId = 1;		// 活动id
+	}
+}
+
+message M570002 { // 兑换物品
+	message S2C{
+		required int32 rs = 1;				// 错误码
+		optional RichManorInfo info = 2;	// 富贵豪庄信息
+	}
+
+	message C2S{
+		required int32 activityId = 1;	// 活动id
+		required int32 id = 2;			// 兑换表的ID
+	}
+}

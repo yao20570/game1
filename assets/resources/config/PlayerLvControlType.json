@@ -1,0 +1,10 @@
+{
+ "1" : {"ID" : 1 ,"playerLvMax" : 30 ,"worldLevel" : 0 ,"serverDays" : 0 ,"unlockTime" : 0 ,"unlockTimeMax" : 0  },
+ "2" : {"ID" : 2 ,"playerLvMax" : 40 ,"worldLevel" : 30 ,"serverDays" : 604800 ,"unlockTime" : 82800 ,"unlockTimeMax" : 1296000  },
+ "3" : {"ID" : 3 ,"playerLvMax" : 50 ,"worldLevel" : 40 ,"serverDays" : 2160000 ,"unlockTime" : 169200 ,"unlockTimeMax" : 3024000  },
+ "4" : {"ID" : 4 ,"playerLvMax" : 60 ,"worldLevel" : 50 ,"serverDays" : 3888000 ,"unlockTime" : 255600 ,"unlockTimeMax" : 4752000  },
+ "5" : {"ID" : 5 ,"playerLvMax" : 70 ,"worldLevel" : 65 ,"serverDays" : 7776000 ,"unlockTime" : 428400 ,"unlockTimeMax" : 10368000  },
+ "6" : {"ID" : 6 ,"playerLvMax" : 80 ,"worldLevel" : 75 ,"serverDays" : 15552000 ,"unlockTime" : 601200 ,"unlockTimeMax" : 18144000  },
+ "7" : {"ID" : 7 ,"playerLvMax" : 65 ,"worldLevel" : 60 ,"serverDays" : 5616000 ,"unlockTime" : 428400 ,"unlockTimeMax" : 6912000  },
+ "8" : {"ID" : 8 ,"playerLvMax" : 75 ,"worldLevel" : 70 ,"serverDays" : 11232000 ,"unlockTime" : 514800 ,"unlockTimeMax" : 12960000  }
+}

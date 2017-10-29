@@ -1,0 +1,218 @@
+package M37;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M37";  //科举协议
+
+message TriennialExamInfo{
+  required int32 state=1;//状态0未开启，1开启中，2答题中 3，答题完成了活动还是开启中
+  optional int32 hasNum=2;//已经答题数
+  optional int32 nextTime=3;//倒计时---单题
+  repeated int32 testIds=4;//试卷ids  有的时候才会发
+  optional int32 nextOpenTime=5;//下次开启时间\
+  optional int32 integral=6;//当前本次积分
+  optional int32 hasReward=7;//0不可领，1，可领，2已领取
+  optional int32 lessTime=8;//答题中剩余时间
+}
+
+message M370000{//查看具体的乡试信息
+     message S2C{
+      required int32 rs=1;//错误码
+      optional TriennialExamInfo info = 2;
+     }
+
+     message C2S{
+    
+     }
+}
+
+
+message M370001{//乡试开始答题
+     message S2C{
+      required int32 rs=1;//错误码
+      repeated int32 testIds=2;//试卷ids
+     }
+     message C2S{
+    
+     }
+}
+
+message M370002{//乡试提交答题
+     message S2C{
+      required int32 rs=1;//错误码0正确，1答错
+      optional int32 integral=2;//当前积分
+     }
+
+     message C2S{
+      required int32 answer=1;//答案
+      required int32 sort=2;//题号
+     }
+}
+
+
+message TriennialRankInfo{ //乡试排行榜信息
+    required int32 rank=1;  //排名
+    required string name=2; //角色名
+    optional int32 level=3;   //等级
+    required int64 value=5; //积分
+    required fixed64 playerId=6;  //玩家Id
+    optional int32  time=7;//总答题时间
+}
+
+message M370003{//乡试排行榜
+     message S2C{
+      required int32 rs=1;//错误码
+      repeated TriennialRankInfo infos=2;//排行榜信息   
+      optional MyInfo myInfo=3;//个人排行榜信息
+     }
+
+     message C2S{
+      
+     }
+}
+
+
+
+
+message MyInfo{//自己的排行信息
+  required int32 rank=1;  //排名-1未上榜
+  optional int64 vlaue=2;   //积分
+}
+
+message M370004{//领取本次乡试积分奖励
+     message S2C{
+      required int32 rs=1;//错误码
+     }
+
+     message C2S{
+      
+     }
+}
+
+
+message M370005{//乡试在场景时间到了请求下一题倒计时到0时
+     message S2C{
+      required int32 rs=1;//错误码0成功1不成功
+      optional int32 time=2;//校验不成功本题重新倒计时时间
+      optional int32 integral=3;//当前积分 成功的时候
+     }
+
+     message C2S{
+      
+     }
+}
+
+
+message M370006{//乡试排行榜变更
+     message S2C{
+      required int32 rs=1;//错误码
+      }
+     message C2S{
+      
+     }
+}
+
+
+
+
+
+
+message EmperorExamInfo{//殿试信息
+  required int32 state=1;//状态0未开启，1,等待中，2答题中 ,3答题结束了，活动未结束
+  optional int32 waitTime=2;//倒计时  ---等待中
+  optional int32 sort=3;//当前第几题  ---答题中
+  optional int32 countTime=4;//当前题倒计时  ---答题中 
+  repeated int32 testIds=5;//试卷ids 答题状态才有的试题
+  optional int32 rankReard=6;//殿试排行榜奖励0不可领取，1可领取，2已领取
+  optional int32 integral=7;//当前积分
+  optional int32 nextOpenTime=8;//下次开启时间
+  optional int32 isOnRank=9;//是否在可参加殿试的榜单0不在，1在 
+  optional int32 trueNum=10;//答对题目
+  optional int32 falseNum=11;//答错题目
+  optional string  first=12;//第一名的名字
+  optional int32   answerTime=13;//回答总时间
+  optional int32   firstScore=14;//第一名的积分
+}
+
+message M370100{//查看具体的乡试信息
+     message S2C{
+      required int32 rs=1;//错误码
+      optional EmperorExamInfo info = 2;
+     }
+
+     message C2S{
+    
+     }
+}
+
+
+message M370101{//殿试通知开启答题了
+     message S2C{
+      required int32 rs=1;//错误码
+      repeated int32 testIds=2;//试卷ids
+     }
+     message C2S{
+    
+     }
+}
+
+message M370102{//殿试提交答题
+     message S2C{
+      required int32 rs=1;//错误码0正确，1答错
+      optional int32 integral=2;//当前积分
+      optional int32   answerTime=3;//回答总时间
+    
+     }
+
+     message C2S{
+       required int32 sort=1;//第几题
+       optional int32 result=2;//答案
+     }
+}
+
+
+message EmperorRankInfo{ //殿试排行榜信息
+    required int32 rank=1;  //排名
+    required string name=2; //角色名
+    optional int32 level=3;   //等级
+    required int64 value=5; //积分
+    required fixed64 playerId=6;  //玩家Id
+    optional int32  time=7;//总答题时间
+}
+
+message M370103{//殿试排行榜 在殿试关闭状态才会请求 且请求一次就好了
+     message S2C{
+      required int32 rs=1;//错误码
+      repeated EmperorRankInfo infos=2;//排行榜信息
+      optional MyInfo myInfo=3;//个人排行榜信息
+     }
+
+     message C2S{
+      
+     }
+}
+
+message M370104{//领取殿试排行榜
+     message S2C{
+      required int32 rs=1;//错误码
+
+     }
+
+     message C2S{
+      
+     }
+}
+
+
+message M370105{//状元推送
+     message S2C{
+      required string name=1; //角色名
+      required int32 score=2; //积分
+      required int32 rs=3;//错误码
+     }
+
+     message C2S{
+      
+     }
+}
+
+

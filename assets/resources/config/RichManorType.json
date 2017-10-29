@@ -1,0 +1,6 @@
+{
+ "1" : {"ID" : 1 ,"effectID" : 1 ,"priceID" : 1 ,"exchangeID" : 1 ,"changeLimit" : 6 ,"rewardGroup" : 1 ,"randomID" : 1 ,"priceChange" : 15  },
+ "2" : {"ID" : 2 ,"effectID" : 2 ,"priceID" : 1 ,"exchangeID" : 2 ,"changeLimit" : 6 ,"rewardGroup" : 1 ,"randomID" : 1 ,"priceChange" : 15  },
+ "3" : {"ID" : 3 ,"effectID" : 3 ,"priceID" : 1 ,"exchangeID" : 3 ,"changeLimit" : 6 ,"rewardGroup" : 1 ,"randomID" : 1 ,"priceChange" : 15  },
+ "4" : {"ID" : 4 ,"effectID" : 4 ,"priceID" : 1 ,"exchangeID" : 4 ,"changeLimit" : 6 ,"rewardGroup" : 1 ,"randomID" : 1 ,"priceChange" : 15  }
+}

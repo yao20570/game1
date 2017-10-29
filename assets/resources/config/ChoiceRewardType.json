@@ -1,0 +1,10 @@
+{
+ "1" : {"ID" : 1 ,"choicenum" : 1 ,"rewardID" : 1 ,"color" : 4  },
+ "2" : {"ID" : 2 ,"choicenum" : 1 ,"rewardID" : 2 ,"color" : 4  },
+ "3" : {"ID" : 3 ,"choicenum" : 1 ,"rewardID" : 3 ,"color" : 4  },
+ "4" : {"ID" : 4 ,"choicenum" : 1 ,"rewardID" : 4 ,"color" : 4  },
+ "5" : {"ID" : 5 ,"choicenum" : 1 ,"rewardID" : 5 ,"color" : 4  },
+ "6" : {"ID" : 6 ,"choicenum" : 1 ,"rewardID" : 6 ,"color" : 4  },
+ "7" : {"ID" : 7 ,"choicenum" : 1 ,"rewardID" : 7 ,"color" : 4  },
+ "8" : {"ID" : 8 ,"choicenum" : 1 ,"rewardID" : 8 ,"color" : 4  }
+}

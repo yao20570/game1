@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "9521255a-3047-44be-8e9d-45ff7eaa785b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Icon_WeekCard_down": {
+      "ver": "1.0.3",
+      "uuid": "b6ace427-c113-48d7-83a2-012fda55a321",
+      "rawTextureUuid": "9521255a-3047-44be-8e9d-45ff7eaa785b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 63,
+      "height": 64,
+      "rawWidth": 63,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,37 @@
+package M38;
+
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M38";  //vip特供活动
+
+import "Common.proto";
+
+message VipSupplyInfo{ //vip特供活动信息
+  repeated int32 receiveTimes = 1;//初始化列表：里面包含5个初始值（0 0 0 0 0） 0 表示不可领取 1 表示未领取 2表示已领取）
+	optional int32 remainingTime = 2;//未成为vip的活动剩余时间
+	
+}
+
+
+message M380000{  //推送vip特供信息
+   message S2C{
+    required int32 rs = 1;//错误码（客户端需要判断）
+    required VipSupplyInfo info = 2;//vip特供信息
+   }
+
+   message C2S{
+   }
+  
+}
+
+
+message M380001{ //领取vip特供
+  message S2C{
+     required int32 rs =1;//错误码
+     optional int32 receiveDay = 2;//成功之后返回当前天数
+  }
+
+  message C2S{
+     required int32 receiveDay = 1;//当前需要领取的那一天
+  }
+	
+}

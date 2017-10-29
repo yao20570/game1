@@ -1,0 +1,281 @@
+package M28;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M28";  //新的建筑协议
+
+import "Common.proto";
+
+message BuildingInfo{  //建筑信息
+	required int32 index = 1; //所在大类的位置 对应配置表的ID
+	required int32 buildingType = 2; //建筑类型  0为空地
+	required int32 level = 3; //建筑等级 0级可建造
+	optional int32 levelTime = 4; //升级完成时间倒计时
+	repeated ProductionInfo productionInfos = 5; //生产队列信息
+	repeated TechnologyInfo technologyInfos = 6; //太学院独有的信息
+}
+
+
+message HelpBuild{  //在帮助列表的建筑
+	required int32 index = 1; //所在大类的位置 对应配置表的ID
+	required int32 buildingType = 2; //建筑类型  0为空地
+}
+
+message ProductionInfo{  //建筑生产信息
+	required int32 typeid = 1; //类型ID
+	required int32 num = 2; //数量
+	required int32 state = 3;  //生产类型 1生产中， 2等待生产
+	optional int32 remainTime = 4; //生产的剩余时间，只有1的时候才赋值，2的情况，客户端自己算
+	optional int32 order=5;//顺序
+}
+
+message TechnologyInfo{  //太学院独有的建筑信息，用来记录各个科技的等级,只有等级大于0的时候才发！
+	required int32 typeid = 1;
+	required int32 level = 2;
+}
+
+//自动升级信息，用来处理自动建筑的初始化
+message AutoUpgradeInfo{
+	required int32 type = 1; //1开启，0关闭
+	required int32 autoRemainTime = 2; //剩余时间，0的话，也可能有值
+}
+
+//简要信息，只来用批量操作逻辑
+message BuildingShortInfo{
+	required int32 buildingType = 1;//建筑类型 
+	required int32 index = 2;  //建筑位置
+	optional int32 rs = 3;   //每个操作的rs错误码
+	optional int32 levelTime = 4; //时间校验时才发！
+	optional int32 level=5;//当前等级
+}
+
+message M280001{ ////建筑请求升级 包括建造（0级升1级） 建筑位不够时，客户端自己判断是否要弹出购买建筑提示框 使用批量的，自动升级会多个一起升级
+	message S2C{
+	    repeated BuildingShortInfo buildingShortInfos = 1; //批量请求 建筑类型 客户端通过建筑类型 判断是否野外还是主城 所需时间自己算
+	}
+
+	message C2S{
+	   repeated BuildingShortInfo buildingShortInfos = 1; //批量请求
+       required int32 type = 2;  //1普通升级 2金币升级
+	}
+}
+
+message M280002{ //请求完成升级 包括建造（0级升1级）完成成功后，客户端做对应的逻辑
+	
+	message S2C{
+	    repeated BuildingShortInfo buildingShortInfos = 1; 
+	}
+
+	message C2S{
+	    repeated BuildingShortInfo buildingShortInfos = 1; //批量请求
+	}
+}
+
+message M280003{ //取消建筑升级
+    
+    message S2C{
+        required sint32 rs = 1;//错误码
+        optional int32 index = 2;//建筑位置
+	    optional int32 buildingType = 3;//建筑类型
+    }
+
+	message C2S{
+	   required int32 buildingType = 1;//建筑类型
+       required int32 index= 2;//建筑位置
+	}
+}
+
+message M280004{  //建筑加速升级
+	
+	message S2C{
+	    required sint32 rs = 1;//错误码
+	    optional int32 index = 2;//建筑位置
+	    optional int32 buildingType = 3;//建筑类型
+	    optional int32 levelTime = 4; //当等于0时，则表示加速升级完成了
+	}
+
+	message C2S{
+	    required int32 buildingType = 1;//建筑类型
+	    required int32 index= 2;//建筑位置
+	    required int32 useType = 3; //1金币全部加速 2：道具1 3：道具2 4：道具3
+	    optional int32 useNum=4;//使用的数量
+	}
+}
+
+message M280005{  //野外建筑拆除
+	
+	message S2C{
+	    required sint32 rs = 1;//错误码
+	    optional int32 index= 2;//原样返回：建筑位置 拆除成功，则把该建筑的类型置为0，空地
+	}
+
+	message C2S{
+       required int32 index= 1;//建筑位置
+	}
+}
+
+message M280006{  //建筑生产 包括 兵营，校场，工匠坊，科技
+	
+	message S2C{
+	    required sint32 rs = 1;//错误码
+	    optional ProductionInfo productionInfo = 2; //新增的生产信息
+	    optional int32 index = 4;//建筑位置
+	    optional int32 buildingType = 5;//建筑类型
+	}
+
+	message C2S{
+	   required int32 buildingType= 1;//建筑类型
+       required int32 index= 2;//建筑位置
+       required int32 typeid =3 ; //所要生产的类型ID
+       required int32 num = 4; //所要生产的数量
+	}
+}
+
+message M280007{  //请求生产完成
+	
+	message S2C{ 
+        required sint32 rs = 1;//错误码
+        optional int32 buildingType= 2;//建筑类型
+        optional int32 index= 3;//建筑位置
+        optional int32 order = 4;  //完成的order
+        optional int32 nextOrder = 5; //生产完成后，才发；生产完成后，下一个要生产的
+        optional int32 remainTime = 6; //生产完成失败时，同步剩余生产所需时间
+    }
+
+	message C2S{
+	   required int32 buildingType= 1;//建筑类型
+       required int32 index= 2;//建筑位置
+       required int32 order = 3; 
+	}
+}
+
+message M280008{  //取消生产 
+    
+    message S2C{ 
+        required sint32 rs = 1;//错误码
+        required int32 buildingType= 2;//建筑类型
+        required int32 index= 3;//建筑位置
+        required int32 order = 4; //取消的order
+        optional int32 nextOrder = 5; //取消生产成功后，下一个要生产的
+    }
+	
+	message C2S{
+	   required int32 buildingType= 1;//建筑类型
+       required int32 index= 2;//建筑位置
+       required int32 order = 3; //
+	}
+}
+
+message M280009{ //加速生产
+
+	message  S2C{
+	    required sint32 rs = 1;//错误码
+	    required int32 buildingType= 2;//建筑类型
+        required int32 index= 3;//建筑位置
+        required int32 order = 4; //取消的order
+        optional int32 nextOrder = 5; //生产完成后，才发；生产完成后，下一个要生产的
+        optional int32 remainTime = 6; //同步剩余生产所需时间
+	}
+
+	message C2S{
+	   required int32 buildingType= 1;//建筑类型
+       required int32 index= 2;//建筑位置
+       required int32 order = 3; //
+       required int32 useType = 4; //1金币全部加速 2：道具1 3：道具2 4：道具3
+       optional int32 useNum=5;//使用的数量
+	}
+}
+
+message M280011{ //客户端自己判断是否可以购买VIP购买建筑位，且计算出价格
+	
+	message S2C{
+        required sint32 rs = 1;//错误码
+        optional int32 type = 2;//开关状态：1开启，0关闭 通过该状态，自动启动客户端的升级
+        optional int32 autoRemainTime = 3; //自动升级剩余的时间 如果还有自动升级时间，则自动开始升级，发剩余时间
+	}
+
+	message  C2S{
+	   
+	}
+}
+
+message M280012{ //购买自动升级建筑
+	
+	message S2C{
+        required sint32 rs = 1;//错误码
+        optional int32 type = 2;//开关状态：1开启，0关闭 通过该状态，自动启动客户端的升级
+        optional int32 autoRemainTime = 3; //自动升级剩余的时间
+	}
+
+	message  C2S{
+	   
+	}
+}
+
+message M280013{  //自动升级建筑开关
+
+    message S2C{
+        required sint32 rs = 1;//
+        required int32 type = 2;//原样返回
+    	optional int32 autoRemainTime = 3; //自动升级剩余的时间,校准时间
+    }
+	
+	message  C2S{
+	     required int32 type = 1;//1开启，0关闭
+	}
+}
+
+message M280014{  //完成自动升级建筑 升级建筑倒计时已经结束
+	
+	message S2C{
+        required sint32 rs = 1;//错误码
+        optional int32 autoRemainTime = 2; //结束失败。还有剩余时间，则发过来剩余时间，客户端同步
+    }
+
+	message  C2S{
+	}
+}
+
+
+
+message M280015{  //资源自动产出
+	
+	message S2C{
+        required sint32 rs = 1;//错误码 每次请求都是以60秒请求一次，服务器只做校验
+        repeated Common.AttrDifInfo diffs = 2;//当前的资源
+        optional int32 serverTime = 3;//当前服务器时间
+    }
+
+	message  C2S{
+	}
+}
+
+message M280016{  //建筑升级升级时间更新
+	
+	message S2C{
+       repeated BuildingShortInfo buildingShortInfos = 1; //更新的简要信息
+    }
+
+	message  C2S{
+	}
+}
+
+
+
+
+message M280017{  //寻求军团帮助
+	
+	message S2C{
+       required int32 rs=1;
+       required int32 buildingType= 2;//建筑类型原样返回
+       required int32 index= 3;//建筑位置原样返回
+    }
+	message  C2S{
+	   required int32 buildingType= 1;//建筑类型
+       required int32 index= 2;//建筑位置
+	}
+}
+
+
+
+
+

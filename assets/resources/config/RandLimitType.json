@@ -1,0 +1,22 @@
+{
+ "1" : {"ID" : 1 ,"resettime" : 1 ,"getmax" : 3  },
+ "2" : {"ID" : 2 ,"resettime" : 1 ,"getmax" : 15  },
+ "3" : {"ID" : 3 ,"resettime" : 1 ,"getmax" : 12  },
+ "4" : {"ID" : 4 ,"resettime" : 1 ,"getmax" : 1  },
+ "5" : {"ID" : 5 ,"resettime" : 1 ,"getmax" : 3  },
+ "6" : {"ID" : 6 ,"resettime" : 1 ,"getmax" : 12  },
+ "7" : {"ID" : 7 ,"resettime" : 1 ,"getmax" : 8  },
+ "8" : {"ID" : 8 ,"resettime" : 1 ,"getmax" : 3  },
+ "9" : {"ID" : 9 ,"resettime" : 1 ,"getmax" : 15  },
+ "10" : {"ID" : 10 ,"resettime" : 1 ,"getmax" : 3  },
+ "11" : {"ID" : 11 ,"resettime" : 1 ,"getmax" : 12  },
+ "12" : {"ID" : 12 ,"resettime" : 1 ,"getmax" : 5  },
+ "13" : {"ID" : 13 ,"resettime" : 1 ,"getmax" : 10  },
+ "14" : {"ID" : 14 ,"resettime" : 1 ,"getmax" : 80  },
+ "15" : {"ID" : 15 ,"resettime" : 1 ,"getmax" : 120  },
+ "16" : {"ID" : 16 ,"resettime" : 1 ,"getmax" : 1  },
+ "17" : {"ID" : 17 ,"resettime" : 1 ,"getmax" : 3  },
+ "18" : {"ID" : 18 ,"resettime" : 1 ,"getmax" : 65  },
+ "19" : {"ID" : 19 ,"resettime" : 1 ,"getmax" : 32  },
+ "20" : {"ID" : 20 ,"resettime" : 1 ,"getmax" : 16  }
+}

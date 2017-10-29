@@ -1,0 +1,5 @@
+{
+ "1" : {"ID" : 1 ,"type" : 1 ,"skill1" : 1001 ,"skill2" : 601 ,"soldier1" : [1,2]  },
+ "2" : {"ID" : 2 ,"type" : 2 ,"skill1" : 1002 ,"skill2" : 602 ,"soldier1" : [2,3]  },
+ "3" : {"ID" : 3 ,"type" : 3 ,"skill1" : 603 ,"skill2" : 1003 ,"soldier1" : [3,4]  }
+}

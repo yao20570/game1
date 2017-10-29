@@ -1,0 +1,11 @@
+{
+ "1" : {"ID" : 1 ,"name" : "司农" ,"type" : 1 ,"openlv" : 24 ,"skilltype" : 3 ,"proType" : 206 ,"add" : [[1,5],[2,10],[3,15],[4,20]] ,"buffType" : 0 ,"buffadd" : []  },
+ "2" : {"ID" : 2 ,"name" : " 金曹" ,"type" : 2 ,"openlv" : 26 ,"skilltype" : 4 ,"proType" : 79 ,"add" : [[1,3],[2,6],[3,10],[4,15]] ,"buffType" : 0 ,"buffadd" : []  },
+ "3" : {"ID" : 3 ,"name" : "户曹" ,"type" : 3 ,"openlv" : 28 ,"skilltype" : 4 ,"proType" : 76 ,"add" : [[1,3],[2,6],[3,10],[4,15]] ,"buffType" : 0 ,"buffadd" : []  },
+ "4" : {"ID" : 4 ,"name" : "计相" ,"type" : 4 ,"openlv" : 30 ,"skilltype" : 4 ,"proType" : 77 ,"add" : [[1,3],[2,6],[3,10],[4,15]] ,"buffType" : 0 ,"buffadd" : []  },
+ "5" : {"ID" : 5 ,"name" : "兵曹" ,"type" : 5 ,"openlv" : 32 ,"skilltype" : 4 ,"proType" : 82 ,"add" : [[1,3],[2,6],[3,10],[4,15]] ,"buffType" : 0 ,"buffadd" : []  },
+ "6" : {"ID" : 6 ,"name" : "中郎将" ,"type" : 6 ,"openlv" : 34 ,"skilltype" : 1 ,"proType" : 0 ,"add" : [] ,"buffType" : 76 ,"buffadd" : [[1,100],[2,101],[3,102],[4,103]]  },
+ "7" : {"ID" : 7 ,"name" : "车郎将" ,"type" : 7 ,"openlv" : 36 ,"skilltype" : 1 ,"proType" : 0 ,"add" : [] ,"buffType" : 77 ,"buffadd" : [[1,104],[2,105],[3,106],[4,107]]  },
+ "8" : {"ID" : 8 ,"name" : "户郎将" ,"type" : 8 ,"openlv" : 38 ,"skilltype" : 1 ,"proType" : 0 ,"add" : [] ,"buffType" : 78 ,"buffadd" : [[1,108],[2,109],[3,110],[4,111]]  },
+ "9" : {"ID" : 9 ,"name" : "骑郎将" ,"type" : 9 ,"openlv" : 40 ,"skilltype" : 1 ,"proType" : 0 ,"add" : [] ,"buffType" : 79 ,"buffadd" : [[1,112],[2,113],[3,114],[4,115]]  }
+}

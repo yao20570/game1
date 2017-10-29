@@ -1,0 +1,160 @@
+package M52;
+ 
+option java_package = "com.znl.city.proto";   
+option java_outer_classname = "M52";  // 皇城战协议
+
+//皇战信息
+message EmperorCityInfo{
+	required int32 cityId = 1;//皇城id
+	required string legionName = 2;//归属同盟名字
+	optional int32 cityStatus = 3;//状态  0未开放, 1已开放, 2开战期, 3保护期, 4休战期
+	optional int32 x = 4; // x坐标
+	optional int32 y = 5; // y坐标
+}
+
+
+//防守队伍
+message DefTeamInfo{
+	required int32 headId = 1;//玩家头像id
+}
+
+//点击皇城
+message M520000 {
+	message S2C {
+		required int32 rs = 1;
+		optional EmperorCityInfo cityInfo = 2; //皇城信息
+		optional int32 nextStateTime = 3; //下一个状态的剩余时间
+		optional int32 marchTime = 4; //行军时间
+
+		optional int32 integralSpeed = 5;//民忠速度(增长则值为正，衰减则值为负)
+		optional int32 occupyNum = 6;//当前占领值
+
+		optional string defLegionName = 7;//防守同盟名
+		repeated DefTeamInfo defTeamList = 8;//防守队伍列表
+		optional int32 openTime = 9;//下轮战斗的具体时间
+			//收益id（读表配置）
+			//增益id（读表配置）
+			//占领收益（读表配置）
+	}
+
+	message C2S {
+		required int32 x = 1; // x坐标
+		required int32 y = 2; // y坐标
+	}
+}
+
+
+//皇城状态刷新，客户端每隔一段时间请求同步一次数据
+message M521000 {
+	message S2C {
+		required int32 rs =1;
+		required string legionName = 2;//归属同盟名字
+		optional int32 cityStatus = 3;//状态  0未开放, 1已开放, 2开战期, 3保护期, 4休战期
+		optional int32 nextStateTime = 4; //下一个状态的剩余时间
+		optional int32 integralSpeed = 5;//民忠速度(增长则值为正，衰减则值为负)
+		optional int32 occupyNum = 6;//当前占领值
+		optional string defLegionName = 7;//防守同盟名
+		repeated DefTeamInfo defTeamList = 8;//防守队伍列表
+	}
+
+	message C2S {
+		required int32 cityId = 1;//皇城id
+	}
+}
+
+
+//皇城界面结构体
+message EmperorCityStateInfo{
+	required EmperorCityInfo cityInfo = 1;//皇城信息
+	optional int32 officeBuff = 2;//官职加成（TODO：另一个功能内容，暂不处理）
+	required int32 nextRewardTime = 3;//下次领取奖励时间点
+	required int32 rewardState = 4;//领取状态，0不可领取，1可领取，2已领取
+}
+
+
+//打开皇城界面获取信息
+message M520001 {
+
+    message S2C {
+        required int32 rs = 1;
+		repeated EmperorCityStateInfo cityStateInfoList = 2;//皇城界面信息
+			//资源奖励（读表配置）
+    }
+
+    message C2S {
+	}
+}
+
+//点击领取
+message M521001 {
+	message S2C {
+        required int32 rs = 1;
+		required int32 rewardState = 2;//领取状态，0不可领取，1可领取，2已领取
+    }
+
+	message C2S {
+		required int32 cityId = 1;//皇城id
+	}
+}
+
+
+
+
+
+//战报结构体(个人战报从同盟战报中筛选)
+message CityFightInfo{
+	required fixed64 battleId = 1;
+	required string ourSideName = 2;//我方
+	required string enemyName = 3;//敌方
+	required string legionName = 4;//敌方同盟名
+	required int32 result = 5; //战斗结果（0负，1胜）
+	required int32 fightTime = 6;//时间
+	required string positionName = 7;//地点
+}
+
+
+//获取历史战报
+message M520002 {
+	message S2C {
+		required int32 rs = 1;
+        repeated CityFightInfo cityFightInfoList = 2;
+	}
+	
+	message C2S {
+    }
+}
+
+
+//排名数据结构体
+message RankInfo{
+	required int32 rank = 1;//排名
+	required string name = 2;//名字（同盟名/玩家名）
+	required int64 capacity = 3; //战力
+	required int64 militaryValue = 4;//军功值
+}
+
+
+//获取排名
+message M520003 {
+	message S2C {
+        required int32 rs = 1 ;
+        repeated RankInfo legionRankList = 2;//同盟
+		repeated RankInfo personRankList = 3;//个人
+		required int32 rewardState = 4;//领取状态，0不可领取，1可领取，2已领取
+    }
+
+	message C2S {
+    }
+}
+
+//点击领取排名奖励
+message M521003 {
+	message S2C {
+        required int32 rs = 1 ;
+		required int32 rewardState = 2;//领取状态，0不可领取，1可领取，2已领取
+    }
+
+	message C2S {
+    }
+}
+

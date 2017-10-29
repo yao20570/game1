@@ -1,0 +1,424 @@
+package M8;
+
+option java_package = "com.znl.city.proto";
+option java_outer_classname = "M8";  //世界地图协议
+
+import "Common.proto";
+import "M16.proto";
+
+message WorldBuildingInfo{
+	required fixed64 playerId = 1;
+	//required int32 x = 2;
+    //required int32 y = 3;
+    required string name = 4; //玩家名字
+    required int32 level = 5; //玩家等级
+    optional int32 buildIcon = 6;//建筑外观图标
+    optional int32 protect = 7;//保护罩 0无，1有
+    optional int32  icon=9;//头像
+    optional int32  degree=10;//当前繁荣度
+    optional int32  degreemax=11;//繁荣度上限
+    optional int32  pendant=12;//挂件
+    optional int32 pretendIcon = 13;//伪装外观图标，值为图标的id
+    optional int32 banMove = 14;//0为没有限制迁城，1为被限制迁城
+}
+
+message WorldRebelArmyInfo{//叛军信息
+	required fixed64 rebelArmyId = 1;//叛军唯一ID
+	required int32 rebelArmyType = 2;//叛军类型
+	required int32 level = 3;//等级
+	required int32 nowHp = 4;//当前血量百分比（已经*100了，前端那到后直接加上%即可）
+	required M16.SolidierInfo monsterInfo = 5;//兵力信息
+	required int32 capacity = 6;//战力排行榜区间平均战力值（用于拿怪物组和奖励）
+	required int32 masterCapacity = 7;//叛军真实战力
+}
+
+
+message WorldTownInfo{//州城信息
+	required int32 townId = 1;//州城id
+	required string legionName = 2;//军团名字
+	required int32 stateStatus = 3;//状态 -- 0未开放1可宣战时期2宣战（可派兵）期间3开战期间4保护期间5休战期间
+	required int32 nextStateTime = 4; //下一个状态的剩余时间
+	optional int32 attackNum = 5;  //攻数量
+	optional int32 defendNum = 6;  //守数量
+}
+
+
+message EmperorCityInfo{//皇战信息
+	required int32 cityId = 1;//皇城id
+	required string legionName = 2;//占领同盟名
+	required int32 cityStatus = 3;//状态 -> 1未开放, 2休战期, 3准备期, 4开战期
+	required int32 nextStateTime = 4; //下一个状态的剩余时间
+	optional int32 integralSpeed = 5;//民忠速度(增长则值为正，衰减则值为负)
+	optional int32 occupyNum = 6;//当前占领值
+}
+
+
+message WorldTileInfo{ //世界格子信息
+    required int32 x = 1;
+    required int32 y = 2;
+    required int32 tileType = 3; //格子类型 1建筑 2资源点 3空地 4叛军 5 黄巾贼 6 州城 7 城主战 8 皇城 
+	optional WorldBuildingInfo buildingInfo = 4;
+	optional int32 resPointId = 5; //资源点ID
+	optional string legionName = 6; //军团名称
+	optional int32  time=7;//抵达时间
+	optional int32  monsterGroupId = 8;//怪物组
+	optional WorldRebelArmyInfo rebelInfo = 9;//叛军信息
+	optional int32 loyaltyCount = 10;//民忠值
+	optional WorldTownInfo townInfo = 11;//州城信息
+	optional int32 resProtect=12;//资源点保护状态 0为没有保护罩，大于0为有保护罩
+	optional EmperorCityInfo cityInfo = 13; //皇城信息
+}
+
+//侦查周围玩家或者矿点的信息，80015用
+message CheckInfo{
+	required int32 x = 1; //矿点或者玩家的x坐标
+	required int32 y = 2; //矿点或者玩家的y坐标
+	required int32 iconId = 3; //矿点的读表id或者玩家的头像id
+	optional string playerName = 4; //是玩家的时候发玩家名，矿点不用发
+	optional int32 level = 5; //是玩家的时候发玩家等级，矿点不用发
+	required int32 time = 6; //抵达时间
+	optional int32 devValue = 7; //是玩家的时候，发玩家的繁荣度
+	required int32 type = 8; //0代表玩家，1代表矿点
+	optional int32 devLimit=9;//是玩家的时候，发玩家的繁荣度上限
+	optional fixed64 playerId=10;//玩家id
+}
+
+message M80000  {  //查看坐标周围的格子信息
+    message  S2C{
+	    required int32 rs = 1;
+	    repeated WorldTileInfo worldTileInfos = 2; //空地不发
+	    required int32 x = 3;  //请求的x, y，有这个去扩展，补全空地数据
+        required int32 y = 4;
+	}
+
+	message  C2S{
+	    required int32 x = 1;
+        required int32 y = 2;
+	}
+}
+
+message M80001 {		//进攻某个点
+	message  S2C{
+	    required int32 rs = 1;
+
+	}
+
+	message  C2S{
+	    required int32 x = 1;
+        required int32 y = 2;
+        repeated Common.FightElementInfo team = 3;//出战队列
+        optional int32 force = 4;//强制进攻 0为非强制性 >0表示强制
+	}
+}
+
+message M80002 {		//侦查某个格子
+	message  S2C{
+	    required int32 rs = 1;
+	    optional int32 price = 2;
+	    required int32 type = 3;//1.查询价格，2执行侦查
+	    required int32 x = 4;
+        required int32 y = 5;
+        optional fixed64 mailId = 6;
+        optional M16.MailDetalInfo report = 7;//侦查战报
+        optional int32 force = 8;//强制进攻 0为非强制性 >0表示强制
+	}
+
+	message  C2S{
+	    required int32 x = 1;
+        required int32 y = 2;
+        required int32 type = 3;//1.查询价格，2执行侦查
+        optional int32 force = 4;//强制进攻 0为非强制性 >0表示强制
+
+	}
+}
+
+message TaskTeamInfo{
+	required int32 x = 1;//目标的x
+    required int32 y = 2;//目标的y
+    required int32 type = 3;//1.进攻,2返回，3挖掘,4 出发驻防 ， 5 驻防中 ，6 别人的驻军，7 盟战准备开战，8 皇城战准备开战
+	required int32 level = 4;
+	required string name = 5;
+	required int32 soldierNum = 6;
+	required int64 capacity = 7;
+	required int32 maxSoldierNum = 8;
+	required int64 alreadyTime = 9;//已经经过的时间/已经获得的产量
+	required int64 totalTime = 10;//总共时间/总共产量
+	required int64 load = 11;//载重
+	optional int32 product = 12;//每秒生产
+	required fixed64 id = 13;//唯一id
+	repeated Common.FightElementInfo fightInfos= 14;//佣兵单位
+	optional int32 exper = 15;//编制经验
+	optional int32 state =16 ; //驻军状态 1，防守 ，2 未防守
+	optional int32 icon =17;
+	optional int32 startx = 18;//起点x
+    optional int32 starty = 19;//起点y
+    required int32 targetType = 20; //任务目标类型：1=玩家，2=矿点，3=空地OR容错, 4=叛军, 5=郡城pvp, 6=郡城pve，7=皇城pvp，8=皇城pve
+	optional int32 loyaltyCount = 21;//民忠值
+	optional int32 initiative = 22; // 先手值
+	optional fixed64 playerId = 23;//驻军的玩家id(6 别人的驻军才有)
+}
+
+message M80103{  //部队任务完成请求
+
+	message S2C{
+	    required int32 rs = 1;
+	    required fixed64 id = 2;  //部队完成的唯一ID
+	    optional int32 alreadyTime = 3;//已经经过的时间/已经获得的产量只有在时间校验失败才发
+	}
+
+	message C2S{
+	    required fixed64 id = 1; //对应的唯一ID
+	}
+}
+
+message M80104{  //新增加一个任务
+
+	message S2C{
+	    required int32 rs = 1;
+	    required TaskTeamInfo taskTeamInfo = 3; //完成后，对应的完成ID有改变的队伍数据才发
+	    //（ 客户端通过type是否为0来判断是否是服务端发过来的更新数据）
+	}
+
+	message C2S{
+
+	}
+}
+
+message M80004 {	//加速完成任务部队时间
+	message  S2C{
+	    required int32 rs = 1;
+	    required fixed64 id = 2;//完成唯一id 删除已有的列表
+	    optional TaskTeamInfo taskTeamInfo = 3; //完成后，对应的完成ID有改变的队伍数据才发 //（客户端通过type是否为0来判断是否是服务端发过来的更新数据）
+	}
+
+	message  C2S{
+		required fixed64 id = 13;//唯一id
+	}
+}
+
+message M80005{		//搬家
+	message  S2C{
+	    required int32 rs = 1;
+	    optional int32 x = 2;
+		optional int32 y = 3;
+	}
+
+	message  C2S{
+		required int32 x = 1;
+		required int32 y = 2;
+	}
+}
+
+message M80006{		//查看玩家坐标
+	message  S2C{
+	    required int32 rs = 1;
+	    optional int32 x = 2;
+		optional int32 y = 3;
+	}
+
+	message  C2S{
+		required string name = 1;
+		required int32 typeId = 2 ;
+	}
+}
+
+message TeamNoticeInfo{
+	required string name = 1;
+	required int32 level = 2;
+	required int32 id = 3; //-1:己方基地，其他为资源点id
+	required int32 x = 4;
+	required int32 y = 5;
+	required int32 time = 6;//剩余秒数
+	required int32 iconId = 7;
+	required fixed64 key =8;//客户端倒计时的唯一指定key
+	required int32 totalTime = 9;//敌袭到达的总时间
+	optional fixed64 playerId = 23;//敌方玩家id
+}
+
+
+message M80107{  //校验
+	message  S2C{
+		required int32 rs = 1; //0表示时间吻合,删除这个任务，
+		//1表示清空通知列表 -2表示时间不吻合发给我剩余时间
+	    required fixed64 key = 3;//唯一key
+	    optional int32 time = 4;
+	}
+
+	message  C2S{
+		required fixed64 key = 1;//唯一key
+	}
+}
+
+message M80108{  //新的被攻击任务
+	message  S2C{
+		required int32 rs = 1;
+	    repeated TeamNoticeInfo infos = 2;
+	}
+
+	message  C2S{
+	}
+}
+/*****收藏*******/
+
+message CollectInfo{ //收藏信息
+	required string name = 1;
+	required int32 level = 2;
+	required int32 iconId = 3; //图标
+	required int32 x = 4;
+	required int32 y = 5;
+	repeated int32 typelist = 6;//收藏的类型
+	optional fixed64 id=7;//请求收藏可以不用发，主要用于删除服务器的定位
+	optional int32  ower = 8;// 1 是人，2 是资源  客户打端请求不用发
+}
+
+
+message M80011{		//随机迁城令
+	message  S2C{
+	    required int32 rs = 1;
+	    optional int32 x = 2;
+		optional int32 y = 3;
+	}
+
+	message  C2S{
+	}
+}
+
+message M80012{		//获得前往驻守时间
+	message  S2C{
+	    required int32 rs = 1;
+	    optional int32 x = 2;
+		optional int32 y = 3;
+		optional int32 time = 4;//需要的时间（秒）
+	}
+
+	message  C2S{
+		required int32 x = 1;
+		required int32 y = 2;
+	}
+}
+
+message M80013{		//前往驻守
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+		required int32 x = 1;
+		required int32 y = 2;
+		repeated Common.FightElementInfo team = 3;//出战队列
+	}
+}
+
+message M80014 {	//选择为防守队伍
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+		required fixed64 id = 13;//唯一id
+	}
+}
+
+
+message M80015  {  //放大镜信息
+    message  S2C{
+	    required int32 rs = 1;
+	    repeated CheckInfo checkInfos = 2;
+	}
+
+	message  C2S{
+	    required int32 x = 1;
+        required int32 y = 2;
+        optional int32 opt=3;//0初始化1换一批
+	}
+}
+
+
+message M80016  {  //请求客户端刷新保护罩
+    message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+	}
+}
+
+message M80017 {	// 撤军
+	message  S2C{
+	    required int32 rs = 1;
+	    required fixed64 id = 2;//队伍唯一id
+	}
+
+	message  C2S{
+		required fixed64 id = 1;//队伍唯一id
+	}
+}
+
+message M80018 {	// 首次攻打世界玩家成功推送
+	message  S2C{
+	    required int32 rs = 1;
+	    required int32 times = 2;//次数
+	}
+
+	message  C2S{
+	}
+}
+
+
+message M80019 {	// 协助驻军id
+	message  S2C{
+	    required int32 rs = 1;
+	    required fixed64 id = 2;// 当前驻守id 0表示防守本身id ，>0表驻守队伍唯一id
+	}
+
+	message  C2S{
+	}
+}
+
+message M80020{		//主城废墟之后随机迁移主城
+	message  S2C{
+	    required int32 rs = 1;
+	    required int32 x = 2;
+		required int32 y = 3;
+	}
+
+	message  C2S{
+	}
+}
+
+message TaskTeamShortInfo{  //对应的所有简要队伍信息
+	optional int32 startX = 1;//起点x
+    optional int32 startY = 2;//起点y
+    optional int32 endX = 3;//终点x
+    optional int32 endY = 4;//终点y
+    optional int32 type = 5;  //只会发 1.进攻,2返回 4 出发驻防等行军路线队伍
+    optional int64 alreadyTime = 6;//已经经过的时间/已经获得的产量
+	optional int64 totalTime = 7;//总共时间/总共产量
+	optional fixed64 playerId = 8;
+	optional fixed64 legionId = 9;
+	required fixed64 teamId = 10; //队伍ID
+	optional int32 targetType = 11; //任务目标类型：1=玩家，2=矿点，3=空地OR容错, 4=叛军, 5=郡城pvp, 6=郡城pve，7=皇城pvp，8=皇城pve
+
+}
+
+message M80100{	  //同步请求，当前在世界上，所有的简要队伍信息
+    message  S2C{
+        required int32 rs = 1;
+        repeated TaskTeamShortInfo teamInfoList = 2;
+    }
+
+    message  C2S{
+	}
+}
+
+message M80101{  //实时推送 通过 30105来确定场景
+
+	message  S2C{
+        required int32 type = 1;  //推送类型 1更新(包含增加)，2删除
+        optional TaskTeamShortInfo teamInfo = 2;
+    }
+
+	message  C2S{
+	}
+}
+

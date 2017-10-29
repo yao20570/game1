@@ -1,0 +1,84 @@
+package M41;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M41";  //限购、抢卷相关通用协议
+
+
+message ItemInfo{//物品信息
+  required int32 shopItemCfgId = 1; //ShopReward配置表ID
+  required int32 num = 2;//物品数量
+  optional int32 buyNum=3;// 个人已买数量
+}
+
+message SellerInfo{//商人信息
+  required int32 type = 1;//商人类型 1打折商人，2黑市商人
+  required int32 state = 2;//状态 1准备状态（暂时对黑市商人有效），2购买状态，3关闭状态
+  required int32 remainTime = 3;//状态结束剩余秒数
+  repeated ItemInfo itemInfoList = 4;//商品列表
+  required int32 typeId = 5;//商人的配置表id
+  optional int32 coupons = 6;//优惠券（黑市商人用）
+  required fixed64 shoperID = 7;//黑市商人或打折商人dbid   
+
+}
+
+
+message M410000{//人气商人信息列表
+     message S2C{
+      required int32 rs = 1;//错误码
+      repeated SellerInfo sellerDiscount = 2;
+     }
+
+     message C2S{
+        required int32 typeId = 1;//限购类型
+     }
+  
+}
+
+message M410001{//黑市商人信息列表
+     message S2C{
+      required int32 rs = 1;//错误码
+      repeated SellerInfo blackMarketInfo = 2;
+     }
+
+     message C2S{
+      required int32 typeId = 1;//黑市类型
+     }
+  
+}
+
+message M410003{//购买商品
+    message S2C{
+      required int32 rs = 1;//错误码
+      required int32 type = 2;//商人类型 1打折商人，2黑市商人
+      required fixed64 shoperID = 3;//黑市商人或打折商人dbid 
+      required int32 itemCfgId = 4;//物品配置表id
+    }
+
+    message C2S{
+      required int32 type = 1;//商人类型 1打折商人，2黑市商人
+      required int32 itemCfgId = 2;//物品配置表id
+      required int32 num = 3;       //物品数量
+      required fixed64 shoperID = 4;//黑市商人或打折商人dbid 
+    }
+  
+}
+
+message M410004{//黑市抢优惠券
+    message S2C{
+      required int32 rs = 1;//错误码
+      optional int32 coupons = 2;//优惠券（本轮）
+      required int32 typeId = 3;//黑市typeid
+    }
+
+    message C2S{
+       required int32 typeId = 1;//黑市typeid
+    }
+  
+}
+
+
+
+
+
+
+

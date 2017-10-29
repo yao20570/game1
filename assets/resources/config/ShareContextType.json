@@ -1,0 +1,22 @@
+{
+ "1" : {"ID" : 1 ,"type" : 1 ,"shareContent" : "{{txt='侦查：',color='#30c7ff'},{txt='$NAME1',color='#30c7ff',isUnderLine=1},{txt=' Lv.$X',color='#30c7ff',isUnderLine=1}}"  },
+ "2" : {"ID" : 2 ,"type" : 2 ,"shareContent" : "{{txt='攻击矿点：',color='#30c7ff'},{txt='$NAME1',color='#30c7ff',isUnderLine=1}}"  },
+ "3" : {"ID" : 3 ,"type" : 3 ,"shareContent" : "{{txt='征召士兵：',color='$AAA'},{txt='$NAME1',color='$AAA',isUnderLine=1}}"  },
+ "4" : {"ID" : 4 ,"type" : 4 ,"shareContent" : "{{txt='攻击：',color='#30c7ff'},{txt='$NAME1',color='#30c7ff',isUnderLine=1}}"  },
+ "5" : {"ID" : 5 ,"type" : 5 ,"shareContent" : "{{txt='演武场战报：挑战',color='#30c7ff'},{txt=' $NAME1',color='#30c7ff',isUnderLine=1}}"  },
+ "6" : {"ID" : 6 ,"type" : 6 ,"shareContent" : "{{txt='演武场战报：被',color='#30c7ff'},{txt=' $NAME1 ',color='#30c7ff',isUnderLine=1},{txt='挑战',color='#30c7ff'}}"  },
+ "7" : {"ID" : 7 ,"type" : 7 ,"shareContent" : "{{txt='军械：',color='$AAA'},{txt='$NAME1',color='$AAA',isUnderLine=1},{txt='强化 Lv.$X 改造 Lv.$XX',color='$AAA',isUnderLine=1}}"  },
+ "8" : {"ID" : 8 ,"type" : 8 ,"shareContent" : "{{txt='武将：',color='$AAA'},{txt='$NAME1',color='$AAA',isUnderLine=1},{txt='Lv.$X',color='$AAA',isUnderLine=1}}"  },
+ "9" : {"ID" : 9 ,"type" : 9 ,"shareContent" : "{{txt='军师：',color='$AAA'},{txt='$NAME1',color='$AAA',isUnderLine=1}}"  },
+ "10" : {"ID" : 10 ,"type" : 10 ,"shareContent" : "{{txt='宝具：',color='$AAA'},{txt='$NAME1',color='$AAA',isUnderLine=1}}"  },
+ "11" : {"ID" : 11 ,"type" : 11 ,"shareContent" : "{{txt='道具：',color='$AAA'},{txt='$NAME1',color='$AAA',isUnderLine=1}}"  },
+ "12" : {"ID" : 12 ,"type" : 12 ,"shareContent" : "{{txt='我正在采集中，快一起来吧',color='#30c7ff',isUnderLine=1}}"  },
+ "13" : {"ID" : 13 ,"type" : 13 ,"shareContent" : "{{txt='遭到 ',color='#30c7ff'},{txt='Lv.$X ',color='#30c7ff',isUnderLine=1},{txt='$NAME1',color='#30c7ff',isUnderLine=1},{txt='的攻击 ',color='#30c7ff'}}"  },
+ "14" : {"ID" : 14 ,"type" : 14 ,"shareContent" : "{{txt='$NAME1',color='#30c7ff',isUnderLine=1},{txt='同盟发出告示：欢迎加入我们同盟，快去看看 ',color='#eed6aa',isUnderLine=1}}"  },
+ "15" : {"ID" : 15 ,"type" : 15 ,"shareContent" : "{{txt='坐标分享 ',color='#eed6aa'},{txt='我分享了',color='#eed6aa'},{txt='$NAME1 Lv.$A[$X，$Y]',color='#30c7ff'},{txt='。',color='#eed6aa'},{txt='点击前往',color='#1fd816',isUnderLine=1}}"  },
+ "16" : {"ID" : 16 ,"type" : 16 ,"shareContent" : "{{txt='侦查：',color='#30c7ff'},{txt='$NAME1',color='#30c7ff',isUnderLine=1}}"  },
+ "17" : {"ID" : 17 ,"type" : 17 ,"shareContent" : "{{txt='坐标分享 ',color='#eed6aa'},{txt='我分享了',color='#eed6aa'},{txt='$NAME1[$X，$Y]',color='#30c7ff'},{txt='。',color='#eed6aa'},{txt='点击前往',color='#1fd816',isUnderLine=1}}"  },
+ "19" : {"ID" : 19 ,"type" : 19 ,"shareContent" : "{{txt='$NAME1',color='#25ef3c'},{txt='的主城已被',color='#fcda7e'},{txt='$NAME2$NAME3',color='#ff3e3e'},{txt='突破',color='#fcda7e'},{txt='前往反击',color='#1fd816',isUnderLine=1}}"  },
+ "20" : {"ID" : 20 ,"type" : 20 ,"shareContent" : "{{txt='$NAME1',color='#25ef3c'},{txt='的主城正被',color='#fcda7e'},{txt='$NAME2$NAME3',color='#ff3e3e'},{txt='攻打！',color='#25ef3c'},{txt='前往支援！',color='#1fd816',isUnderLine=1}}"  },
+ "21" : {"ID" : 21 ,"type" : 21 ,"shareContent" : "{{txt='$NAME1',color='#81c5ff'},{txt='驻守的',color='#fcda7e'},{txt='$NAME2',color='#25ef3c'},{txt='遭受到',color='#fcda7e'},{txt='$NAME3$NAME4',color='#ff3e3e'},{txt='袭击，防守失败！',color='#fcda7e'},{txt='前往反击',color='#1fd816',isUnderLine=1}}"  }
+}

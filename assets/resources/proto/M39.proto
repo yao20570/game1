@@ -1,0 +1,55 @@
+package M39;
+
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M39";  //国策
+
+import "Common.proto";
+
+message TalentInfo{//天赋信息
+  required int32 talentId = 1;//天赋id
+  required int32 talentLv = 2;//对应的天赋等级
+  required int32 talentState = 3;//天赋状态
+}
+
+message M390000{//获取国策信息
+  message S2C{
+  repeated TalentInfo talentInfo = 1;//国策信息
+  }
+
+  message C2S{
+  }
+	
+}
+
+message M390001{//天赋升级
+  message S2C{
+  required int32 rs = 1;//错误码
+  optional int32 talentId = 2;//升级成功返回该天赋typeId
+  }
+
+  message C2S{
+  required int32 talentId = 1;//需要升级的天赋id
+  }
+}
+
+message M390002{//天赋重置
+  message S2C{
+  required int32 rs = 1;//错误码
+  }
+
+  message C2S{
+  }
+}
+
+
+message M390003{//天赋激活
+  message S2C{
+  required int32 rs = 1;//错误码
+  optional int32 talentId = 2;//激活成功原样返回
+  }
+
+  message C2S{
+  required int32 talentId = 1;//需要激活的天赋id
+  }
+  
+}

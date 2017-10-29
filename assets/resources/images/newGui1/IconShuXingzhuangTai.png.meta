@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "5e401a34-654e-45db-9727-b8cba929eff0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "IconShuXingzhuangTai": {
+      "ver": "1.0.3",
+      "uuid": "c003112b-c66e-4d39-b280-5d729fb4b8c5",
+      "rawTextureUuid": "5e401a34-654e-45db-9727-b8cba929eff0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 20,
+      "height": 21,
+      "rawWidth": 20,
+      "rawHeight": 21,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

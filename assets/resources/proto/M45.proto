@@ -1,0 +1,176 @@
+package M45;
+
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M45";  // 酒馆协议
+
+import "Common.proto";
+
+// 小宴信息
+message BanquetInfo{
+  required int32 banquetFreeTime = 1; // 小宴单抽剩余免费次数
+  required LotteryTimeInfo banquetInfo = 2; // 宴会剩余次数信息（限制次数相关）
+
+}
+// 盛宴信息
+message FeastInfo{
+  required int32 feastFreeTime = 3; // 盛宴单抽剩余免费次数
+  required LotteryTimeInfo banquetInfo = 4; // 宴会剩余次数信息（限制次数相关）
+  required int32 doubleTime = 5; // 盛宴九抽再抽多少次后奖励翻倍
+}
+
+// 剩余次数信息
+message LotteryTimeInfo{
+   required int32 oneLotteryTime = 1; // 单抽剩余次数
+   required int32 nextOneTime = 2; // 下一次是第几次单抽
+   required int32 nineLotteryTime = 3; // 九抽剩余次数
+   required int32 nextNimeTime = 4; // 下一次是第几次九抽
+}
+
+// 获取酒馆小宴信息
+message M450000{ 
+	message S2C{
+	    required int32 rs = 1;
+	    optional BanquetInfo banquetInfo = 2;
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 获取酒馆盛宴信息
+message M450001{ 
+	message S2C{
+	    required int32 rs = 1;
+	    optional FeastInfo feastInfo = 2;
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 小宴购买女儿红
+message M450002{ 
+	message S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 盛宴购买竹叶青
+message M450003{ 
+	message S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 小宴单抽（购买）
+message M450004{ 
+	message S2C{
+	    required int32 rs = 1;
+	    optional Common.RewardInfo reward = 2;
+	    optional BanquetInfo banquetInfo = 3;
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 酒馆小宴九抽（购买）
+message M450005{ 
+	message S2C{
+	    required int32 rs = 1;
+	    repeated Common.RewardInfo reward = 2;
+	    optional BanquetInfo banquetInfo = 3;
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 酒馆盛宴单抽（购买）
+message M450006{ 
+	message S2C{
+	    required int32 rs = 1;
+	    optional Common.RewardInfo reward = 2;
+	    optional FeastInfo feastInfo = 3;
+	}
+	
+
+	message  C2S{ 
+	}
+}
+
+// 酒馆盛宴九抽购买
+message M450007{ 
+	message S2C{
+	    required int32 rs = 1;
+	    repeated Common.RewardInfo reward = 2;
+	    optional FeastInfo feastInfo = 3;
+
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 酒令兑换（购买）
+message M450008{ 
+	message S2C{
+	    required int32 rs = 1;
+	    repeated DrinkOrderTimeInfo drinkOrderTimeInfo = 2; // 酒令兑换剩余次数信息
+	}
+
+	message  C2S{ 
+	    required int32 typeId= 1; // 配置表Id
+	}
+}
+
+// 宴会界面公告
+message PubHistroryInfo{
+	required string name = 1; // 玩家名字
+	required Common.RewardInfo reward = 2; // 奖励
+}
+
+// 小宴界面公告
+message M450009{ 
+	message S2C{
+	    required int32 rs = 1;
+	    repeated PubHistroryInfo banquetNotice = 2; // 宴会界面公告
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 盛宴界面公告
+message M450010{ 
+	message S2C{
+	    required int32 rs = 1;
+	    repeated PubHistroryInfo feastNotice = 2; // 宴会界面公告
+	}
+
+	message  C2S{ 
+	}
+}
+
+// 酒令兑换剩余次数信息
+message DrinkOrderTimeInfo{
+   required int32 typeId = 1; // 配置表id
+   required int32 changeTime = 2; // 已兑换次数
+}
+
+// 获取酒令兑换信息
+message M450011{ 
+	message S2C{
+	    required int32 rs = 1;
+	    repeated DrinkOrderTimeInfo drinkOrderTimeInfo = 2; // 酒令兑换剩余次数信息
+	}
+
+	message  C2S{ 
+	}
+}

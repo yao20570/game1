@@ -1,0 +1,5 @@
+{
+ "1" : {"ID" : 1 ,"rewardID" : 1 ,"soldierNumber" : 1 ,"rate" : 40  },
+ "2" : {"ID" : 2 ,"rewardID" : 1 ,"soldierNumber" : 3 ,"rate" : 55  },
+ "3" : {"ID" : 3 ,"rewardID" : 1 ,"soldierNumber" : 5 ,"rate" : 4  }
+}

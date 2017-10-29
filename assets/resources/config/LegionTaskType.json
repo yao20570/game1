@@ -1,0 +1,14 @@
+{
+ "1" : {"ID" : 1 ,"limit" : 6 ,"resetType" : 0 ,"type" : 74 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 1  },
+ "2" : {"ID" : 2 ,"limit" : 6 ,"resetType" : 0 ,"type" : 75 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 1  },
+ "3" : {"ID" : 3 ,"limit" : 1 ,"resetType" : 1 ,"type" : 66 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 6  },
+ "4" : {"ID" : 4 ,"limit" : 10 ,"resetType" : 0 ,"type" : 76 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 1  },
+ "5" : {"ID" : 5 ,"limit" : 5 ,"resetType" : 0 ,"type" : 22 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 2  },
+ "6" : {"ID" : 6 ,"limit" : 10 ,"resetType" : 0 ,"type" : 71 ,"finishcond1" : 2 ,"finishcond2" : 1 ,"performance" : 1  },
+ "7" : {"ID" : 7 ,"limit" : 10 ,"resetType" : 0 ,"type" : 77 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 1  },
+ "8" : {"ID" : 8 ,"limit" : 40 ,"resetType" : 0 ,"type" : 35 ,"finishcond1" : 0 ,"finishcond2" : 5 ,"performance" : 1  },
+ "9" : {"ID" : 9 ,"limit" : 1 ,"resetType" : 0 ,"type" : 65 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 8  },
+ "10" : {"ID" : 10 ,"limit" : 5 ,"resetType" : 0 ,"type" : 57 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 2  },
+ "11" : {"ID" : 11 ,"limit" : 1 ,"resetType" : 1 ,"type" : 69 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 8  },
+ "12" : {"ID" : 12 ,"limit" : 3 ,"resetType" : 1 ,"type" : 70 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"performance" : 2  }
+}

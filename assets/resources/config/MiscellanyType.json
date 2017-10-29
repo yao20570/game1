@@ -1,0 +1,17 @@
+{
+ "1" : {"ID" : 1 ,"describe" : "playerRange" ,"number" : 10  },
+ "2" : {"ID" : 2 ,"describe" : "resourceRange" ,"number" : 10  },
+ "3" : {"ID" : 3 ,"describe" : "protectTime" ,"number" : 93600  },
+ "4" : {"ID" : 4 ,"describe" : "protectLevel" ,"number" : 10  },
+ "5" : {"ID" : 5 ,"describe" : "cityBattleInviteNum" ,"number" : 10  },
+ "6" : {"ID" : 6 ,"describe" : "energyMax" ,"number" : 50  },
+ "7" : {"ID" : 7 ,"describe" : "crusadeEnergyMax" ,"number" : 50  },
+ "8" : {"ID" : 8 ,"describe" : "legionTownWarNum" ,"number" : 2  },
+ "9" : {"ID" : 9 ,"describe" : "townWarRankRefresh" ,"number" : 1  },
+ "10" : {"ID" : 10 ,"describe" : "expMax" ,"number" : 2100000000  },
+ "11" : {"ID" : 11 ,"describe" : "joinLegionTime" ,"number" : 86400  },
+ "12" : {"ID" : 12 ,"describe" : "awardLimit" ,"number" : 99  },
+ "13" : {"ID" : 13 ,"describe" : "headPrice" ,"number" : 8  },
+ "14" : {"ID" : 14 ,"describe" : "legionTaskOpenLv" ,"number" : 3  },
+ "15" : {"ID" : 15 ,"describe" : "legionTownWarFightNum" ,"number" : 4  }
+}

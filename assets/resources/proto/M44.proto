@@ -1,0 +1,484 @@
+package M44;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M44";  // 师徒
+
+
+//徒弟申请列表
+message StudentApplyInfo{
+	required fixed64 playerId = 1; //玩家id
+	required string playerName = 2; //角色名
+	required int32 vipLevel = 3; //vip等级
+	required int64 capacity = 4; //战力
+}
+
+//师傅申请列表
+message TeacherApplyInfo{
+	required fixed64 teacherId = 1; //师门id
+	required string playerName = 2; //角色名
+	required int32 vipLevel = 3; //vip等级
+	required int64 capacity = 4; //战力
+}
+
+
+//师傅登记列表
+message TeacherInfo{
+	required fixed64 teacherId = 1; //师门id
+	required fixed64 playerId = 2; //师傅id
+	required string playerName = 3; //角色名
+	required int32 level = 4; //等级
+	required int32 vipLevel = 5; //vip等级
+	required int64 capacity = 6; //战力
+	required int32 adId = 7; //广告id
+	required string legionName = 8; //军团名	
+	required int32 isApply = 9;// 是否已申请 0-否 1-是
+}
+
+//师门成员信息
+message TeacherMemberInfo{
+	required fixed64 playerId = 1; //玩家id
+	required string playerName = 2; //角色名
+	required int32 job = 3; //1-师傅 2-徒弟
+	required int32 level = 4; //等级
+	required int32 vipLevel = 5; //vip等级
+	required int64 capacity = 6; //战力
+	required int32 famous = 7; //名师值 (师傅才有)
+	required int32 taskFinish = 8; //每日任务是否全部完成 0-否 1-是(徒弟才有)
+	required string legionName = 9; //军团名	
+	required int32 joinTime = 10; //加入时间
+	required int32 iconId = 11; //头像id
+	required int32 finishLearn = 12; //是否已出师 0-否 1-是
+	required int32 isOnline = 13; //是否在线 0在线 不在线则显示离线时间	
+}
+
+//已修改称号
+message DesignInfo{
+	required int32 id = 1; //基础表id
+	required string name = 2;//新名称
+}
+
+//师门考核任务信息
+message AssessTaskInfo{
+	required int32 id = 1; //基础表id
+	required int32 state = 2;//完成情况 0 -未完成 1-已完成 2 -已领取
+}
+
+//师傅考核任务领取次数
+message AssessGetTimes{
+	required int32 id = 1; //基础表id
+	required int32 count = 2;//已领取次数
+}
+
+
+//登记师傅
+message M440000{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 teacherId = 2; //师门id
+    }
+    message C2S{
+		required int32 adId = 1;//广告id
+    }
+}
+
+//获得师门信息
+message M440001{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 teacherId = 2; //师门id
+		repeated TeacherMemberInfo memberInfos = 3; //成员信息
+		repeated DesignInfo designInfos = 4; //称号信息
+		optional int32 evaluateTimes = 5;//已评价次数
+		optional int32 joinLevel = 6; // 入门等级
+    }
+    message C2S{
+
+    }
+}
+
+//取消登记师傅
+message M440002{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+
+    }
+}
+
+//收徒申请
+message M440003{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+		required fixed64 playerId = 1;//玩家id
+
+    }
+}
+
+//获得徒弟申请列表
+message M440004{
+    message S2C{
+		required int32 rs = 1;//错误码
+		repeated StudentApplyInfo applyInfos = 2; //申请列表
+    }
+	
+    message C2S{
+		
+    }
+}
+
+//接受徒弟
+message M440005{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional TeacherMemberInfo memberInfo = 2;//成员信息
+    }
+	
+    message C2S{
+		required fixed64 playerId = 1;//玩家id
+    }
+}
+
+
+//拒绝全部徒弟申请
+message M440006{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+		
+    }
+}
+
+//逐出师门
+message M440007{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 studentId = 2;//玩家id(徒弟)
+    }
+	
+    message C2S{
+		required fixed64 studentId = 1;//玩家id(徒弟)
+    }
+}
+
+
+//修改徒弟称号
+message M440008{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+		repeated DesignInfo designInfos = 1;// 修改称号列表
+    }
+}
+
+//师傅领取每日教导奖励
+message M440009{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 studentId = 2;//玩家id(徒弟)
+    }
+	
+    message C2S{
+		required fixed64 studentId = 1;//玩家id(徒弟)
+    }
+}
+
+//师傅领取考核奖励
+message M440010{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional int32 taskId = 2;//任务id
+		optional fixed64 studentId = 3;//玩家id(徒弟)
+    }
+	
+    message C2S{
+		required int32 taskId = 1;//任务id
+		required fixed64 studentId = 2;//玩家id(徒弟)
+    }
+}
+
+//获得登记师傅列表
+message M440011{
+    message S2C{
+		required int32 rs = 1;//错误码
+		repeated TeacherInfo infos = 2; //师门列表
+    }
+	
+    message C2S{
+
+    }
+}
+
+//拜师
+message M440012{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 teacherId = 2;//师门id
+    }
+	
+    message C2S{
+		required fixed64 teacherId = 1;//师门id
+    }
+}
+
+//获得申请师傅列表
+message M440013{
+    message S2C{
+		required int32 rs = 1;//错误码
+		repeated TeacherApplyInfo applyInfos = 2; //申请列表
+    }
+	
+    message C2S{
+
+    }
+}
+
+//接受师傅
+message M440014{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 teacherId = 2;//师门id
+
+    }
+	
+    message C2S{
+		required fixed64 teacherId = 1;//师门id
+    }
+}
+
+//拒绝全部师傅
+message M440015{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+
+    }
+}
+
+//出师
+message M440016{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+
+    }
+}
+
+//叛离师门
+message M440017{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+
+    }
+}
+
+//评价师门
+message M440018{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+		required int32 commentId =1;//评论id
+    }
+}
+
+//徒弟领取每日教导奖励
+message M440019{
+    message S2C{
+		required int32 rs = 1;//错误码
+    }
+	
+    message C2S{
+
+    }
+}
+
+// 徒弟取消申请
+message M440020{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 teacherId =2; //师门id
+    }
+	
+    message C2S{
+		required fixed64 teacherId =1; //师门id
+    }
+}
+
+
+//徒弟获得每日教导任务
+message M440021{
+    message S2C{
+		required int32 rs = 1;//错误码
+		repeated int32 taskIds = 2;//已完成任务id列表
+		optional int32 isGet = 3; //是否已领取 0-否 1-是
+    }
+	
+    message C2S{
+
+    }
+}
+
+//师傅获得徒弟的考核任务
+message M440022{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 studentId = 2;//玩家id(徒弟)
+		repeated AssessTaskInfo taskInfos = 3;//考核任务信息
+		repeated AssessGetTimes times = 4;
+    }
+	
+    message C2S{
+		required fixed64 studentId = 1;//玩家id(徒弟)
+    }
+}
+
+//师傅获得徒弟每日教导任务
+message M440023{
+    message S2C{
+		required int32 rs = 1;//错误码
+		optional fixed64 studentId = 2;//玩家id(徒弟)
+		repeated int32 taskIds = 3;//已完成任务id列表
+		optional int32 isGet = 4;// 奖励是否已领取 0-否, 1-是
+    }
+	
+    message C2S{
+		required fixed64 studentId = 1;//玩家id(徒弟)
+    }
+}
+
+//督促徒弟
+message M440024{
+    message S2C{
+		required int32 rs = 1;//错误码
+
+    }
+	
+    message C2S{
+		required fixed64 studentId = 1;//玩家id(徒弟)
+    }
+}
+
+
+//服务器主动推送 被师门接受情况
+message M440100{
+    message S2C{
+		required fixed64 teacherId =1; //师门id		
+		required int32 type = 2; //0-接受 1-拒绝
+    }
+	
+    message C2S{
+
+    }
+}
+
+//服务器主动推送 申请收徒信息
+message M440101{
+    message S2C{
+		required TeacherApplyInfo  info = 1;//申请信息		
+    }
+	
+    message C2S{
+
+    }
+}
+
+//服务器主动推送 被徒弟接受情况
+message M440102{
+    message S2C{
+		optional TeacherMemberInfo memberInfo = 1;//成员信息
+		required int32 type = 2; //0-接受 1-拒绝
+    }
+	
+    message C2S{
+
+    }
+}
+
+//服务器主动推送 申请拜师信息
+message M440103{
+    message S2C{
+		required StudentApplyInfo info = 1;	 //申请信息	
+    }
+	
+    message C2S{
+
+    }
+}
+
+//服务器主动推送 被逐出师门
+message M440104{
+    message S2C{
+
+    }
+	
+    message C2S{
+
+    }
+}
+
+//服务器主动推送 称号改变
+message M440105{
+    message S2C{
+		required string name = 1; //改变后的称号
+    }
+	
+    message C2S{
+			
+    }
+}
+
+// 徒弟小红点数量
+message StudentRemidTimes{
+	required fixed64 studentId = 1;  // 徒弟id（玩家id）
+	required int32 dayTaskNum = 2;   //每日任务可领取数量
+	required int32 asssessTaskNum = 3;//考核任务可领取数量
+}
+
+// 小红点数量
+message RemidTimes{
+	required int32 applyNum = 1; // 被申请数量
+	optional int32 dayTaskNum = 2; //每日任务可领取数量（徒弟才有）
+	repeated StudentRemidTimes times = 3;//徒弟小红点数量(师傅才有)
+}
+
+//服务器主动推送 小红点数量（被申请数量和任务可领取数量）
+message M440106{
+    message S2C{
+		required RemidTimes remindTims = 1;
+    }
+	
+    message C2S{
+			
+    }
+}
+
+//服务器主动推送 徒弟出师
+message M440107{
+    message S2C{
+		required fixed64 studentId = 1;//玩家id(徒弟)
+    }
+	
+    message C2S{
+			
+    }
+}
+
+
+

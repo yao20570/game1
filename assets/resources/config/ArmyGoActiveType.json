@@ -1,0 +1,4 @@
+{
+ "1" : {"ID" : 1 ,"effectID" : 1 ,"openTime1" : 1230 ,"activeTime" : 3600 ,"secondTime" : 600 ,"thirdTime" : 1200 ,"killMonsterLimite" : 5 ,"acedReward" : [301,302,303,304,305] ,"joinLvLimite" : 16 ,"personRankingId" : 5 ,"legionRankingId" : 6  },
+ "2" : {"ID" : 2 ,"effectID" : 1 ,"openTime1" : 2200 ,"activeTime" : 3600 ,"secondTime" : 600 ,"thirdTime" : 1200 ,"killMonsterLimite" : 5 ,"acedReward" : [301,302,303,304,305] ,"joinLvLimite" : 16 ,"personRankingId" : 5 ,"legionRankingId" : 6  }
+}

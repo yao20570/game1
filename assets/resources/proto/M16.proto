@@ -1,0 +1,317 @@
+package M16;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M16";  //抽奖协议
+
+import "Common.proto";
+import "M5.proto";
+import "M47.proto";
+
+message TargetInfo{     
+	required string name = 1;//资源名地点,若目标是玩家,则为玩家名称信息
+	required int32 time = 2;//时间
+	optional int32 result = 3;//战斗结果:0胜利，1失败，3 采集成功
+	required int32 posX = 4;//坐标x
+	required int32 posY = 5;//坐标y
+	required string posSoldier = 7;//据点驻军
+	optional string legionName =  8;//所属军团
+	optional int32 honner = 9;//获得荣誉
+	required int32 level = 10; //等级
+	optional int32 prosper = 11; //繁荣度
+	optional int32 totalprosper = 12;//总繁荣度
+	optional string aim=13;//目标是玩家，则为玩家名称信息
+}
+
+message fivePos{
+	repeated int32 posCount = 1;//五个点的值
+}
+
+message Resource{
+	required int32 type = 1;//0:侦察玩家,1:侦察资源,2:战斗资源信息
+	optional int32 resourceId = 2;//侦察资源id
+	optional int32 get = 3;//侦察资源已经采集，或为采集成功的总资源数量
+	optional fivePos info = 4;//5个点的资源值
+	optional int32 mostGet = 5;//最多可掠夺
+	optional int32 cityIcon = 6;//资源点或者玩家的城池图标
+}
+
+message PosInfo{   // 佣兵位置信息
+    required int32 typeid = 1;//配置表id
+    optional int32 post = 2;//位置  （ 为 9  时是军师的位置信息）
+    required int32 num = 3;//数量
+    optional int32 lv=4;//等级
+    optional int32 heroTypeId = 5;//英雄配置表id
+}
+
+message SolidierInfo{
+	repeated PosInfo info = 1;
+	optional int32 teamCapacity = 2;//防守方初始战力
+}
+
+message FightItem{   //军师信息
+	required int32 typeid = 1;//军师读表ID
+	required int32 level = 2;//军师的实际星级
+}
+
+message LostSoldierInfo{//每个槽位对应的损失兵种数量以及出战数量
+    required int32 typeId = 1;//配置表id
+	required int32 post = 2;//槽位位置
+	required int32 lostNum = 3;//兵种损失数量
+	required int32 allNum = 4;//兵种总数量
+	optional int32 heroTypeId = 5;//英雄配置表id
+}
+
+message lostItem{
+	required string name = 1;//名称
+	optional int32 ftvip = 2; //vip等级
+	optional string ftTeam = 3;//军团名称
+	optional FightItem fightSr = 5;//军师信息
+	required int32  fightExp = 7;//编制经验
+	repeated PosInfo ftLost = 9;  //损失
+	repeated LostSoldierInfo lostInfo = 10;//对应槽位损失以及出战数量
+	optional int32 teamCapacity = 11;//出战部队战力（如果是怪物组前端读表显示）
+	optional M5.WarBookFight warBookFight = 12;//国策
+}
+
+message lostSoldiers{  //部队损失
+	required lostItem attackItem = 1;//攻击损失
+	required lostItem defentItem = 2;//防守损失
+	required int32 firstHand = 3;//先手值,0:攻击先出手,1:防守先出手
+}
+
+message CityInfo{
+	required int32 attackIcon = 1;//攻击方的图标
+	required int32 attackAddBoom = 2; //攻击方的繁荣度加成,可能为负值
+	optional int32 attackTotalBoom = 3;//攻击方的总繁荣度
+	optional int32 attackCurrBoom = 4;//攻击方当前繁荣度
+	required int32 defentAddBoom = 5;//防守方的繁荣度加成,可能为负值
+	optional int32 defentTotalBoom = 6;//防守方的总繁荣度
+	optional int32 defentCurrBoom = 7;//防守方当前繁荣度
+	required int32 defentIcon = 8;//防守方的图标
+	required string oName = 9;//对方的名字  
+	required string myName = 10;//我方的名字
+	optional int32  defenPox=11;//防守方坐标x
+	optional int32  defenPoy=12;//防守方坐标y
+}
+
+message Report{
+	required int32 mailType = 1;//1:攻击;2:被攻击;3:侦查
+	required int32 isPerson = 2;//0=对方是玩家或被占领的资源，1=对方是资源，2=叛军，3=郡城
+	required TargetInfo InfoPanel = 3;  //信息,如果有玩家占领，则有信息。
+	optional Resource resourcePanel = 4;       //资源，资源的详细信息
+	optional SolidierInfo watchSerPanel = 5;   //侦察兵力信息
+	required int32 haveBattle = 6;//是否有战斗产生0没有，1有
+	optional lostSoldiers lostSerPanel = 7;  //战斗损失
+	optional CityInfo cityPanel = 8;//城市的繁荣度
+	repeated Common.RewardInfo reward = 9;//奖励
+	optional fixed64 battleId = 10;//战斗id
+	optional int32 rebelArmyIcon = 11;//叛军icon
+	optional int32 loyaltyCount=12;//民忠值
+	optional M47.M470002.S2C townBattleReport = 13; //盟城战报
+}
+
+message MailDetalInfo{
+	required fixed64 id = 1;
+	optional string title = 2;
+	required int32 type = 3;//邮件类型1:系统，2：发件箱；3：邮件；4：报告
+	required int32 senderType =4;//发送者类型：0系统，1玩家
+	optional string name= 5; //对方名称
+	optional string context=6;//邮件内容
+	repeated Common.RewardInfo reward = 7;//邮件附件
+	optional int32 extracted = 8;//附件是否已经提取0：未提取，1：已提取
+	required int32 createTime = 9;//创建的时间戳
+	optional Report infos = 10;//报告的详情
+	optional fixed64 playerId = 11;//对方id
+	optional fixed64 friendId = 12;//好友id
+	optional int32 helpX = 13;  //求助
+	optional int32 helpY = 14;
+}
+
+message MailShortInfo{
+	required fixed64 id				= 1;
+	optional string  title				= 2;
+	required string  name			= 3; //对方名称
+	required int32   createTime			= 4;//创建的时间戳
+	required int32   state			= 5;//邮件状态1：已读，0：未读
+	required int32   type			= 6;//邮件类型1:系统，2：发件箱；3：邮件；4：报告
+	required int32   senderType			=7;//发送者类型：0系统，1玩家
+	optional int32   level			 = 8;//报告界面用的到，有玩家占领资源点则下发，
+	optional int32   mailType		= 9;//1:攻击;2:被攻击;3:侦查
+	optional int32   extracted		= 10;//附件是否已经提取0：未提取，1：已提取,-1没有附件
+	optional int32   typeState		= 11;//战报状态 0 胜利 1 失败 2 侦查中 3 采集成功
+	optional int32   targetType			= 12;//世界战报的对象类型 1玩家 2玩家占领的资源点 3纯资源点 4 叛军喽啰 5 郡城
+	optional string  defendName			= 13;//占据资源点的玩家名称
+	optional fixed64 collectId		=14;//鏈接的郵件id如果收藏邮件对应普通，普通对应收藏
+	optional int32   loyaltyCount		=15;//民忠值
+
+}
+
+message SpyResourceInfo{ //侦查资源点战报(坑位信息)
+    required int32 post = 1;//坑位
+	optional string playerName = 2;
+	optional string legionName = 3;
+	optional int32 alreadyGet = 4;//已采集
+	required M16.SolidierInfo watchSerPanel = 5;//兵力信息
+	optional int32 morePeopleAddition = 6; //多人加成
+	optional int32 legionAddition = 7; //同军团加成
+	}
+
+message M160000  {  //获取邮件列表
+	message  S2C{
+	    required int32 rs=1;
+	    repeated MailShortInfo mails = 2;
+	}
+
+	message  C2S{
+		
+	}
+
+}
+
+message M160001  {  //查看邮件
+	message  S2C{
+	    required int32 rs=1;
+	    optional MailDetalInfo info = 2;
+	    optional int32 resPointId = 3;//资源点id
+        optional int32 createTime = 4;//创建的时间戳（侦查资源点战报用）
+        repeated SpyResourceInfo spyTrenchInfos = 5;//侦查资源点战报(坑位信息)
+        optional fixed64 mailId = 6;//（侦查资源点战报用）
+        optional int32 x = 7;//（侦查资源点战报用）
+        optional int32 y = 8;//（侦查资源点战报用）
+	}
+
+	message  C2S{
+		required fixed64 id = 1;
+	}
+
+}
+
+message M160002  {  //新邮件通知
+	message  S2C{
+	    required int32 num=1;//未读邮件数量
+	}
+
+	message  C2S{
+	
+	}
+
+}
+
+message M160003  {  //发送邮件
+	message  S2C{
+	    required int32 rs=1;
+	    repeated MailShortInfo info = 2;
+	    repeated string notGetNameList = 3;//不存在的名字列表
+	}
+
+	message  C2S{
+		repeated string name = 1;//接收者名字
+		required string title = 2;
+		required string context=3;//邮件内容
+	}
+
+}
+
+message M160004 {  //删除邮件
+	message  S2C{
+	    required int32 rs=1;
+	    repeated fixed64 idlist = 2;
+	}
+
+	message  C2S{
+		repeated fixed64 idlist = 1;//要删除的邮件id
+	}
+
+}
+
+message M160005 {//请求请求战斗播放
+	message  S2C{
+	    required int32 rs=1;
+	}
+
+	message  C2S{
+		required fixed64 battleId = 1;
+	}
+}
+
+message M160006 {//提取附件
+	message  S2C{
+	    required int32 rs=1;
+	}
+
+	message  C2S{
+		required fixed64 mailId = 1;
+	}
+}
+
+message M160007  {  //新邮件增加
+	message  S2C{
+	     required int32 rs=1;
+	     repeated MailShortInfo mails = 2;
+	}
+
+	message  C2S{
+	
+	}
+
+}
+
+
+message M160008  {  //收藏邮件 取消收藏即请求删除邮件协议
+	message  S2C{
+	    required int32 rs=1;
+	    optional MailShortInfo mail = 2;// 成功的时候 收藏新邮件信息
+	}
+
+	message  C2S{
+	    required fixed64 id = 1;//收藏邮件的id  
+	}
+
+}
+
+message M160009 {  //取消收藏邮件
+	message  S2C{
+	    required int32 rs=1;
+	    repeated fixed64 collectId=2;//收藏邮件id
+	    repeated fixed64 normalId=3;//原本邮件id
+	}
+
+	message  C2S{
+		repeated fixed64 id = 1;//要取消的邮件id  如果从本身邮件取消就是链接id，如果是从收藏邮件就是收藏邮件的本身id
+	}
+
+}
+
+message M160010 {  //奖励转发邮件通知（服务端主动推送）
+	message  S2C{
+	    required int32 rs=1;
+	}
+
+	message  C2S{
+	
+	}
+
+}
+
+message M160011 {  // 一键领取邮件附件
+	message  S2C{
+	    required int32 rs = 1;
+	    repeated fixed64 mailIds = 2; // 未成功领取的邮件id列表
+	}
+
+	message  C2S{
+	    repeated fixed64 mailIds = 1; // 邮件id列表
+	}
+
+}
+
+message M160012 {  // 将邮件状态设置为已阅
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+	    repeated fixed64 mailIds = 1; // 邮件id列表
+	}
+
+}

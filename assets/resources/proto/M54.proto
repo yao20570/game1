@@ -1,0 +1,44 @@
+package M54;
+
+option java_package = "com.znl.city.proto";
+option java_outer_classname = "M54"; // 抢红包玩法相关协议
+
+import "Common.proto";
+
+message RedBagRewardInfo{ // 红包抢夺信息
+	optional string name = 1;				// 名字
+	optional Common.RewardInfo reward = 2;	// 获得奖励
+	optional int32 icon = 3;				// 头像
+	optional int32 time = 4;				// 时间
+	optional fixed64 playerId = 5; 			//玩家ID
+}
+
+message RedBagInfo{ // 聊天里的红包信息
+	optional fixed64 id = 2;	// 红包数据库id
+	optional int32 typeId = 3;	// 红包配置表id
+}
+
+message M540000{ // 发红包
+	message S2C{
+		required int32 rs = 1;		// 错误码
+	}
+
+	message C2S{
+		required int32 itemId = 1;	// 道具的配置表id
+		required int32 channel = 2;	// 频道
+		optional string name = 3;	// 要发送的玩家名字，发指定红包时使用
+	}
+}
+
+message M540001{ // 抢红包
+	message S2C{
+         required int32 rs = 1;					// 错误码
+         optional Common.RewardInfo reward = 2;	// 获得奖励
+         repeated RedBagRewardInfo info = 3;	// 红包抢夺信息
+         optional int32 id = 4;					// 红包的配置表id
+    }
+
+    message C2S{
+        optional fixed64 id = 1;				// 所抢红包唯一id
+    }
+}

@@ -1,0 +1,5 @@
+{
+ "1" : {"ID" : 1 ,"monsterGround" : 1 ,"monsterType" : 1 ,"monsterName" : "喽啰" ,"monsterIcon" : 1 ,"fightInterval" : [31,50] ,"monsterXY" : [[1,28]] ,"monsterNum" : 36 ,"monsterMax" : 2 ,"monsterIntegral" : 5  },
+ "2" : {"ID" : 2 ,"monsterGround" : 1 ,"monsterType" : 2 ,"monsterName" : "头目" ,"monsterIcon" : 2 ,"fightInterval" : [11,30] ,"monsterXY" : [[109,128]] ,"monsterNum" : 18 ,"monsterMax" : 1 ,"monsterIntegral" : 8  },
+ "3" : {"ID" : 3 ,"monsterGround" : 1 ,"monsterType" : 3 ,"monsterName" : "将领" ,"monsterIcon" : 3 ,"fightInterval" : [1,10] ,"monsterXY" : [[109,128]] ,"monsterNum" : 8 ,"monsterMax" : 1 ,"monsterIntegral" : 12  }
+}

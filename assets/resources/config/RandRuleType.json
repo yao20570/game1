@@ -1,0 +1,17 @@
+{
+ "1" : {"ID" : 1 ,"groupID" : 1 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10017 ,"numsec" : [9,9] ,"rewardgroup2" : 10017 ,"totalnum" : 9  },
+ "2" : {"ID" : 2 ,"groupID" : 2 ,"minlevel" : 1 ,"maxlevel" : 30 ,"rewardgroup1" : 10019 ,"numsec" : [9,9] ,"rewardgroup2" : 10019 ,"totalnum" : 9  },
+ "3" : {"ID" : 3 ,"groupID" : 2 ,"minlevel" : 31 ,"maxlevel" : 80 ,"rewardgroup1" : 10020 ,"numsec" : [9,9] ,"rewardgroup2" : 10020 ,"totalnum" : 9  },
+ "4" : {"ID" : 4 ,"groupID" : 3 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10013 ,"numsec" : [8,8] ,"rewardgroup2" : 10013 ,"totalnum" : 8  },
+ "5" : {"ID" : 5 ,"groupID" : 4 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10014 ,"numsec" : [8,8] ,"rewardgroup2" : 10014 ,"totalnum" : 8  },
+ "6" : {"ID" : 6 ,"groupID" : 5 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10021 ,"numsec" : [3,5] ,"rewardgroup2" : 10022 ,"totalnum" : 9  },
+ "7" : {"ID" : 7 ,"groupID" : 6 ,"minlevel" : 1 ,"maxlevel" : 30 ,"rewardgroup1" : 10023 ,"numsec" : [3,4] ,"rewardgroup2" : 10024 ,"totalnum" : 9  },
+ "8" : {"ID" : 8 ,"groupID" : 6 ,"minlevel" : 31 ,"maxlevel" : 80 ,"rewardgroup1" : 10025 ,"numsec" : [3,5] ,"rewardgroup2" : 10026 ,"totalnum" : 9  },
+ "9" : {"ID" : 9 ,"groupID" : 7 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10027 ,"numsec" : [9,9] ,"rewardgroup2" : 10027 ,"totalnum" : 9  },
+ "10" : {"ID" : 10 ,"groupID" : 8 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10028 ,"numsec" : [9,9] ,"rewardgroup2" : 10028 ,"totalnum" : 9  },
+ "11" : {"ID" : 11 ,"groupID" : 9 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10029 ,"numsec" : [9,9] ,"rewardgroup2" : 10029 ,"totalnum" : 9  },
+ "12" : {"ID" : 12 ,"groupID" : 10 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10030 ,"numsec" : [1,1] ,"rewardgroup2" : 10030 ,"totalnum" : 1  },
+ "13" : {"ID" : 13 ,"groupID" : 11 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10031 ,"numsec" : [2,2] ,"rewardgroup2" : 10031 ,"totalnum" : 2  },
+ "14" : {"ID" : 14 ,"groupID" : 12 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10032 ,"numsec" : [2,2] ,"rewardgroup2" : 10032 ,"totalnum" : 2  },
+ "15" : {"ID" : 15 ,"groupID" : 13 ,"minlevel" : 1 ,"maxlevel" : 80 ,"rewardgroup1" : 10033 ,"numsec" : [3,3] ,"rewardgroup2" : 10033 ,"totalnum" : 3  }
+}

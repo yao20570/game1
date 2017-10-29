@@ -1,0 +1,115 @@
+package M26;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M26";  //军师相关协议
+
+import "Common.proto";
+
+
+message ForeignInfo{  //内政信息
+     required int32 pos = 1;      //位置
+     required fixed64 id = 2;   //军师id
+}
+
+
+message M260001{  //军师进阶
+    message S2C{
+      required int32 rs=1;//错误码
+      optional int32 newid=2;//获得新的军师id
+    }
+
+    message  C2S{  
+     repeated fixed64 ids=1;//唯一id
+     required int32 quilty=2;//品质
+    }
+}
+
+
+message M260002{  //军师升级
+    message S2C{
+     required int32 rs=1;//错误码
+    }
+
+    message  C2S{
+       required  fixed64 id=1;//升级的军师id
+    }
+}
+
+
+message M260003{  //军师分解
+    message S2C{
+     required int32 rs=1;//错误码
+    }
+
+    message  C2S{  
+       repeated int32 star=1;//分解的星级 没有传星级就是单分解了
+       optional fixed64  id=2;//单分解的时候才需要传的数据
+    }
+}
+
+
+
+
+///////////////军师抽奖
+
+message CostInfo{  //价格信息
+    required int32 type = 1;      //抽奖类型
+    required int32 onceprice = 2;       //1次抽价格
+    required int32 fiveprice = 5;       //5次抽价格
+}
+
+
+message M260005{  //军师抽奖
+    message S2C{
+     required int32 rs=1;//错误码
+     repeated CostInfo costInfos=2;//抽奖信息
+     repeated int32 getids=3;//抽到的军师id
+     optional int32 type=4;//原样返回
+    }
+
+    message  C2S{  
+     required int32 type=1;//抽奖类型 1:金币抽奖   2:银币抽奖
+     required int32 num=2;//抽奖数量 1:抽1次   5:抽5次
+    }
+}
+
+
+message M260006{  //军师一键进阶
+    message S2C{
+      required int32 rs=1;//错误码
+      repeated int32 newids=2;//获得新的军师id
+    }
+
+    message  C2S{  
+     required int32 quilty=1;//品质
+    }
+}
+
+message M260007{  //內政任职
+    message S2C{
+     required int32 rs=1;//错误码
+     optional ForeignInfo info=2;//内政更新的信息
+    }
+
+    message  C2S{  
+       required  fixed64 id=1;//任职id
+       required  int32  pos=2;//位置
+    }
+}
+
+
+message M260008{  //內政卸任
+    message S2C{
+     required int32 rs=1;//错误码
+     optional int32 pos=2;//卸任成功返回的槽位
+    }
+
+    message  C2S{  
+       required  int32  pos=1;//位置
+    }
+}
+
+
+
+
+

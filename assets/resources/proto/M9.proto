@@ -1,0 +1,175 @@
+package M9;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M9";  //道具buff协议
+
+import "Common.proto";
+
+
+
+message M90000  {  //道具信息
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.ItemInfo iteminfos = 2;//道具信息
+	}
+
+	message  C2S{
+	}
+
+}
+
+
+message M90001  {  //道具使用
+	message  S2C{
+	    required int32 rs = 1;
+	    required int32 num=2;//数量
+	    required int32 typeId= 3;
+	    repeated Common.ItemInfo iteminfos=4;
+	    optional ItemBuffInfo itemBuffInfo=5;	//buff类道具使用信息
+		optional int32 cdTime = 6;
+	}
+
+	message  C2S{
+		required int32 typeId= 1;
+		required int32 num=2;//数量
+		optional int32 costType =3;//使用消耗类型1道具，2金币 
+	   
+	}
+
+}
+
+message M90002{  //buff倒计时完成后请求
+
+    message S2C{
+        required int32 rs = 1;
+	    required int32 type =2;    	//道具类型
+	    required int32 powerId =3;  //要加成效果的powerId
+        optional int32 remainTime = 4;
+        required int32 buffType = 5; //0 普通道具buff  1 全服性buff
+    }
+	
+	message C2S{
+	    required int32 type =1;    	//道具类型
+	    required int32 powerId =2;  //要加成效果的powerId
+	    required int32 buffType = 3; //0 普通道具buff  1 全服性buff
+	}
+}
+
+
+message M90003{//更新推送道具buff加成效果 只推送新增、更新的(初始化)
+	message S2C{
+		required int32 rs = 1;
+		repeated ItemBuffInfo itemBuffInfo=2;
+		optional int32 allRefresh = 3; //是否全部刷新 1则为全部
+	}
+
+	message C2S{
+
+	}
+}
+
+
+message M90004  {  //道具使用发红包改名卡
+	message  S2C{
+	    required int32 rs = 1;
+        repeated Common.ItemInfo iteminfos=2;//更新改变的道具
+        optional string name = 3;//改名成功返回名字给前端更新
+		optional int32 typeId = 4;//使用道具的typeId，提供给服务端返回
+	}
+
+	message  C2S{
+		required  int32  typeId= 1;
+	    required  string name=2;//名字  发红包 改名卡
+	}
+
+}
+
+
+message M90005  {  //请求是否有外观道具正在使用
+	message  S2C{
+	    required int32 rs = 1;
+        required int32 typeId=2;//0 没有，1正在使用的外观道具id
+	}
+
+	message  C2S{
+		
+	}
+
+}
+
+
+message M90006  {  //使用喇叭协议
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+		required  int32  typeId= 1;
+	    required  string  mess =2;//信息
+	}
+
+}
+
+message M90007  {  //增加军团贡献度
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+		required  int32  typeId= 1;
+	    required  int32  num =2;//使用军团贡献度
+	}
+
+}
+
+message ItemBuffInfo{//道具buff信息
+	required int32 itemId =1;   //道具Id（普通道具buff读item表，全服性buff读buffShow）
+	required int32 type =2;    	//道具类型
+	required int32 powerId =3;  //要加成效果的powerId
+	required int32 value =4;    //加成效果（百分比）
+	required int32 time =5;	    //buff有效时间
+	required int32 remainTime = 6; //剩余时间
+	required int32 buffType = 7; //0 普通道具buff  1 全服性buff
+	optional int32 layer = 8; //buff的层数
+}
+
+message M90008  {  //特殊道具合成
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+		required  int32  typeId= 1; // 合成表Synthetize的id
+	}
+
+}
+
+message ItemCDInfo{  //道具CD信息
+	required int32 cdgroup = 1; //道具cd组
+	required int32 remainTime = 2; //剩余CD时间
+	required int32 allTime = 3;  //总共时间
+}
+
+message M90009{  //推送更新道具CD信息
+	message S2C{
+	    required int32 rs = 1;
+	    repeated ItemCDInfo itemCDInfoList = 2;
+	}
+
+	message C2S{
+
+	}
+}
+
+
+message M90010  {  //道具合成
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+		required  int32  typeId= 1; // 合成表Synthetize的id
+		required  int32  num= 2; // 合成表的数量
+	}
+
+}

@@ -1,0 +1,76 @@
+package M29;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M29";  //新的武将协议
+import "Common.proto";
+
+
+
+
+
+message M290000{//查看武将信息
+	message S2C{
+     repeated Common.GeneralInfo generalInfo=2;//推送武将信息（不管是否上阵）
+	}
+
+	message C2S{
+
+	}
+}
+
+
+
+message M290001{//武将上阵或更换
+     message S2C{
+     required int32 rs=1;//错误码
+     }
+
+     message C2S{
+     required int32 generalId=1;//武将id
+	   required int32 position=2;//武将槽位
+     }
+	
+}
+
+
+
+
+message M290003{  //武将升级
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    optional int32 id = 2;//升级的武将id原样返回
+	}
+
+	message  C2S{
+       required int32 id = 1;//武将id
+       required int32 useId = 2;  //所选经验丹的id
+	}
+
+}
+
+message M290004{//将魂加点(升级)
+    message S2C{
+       required int32 rs = 1;
+       optional int32 num = 2;//剩余总点数
+    }
+
+    message C2S{
+       required int32 id = 1;//武将id
+       required int32 soulid = 2;//将魂id
+       required int32 soulnum = 3;//所加点数
+    }
+	
+}
+
+message M290005{//将魂加点重置
+    message S2C{
+       required int32 rs = 1;
+    }
+
+    message C2S{
+       required int32 id = 1;//武将id
+    }
+	
+}
+
+

@@ -1,0 +1,7 @@
+{
+ "1" : {"ID" : 1 ,"sort" : 1 ,"chargeID" : 1 ,"chargeAmount" : 8888 ,"rewardTime" : 2  },
+ "2" : {"ID" : 2 ,"sort" : 2 ,"chargeID" : 1 ,"chargeAmount" : 18888 ,"rewardTime" : 5  },
+ "3" : {"ID" : 3 ,"sort" : 3 ,"chargeID" : 1 ,"chargeAmount" : 28888 ,"rewardTime" : 8  },
+ "4" : {"ID" : 4 ,"sort" : 4 ,"chargeID" : 1 ,"chargeAmount" : 38888 ,"rewardTime" : 10  },
+ "5" : {"ID" : 5 ,"sort" : 5 ,"chargeID" : 1 ,"chargeAmount" : 58888 ,"rewardTime" : 18  }
+}

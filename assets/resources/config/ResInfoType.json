@@ -1,0 +1,11 @@
+{
+ "1" : {"ID" : 1 ,"resLevel" : 1 ,"loyaltyRandom" : [720000,160000,280000] ,"loyaltyUp" : 120 ,"loyaltyDown" : 200  },
+ "2" : {"ID" : 2 ,"resLevel" : 2 ,"loyaltyRandom" : [720000,120000,180000,240000] ,"loyaltyUp" : 90 ,"loyaltyDown" : 160  },
+ "3" : {"ID" : 3 ,"resLevel" : 3 ,"loyaltyRandom" : [720000,100000,140000,180000,220000] ,"loyaltyUp" : 65 ,"loyaltyDown" : 130  },
+ "4" : {"ID" : 4 ,"resLevel" : 4 ,"loyaltyRandom" : [720000,80000,120000,160000,200000,240000] ,"loyaltyUp" : 55 ,"loyaltyDown" : 110  },
+ "5" : {"ID" : 5 ,"resLevel" : 5 ,"loyaltyRandom" : [720000,70000,100000,130000,160000,190000,220000] ,"loyaltyUp" : 50 ,"loyaltyDown" : 100  },
+ "6" : {"ID" : 6 ,"resLevel" : 6 ,"loyaltyRandom" : [720000,60000,90000,120000,150000,180000,210000,240000] ,"loyaltyUp" : 45 ,"loyaltyDown" : 90  },
+ "7" : {"ID" : 7 ,"resLevel" : 7 ,"loyaltyRandom" : [720000,50000,80000,110000,140000,170000,200000,230000,260000] ,"loyaltyUp" : 40 ,"loyaltyDown" : 80  },
+ "8" : {"ID" : 8 ,"resLevel" : 8 ,"loyaltyRandom" : [720000,40000,70000,100000,130000,160000,190000,220000,250000,280000] ,"loyaltyUp" : 35 ,"loyaltyDown" : 70  },
+ "9" : {"ID" : 9 ,"resLevel" : 9 ,"loyaltyRandom" : [720000,36000,60000,84000,108000,132000,156000,180000,204000,228000,252000] ,"loyaltyUp" : 30 ,"loyaltyDown" : 60  }
+}

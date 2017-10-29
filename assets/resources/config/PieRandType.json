@@ -1,0 +1,6 @@
+{
+ "1" : {"ID" : 1 ,"pieRandID" : 1 ,"pietype" : 1 ,"num" : 2 ,"rate" : 30 ,"fullrate" : 180  },
+ "2" : {"ID" : 2 ,"pieRandID" : 1 ,"pietype" : 2 ,"num" : 2 ,"rate" : 30 ,"fullrate" : 180  },
+ "3" : {"ID" : 3 ,"pieRandID" : 1 ,"pietype" : 1 ,"num" : 4 ,"rate" : 30 ,"fullrate" : 180  },
+ "4" : {"ID" : 4 ,"pieRandID" : 1 ,"pietype" : 2 ,"num" : 4 ,"rate" : 30 ,"fullrate" : 180  }
+}

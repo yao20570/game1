@@ -1,0 +1,23 @@
+{
+ "1" : {"ID" : 1 ,"effectgroup" : 1 ,"sort" : 1 ,"type" : 101 ,"price" : 20 ,"reward" : [[401,2063,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 2  },
+ "2" : {"ID" : 2 ,"effectgroup" : 1 ,"sort" : 2 ,"type" : 102 ,"price" : 50 ,"reward" : [[401,2064,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 3  },
+ "3" : {"ID" : 3 ,"effectgroup" : 1 ,"sort" : 3 ,"type" : 103 ,"price" : 100 ,"reward" : [[401,2065,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 4  },
+ "4" : {"ID" : 4 ,"effectgroup" : 2 ,"sort" : 1 ,"type" : 101 ,"price" : 50 ,"reward" : [[401,2063,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 2  },
+ "5" : {"ID" : 5 ,"effectgroup" : 2 ,"sort" : 2 ,"type" : 102 ,"price" : 100 ,"reward" : [[401,2064,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 3  },
+ "6" : {"ID" : 6 ,"effectgroup" : 2 ,"sort" : 3 ,"type" : 103 ,"price" : 150 ,"reward" : [[401,2065,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 4  },
+ "7" : {"ID" : 7 ,"effectgroup" : 3 ,"sort" : 1 ,"type" : 101 ,"price" : 28 ,"reward" : [[401,2206,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 2  },
+ "8" : {"ID" : 8 ,"effectgroup" : 3 ,"sort" : 2 ,"type" : 102 ,"price" : 68 ,"reward" : [[401,2207,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 3  },
+ "9" : {"ID" : 9 ,"effectgroup" : 3 ,"sort" : 3 ,"type" : 103 ,"price" : 98 ,"reward" : [[401,2208,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 4  },
+ "10" : {"ID" : 10 ,"effectgroup" : 4 ,"sort" : 1 ,"type" : 101 ,"price" : 28 ,"reward" : [[401,2209,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 2  },
+ "11" : {"ID" : 11 ,"effectgroup" : 4 ,"sort" : 2 ,"type" : 102 ,"price" : 68 ,"reward" : [[401,2210,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 3  },
+ "12" : {"ID" : 12 ,"effectgroup" : 4 ,"sort" : 3 ,"type" : 103 ,"price" : 98 ,"reward" : [[401,2211,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 4  },
+ "13" : {"ID" : 13 ,"effectgroup" : 5 ,"sort" : 1 ,"type" : 101 ,"price" : 8 ,"reward" : [[401,2212,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 2  },
+ "14" : {"ID" : 14 ,"effectgroup" : 5 ,"sort" : 2 ,"type" : 102 ,"price" : 28 ,"reward" : [[401,2213,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 3  },
+ "15" : {"ID" : 15 ,"effectgroup" : 5 ,"sort" : 3 ,"type" : 103 ,"price" : 68 ,"reward" : [[401,2214,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 4  },
+ "16" : {"ID" : 16 ,"effectgroup" : 6 ,"sort" : 1 ,"type" : 101 ,"price" : 38 ,"reward" : [[401,2063,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 2  },
+ "17" : {"ID" : 17 ,"effectgroup" : 6 ,"sort" : 2 ,"type" : 102 ,"price" : 78 ,"reward" : [[401,2064,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 3  },
+ "18" : {"ID" : 18 ,"effectgroup" : 6 ,"sort" : 3 ,"type" : 103 ,"price" : 120 ,"reward" : [[401,2065,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 4  },
+ "19" : {"ID" : 19 ,"effectgroup" : 7 ,"sort" : 1 ,"type" : 101 ,"price" : 28 ,"reward" : [[401,2221,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 2  },
+ "20" : {"ID" : 20 ,"effectgroup" : 7 ,"sort" : 2 ,"type" : 102 ,"price" : 88 ,"reward" : [[401,2222,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 3  },
+ "21" : {"ID" : 21 ,"effectgroup" : 7 ,"sort" : 3 ,"type" : 103 ,"price" : 188 ,"reward" : [[401,2223,1]] ,"singleAward" : [[409,102,1]] ,"boxColor" : 4  }
+}

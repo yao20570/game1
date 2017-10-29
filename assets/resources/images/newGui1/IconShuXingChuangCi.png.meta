@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "32959eb1-6018-472b-8f33-0992daab3f1e",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "IconShuXingChuangCi": {
+      "ver": "1.0.3",
+      "uuid": "2494d065-a537-47bb-830f-1573bfa60783",
+      "rawTextureUuid": "32959eb1-6018-472b-8f33-0992daab3f1e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 1.5,
+      "trimX": 5,
+      "trimY": 2,
+      "width": 20,
+      "height": 23,
+      "rawWidth": 30,
+      "rawHeight": 30,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

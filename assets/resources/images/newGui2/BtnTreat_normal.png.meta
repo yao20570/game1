@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "e5536e1a-ecad-495e-af74-46db33a95527",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "BtnTreat_normal": {
+      "ver": "1.0.3",
+      "uuid": "2e545962-987d-494f-9b15-4fdd89f21d88",
+      "rawTextureUuid": "e5536e1a-ecad-495e-af74-46db33a95527",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 10,
+      "trimY": 10,
+      "width": 39,
+      "height": 40,
+      "rawWidth": 60,
+      "rawHeight": 60,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

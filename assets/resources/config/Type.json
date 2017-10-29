@@ -1,0 +1,21 @@
+{
+ "1" : {"ID" : 1 ,"type" : 1 ,"define" : "hpMax" ,"name" : "血量上限"  },
+ "2" : {"ID" : 2 ,"type" : 2 ,"define" : "hp" ,"name" : "血量"  },
+ "3" : {"ID" : 3 ,"type" : 3 ,"define" : "atk" ,"name" : "攻击"  },
+ "4" : {"ID" : 4 ,"type" : 4 ,"define" : "hitRate" ,"name" : "命中"  },
+ "5" : {"ID" : 5 ,"type" : 5 ,"define" : "dodgeRate" ,"name" : "闪避"  },
+ "6" : {"ID" : 6 ,"type" : 6 ,"define" : "criRate" ,"name" : "暴击"  },
+ "7" : {"ID" : 7 ,"type" : 7 ,"define" : "defRate" ,"name" : "抗暴"  },
+ "8" : {"ID" : 8 ,"type" : 8 ,"define" : "wreck" ,"name" : "穿刺"  },
+ "9" : {"ID" : 9 ,"type" : 9 ,"define" : "defend" ,"name" : "防护"  },
+ "10" : {"ID" : 10 ,"type" : 10 ,"define" : "hpMaxRate" ,"name" : "血量百分比"  },
+ "11" : {"ID" : 11 ,"type" : 11 ,"define" : "atkRate" ,"name" : "攻击百分比"  },
+ "12" : {"ID" : 12 ,"type" : 12 ,"define" : "infantryhpMax" ,"name" : "步兵血量百分比"  },
+ "13" : {"ID" : 13 ,"type" : 13 ,"define" : "infantryatk" ,"name" : "步兵攻击百分比"  },
+ "14" : {"ID" : 14 ,"type" : 14 ,"define" : "cavalryhpMax" ,"name" : "骑兵血量百分比"  },
+ "15" : {"ID" : 15 ,"type" : 15 ,"define" : "cavalryatk" ,"name" : "骑兵攻击百分比"  },
+ "16" : {"ID" : 16 ,"type" : 16 ,"define" : "pikemanhpMax" ,"name" : "枪兵血量百分比"  },
+ "17" : {"ID" : 17 ,"type" : 17 ,"define" : "pikemanatk" ,"name" : "枪兵攻击百分比"  },
+ "18" : {"ID" : 18 ,"type" : 18 ,"define" : "archerhpMax" ,"name" : "弓兵血量百分比"  },
+ "19" : {"ID" : 19 ,"type" : 19 ,"define" : "archerhpatk" ,"name" : "弓兵攻击百分比"  }
+}

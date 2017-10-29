@@ -1,0 +1,5 @@
+{
+ "1" : {"ID" : 1 ,"arealv" : 1 ,"minlv" : 4 ,"maxlv" : 30  },
+ "2" : {"ID" : 2 ,"arealv" : 2 ,"minlv" : 32 ,"maxlv" : 60  },
+ "3" : {"ID" : 3 ,"arealv" : 3 ,"minlv" : 62 ,"maxlv" : 80  }
+}

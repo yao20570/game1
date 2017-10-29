@@ -1,0 +1,240 @@
+package Common;  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "Common";  //共用定义
+
+
+
+message AttrDifInfo{ //玩家各种属性各种列表
+	required int32 typeid = 1;   //属性
+	required int64 value= 2;     //值
+}
+
+///////////////////power相关对应结构体///////////////
+
+message AttrInfo{  //玩家各种属性列表，包括资源属性
+	required int32 typeid = 1;   //属性
+	required int64 value= 2;     //值
+}
+
+///powerList 需要优化
+message SoldierInfo{  //佣兵信息
+	required int32 typeid = 1;		//佣兵模板id
+	required int32 num = 2;			//数量
+	repeated SoldierPowerInfo powerInfo = 3;	//战斗属性列表
+	//required int32 attack = 4;//攻击
+	//required int32 hp =5;//总血量
+}
+
+message SoldierPowerInfo{//佣兵power信息
+    required int32 powerId = 1;
+    required int32 value = 2;//道具数量
+}
+
+message ItemInfo{//道具信息
+	required int32 typeid = 1;//道具id
+	required int32 num = 2;//道具数量
+}
+
+message AdviserInfo{     //军师信息
+    required fixed64 id = 1; 
+    required int32 typeId = 2;//军师配置表id
+    required int32  pos=3; //位置大于0内政任职位置，-1处于出战位置，0空闲状态
+    required int32  lv=4;//等级
+    
+}
+
+
+////////////////////////////////////////////////////
+
+message RewardInfo{  //奖励信息
+	required int32 power = 1;		//分类  
+	optional int32 typeid = 2;		//类型
+	required int32 num = 3;			//数量
+}
+
+message FightElementInfo{//出战单位属性
+	required int32 typeid = 1;//佣兵模板id  OR  军师id
+	required int32 num = 2;//出战数量 OR 军师数量固定为1
+	required int32 post = 3;//位置 OR 军师位置固定为9
+    optional fixed64 adviserId=4;//军师id
+    optional int32 adviserLv=5;//军师星级 演武场显示用到
+    optional int32 heroType = 6; // 武将typeId
+}
+
+
+//////////////////////////////////////////////////
+message EquipInfo{    //装备信息
+	required fixed64 id = 1; //装备唯一id
+	required int32 typeid = 2; //装备配置id
+	required int32 level = 3; //装备等级
+	required int32 exp = 4; //装备储存的exp
+	required int32 position = 5; //装备的位置，0在仓库里,123456槽位
+    required int32 type=6;//装备类型
+    required int32 quality=7;//品质
+    required int32 upproperty=8;//功能属性
+   
+}
+
+
+message OrdnancePieceInfo{    //军械碎片信息
+    required int32 typeid = 1; //typeid
+	optional int32 num = 2; //数量
+	
+}
+
+
+message HeroPieceInfo{    //武将碎片信息
+    required int32 typeid = 1; //typeid
+    optional int32 num = 2; //数量
+    
+}
+
+
+message OrdnanceInfo{    //军械信息
+    required fixed64 id = 1; //军械唯一id
+	required int32 typeid = 2; //军械碎片装备配置id
+	required int32 strgthlv=3;//强化等级
+    required int32 remoulv=4;//改造等级
+    required int32 type=5;//兵种类型
+    required int32 quality=6;//品质
+    required int32 part=7;//部位
+    required int32 position = 8; //装备的位置，0在仓库里,1槽位
+    required int32 strength=9;//强度
+  
+}
+
+
+
+message DungeonInfo{
+    required int32 rs = 1;
+    repeated EventInfo eventInfo = 2;
+    repeated int32 boxes = 3;//可领取副本宝箱列表：1 2 3
+    optional int32 star = 4;//副本获得的星星数
+    optional int32 totalStar = 5;//副本的总星星数
+    optional int32 dungeoId = 6;//副本id
+    optional int32 times = 7;//剩余次数
+    optional int32 timesTotal = 8;//总次数
+}
+
+message EventInfo{   //关卡信息
+    required int32 id = 1;//关卡id
+    required int32 star = 2;//关卡获得的星星数
+    repeated MonsterInfo monsterInfos = 3;//关卡怪物信息
+    required int32 force = 4;//怪物战力
+}
+
+message MonsterInfo{   //关卡信息
+    required int32 id = 1;//关卡id
+    required int32 post = 2;//位置
+    required int32 num = 3;//怪物数量
+}
+
+
+
+
+
+message TaskInfo{    //任务信息 
+    required int32 tableType = 1; //任务类型 1，主线任务，2每日任务，3每日活跃,4，军功类型
+    required int32 typeId = 2; //任务对应表的Id
+    optional int64  num= 3; //完成度
+    optional int32 state = 4; //状态 0未完成 1已经完成 2领取过了 3要删除的
+    optional int32 accept = 5; //状态 0未接受 ，1接受
+    optional int32 finishTimes=6;//完成过的次数
+    optional int32 completionTime=7;//用于战功任务完成排序  完成时间
+}
+
+message TaskInfoList {
+    repeated TaskInfo taskInfos = 1; //
+    optional int32 dayliynum=2;//日常任务任务完成数
+    optional int32 dayActivityId=3;//日常活跃Id
+    required int32 rs=4;//错误吗
+    optional int32 hasGetMaxId=5;//已经领取活跃最大id
+    repeated int32 exploitHasget=6;//军功已领id
+}
+
+
+message GeneralInfo{//武将信息
+    required int32 generalId=1;//武将ID
+    required int32 generalLevel=2;//武将等级
+    required int32 position=3;//武将位置（0在仓库，123456正在上阵）
+    required int32 potential=4;//武将潜力
+    required int32 command=5;//该武将带兵量
+    required int32 exp=6;//武将当前经验
+    repeated GeneralSoul generalSoul=7;//将魂加点信息 
+}
+
+message GeneralSoul{//将魂加点信息
+    required int32 id=1;//将魂id
+    required int32 generallevel=2;//将魂等级
+    required int32 num=3;//该将魂所加的点数
+}
+
+message StrategicsInfo{//武将兵法信息
+    required int32 strategicsId=1;//兵法id
+    required int32 strategicsLv=2;//兵法等级
+    
+}
+
+message HeroInfo{//英雄信息
+    required int32 heroId=1;//英雄typeid
+    required fixed64 heroDbId =2;//英雄数据库id
+    required int32 heroLv=3;//英雄等级
+    required int32 heroPosition=4;//英雄位置
+    required int32 heroStar=5;//英雄星级
+    required int32 heroExp=6;//英雄当前经验值
+    repeated StrategicsInfo strategicsInfo=7;//兵法信息 
+    required int32 num=8;//数量
+}
+
+message FormationInfo{//阵法信息
+   required int32 formationId=1;//阵法Id
+   required int32 formationLv=2;//阵法等级
+}
+
+message TreasurePostLevelInfo{//宝具部位阶级信息
+   required int32 postId=1;//部位Id  0是武器，1是马驹
+   required int32 level=2;//部位阶级
+}
+
+message TreasurePostWishInfo{//宝具部位祝福值信息
+   required int32 postId=1;//部位Id  0是武器，1是马驹
+   required int32 wish=2;//部位祝福值
+}
+
+message TreasurePieceInfo{    //宝具碎片信息
+    required int32 typeid = 1; //typeid
+    required int32 num = 2; //数量
+    
+}
+
+
+message TreasureInfo{    //宝具信息
+    required fixed64 id = 1; //宝具唯一id
+    required int32 typeid = 2; //宝具碎片装备配置id
+    optional int32 postId = 3;//装备在那个出战槽位上
+    required int32 washTime = 4;//当天已洗练次数
+    repeated SophisticationLevelInfo baseInfo = 5;//当前洗练属性等级信息
+    repeated BestSophisticationInfo bestInfos = 6;//最优属性信息
+}
+
+message SophisticationLevelInfo{    //洗练属性等级信息
+    required int32 typeid = 1; //属性typeid
+    required int32 level = 2; //等级
+
+}
+
+message BestSophisticationInfo{    //最优属性信息
+    required int32 typeid = 1; //属性typeid
+    required int32 number = 2; //前第几（用于恢复）
+
+}
+
+message BastPostInfo{//6个槽位上宝具槽位的信息（宝具槽位现在挂在出战部队槽位上）
+    required int32 postId = 1;//出战部队槽位1-6
+    repeated TreasurePostLevelInfo treasurePostLevelInfo =2;//宝具部位阶级信息
+    repeated TreasurePostWishInfo treasurePostWishInfo =3;//宝具部位祝福值信息
+}
+
+message IsCanGetWelfInfo{//军团福利所信息
+    required int32 isCanGetWelfInfo = 1;//是否可领取 0可领取 1不可领取
+}

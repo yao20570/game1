@@ -1,0 +1,217 @@
+package M20;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M20";  //竞技场协议
+
+import "Common.proto";
+import "M5.proto";
+
+
+message FightInfo{
+    required int32 rank=1;  //排名
+    required string name=2; //名称
+    required int32 level=3;   //等级
+    required int32 capity=4;   //阵形战力
+    required fixed64 playerId=5;  //玩家Id
+}
+
+message AreaInfo{//竞技场信息
+    required int32  rs=1;
+    required int32 challengetimes = 2;//竞技场剩余挑战次数
+    required int32 lasttimes=3;//上期排名 -1表示未上榜 
+    repeated FightInfo fightInfos=4;//对手信息 
+    required int32 wintimes=6;//连胜次数  
+    required int32  buytimes=7;//购买挑战次数
+    optional int32  lastReward=8;//上期排名奖励 0不可领取 1可领取
+    required int32  money=9;//购买所需的金币数目
+    required int32  remainTime=10;//剩余挑战时间
+    required int32 nextRefreshTime =11;//下次剩余挑战时间
+}
+
+message M200000{  //竞技场挑战信息
+
+    message S2C{
+        required AreaInfo areaInfo = 1;//竞技场信息
+    }
+
+    message  C2S{  
+    }
+}
+
+
+message M200001{  //请求战斗
+
+    message S2C{
+        required int32  rs=1;
+        
+    }
+
+    message  C2S{  
+       required int32 rank=5;  //排名
+    }
+}
+
+message M200003{  //增加挑战次数
+
+    message S2C{
+        required int32  rs=1;
+        required int32  money=2;//所需要的money
+        required int32 challengetimes = 3;//竞技场剩余挑战次数
+    }
+
+    message  C2S{  
+        
+    }
+}
+
+message M200004{  //竞技场商店购买
+
+    message S2C{
+        required int32  rs=1;
+        required int32  id=2;//原样返回
+    }
+
+    message  C2S{  
+         required int32  id=1;//竞技场商店购买的id
+    }
+}
+
+
+message M200005{  //领取竞技场上期排名奖励
+
+    message S2C{
+        required int32  rs=1;
+       
+    }
+
+    message  C2S{  
+    
+    }
+}
+
+
+message M200006{  //消除竞技场挑战时间
+
+    message S2C{
+        required int32  rs=1;
+    }
+
+    message  C2S{  
+        
+    }
+}
+
+message ShortInfos{
+    optional int32 type = 1;//1:我是攻击者，2:我是防守者,ps(只针对个人信息)
+    required string attack =2;//攻击者姓名
+    required string protect =3;//防守者姓名
+    required int32 time = 4;//时间
+    required int32 result = 5;//1:胜利 2:失败
+    required fixed64 id = 6;//
+    required int32 isRead = 7;//1:已读 2:未读
+}
+
+message LostSoldierInfo{//每个槽位对应的损失兵种数量以及出战数量
+    required int32 typeId = 1;//配置表id
+    required int32 post = 2;//槽位位置
+    required int32 lostNum = 3;//兵种损失数量
+    required int32 allNum = 4;//兵种总数量
+    optional int32 heroTypeId = 5;//英雄配置表id
+}
+
+message PersionInfo{  //攻守方的详细信息
+    required string name = 1;
+    required int32 vip = 2;
+    optional int32 typeid = 3; //军师数据表id
+    optional int32 level = 4;//军师实际星级
+    required string team = 5;//所属军团,若无则为""
+	optional int32 teamCapacit = 6;//出战部队战力 （新增）
+	repeated LostSoldierInfo lostInfo = 7;//对应槽位损失以及出战数量 （新增）
+    optional M5.WarBookFight warBookFight = 8;//国策
+}
+
+message PerDetailInfos{  //个人战报详细信息
+    required int32 type = 1;//1:我是攻击者，2:我是防守者,3全服
+    required int32 time = 2;//时间
+    required int32 first = 3;//1:攻击先手,2:防守先手
+    required int32 result =4;//1:攻击胜利,2:攻击失败
+    required PersionInfo attack = 5;//攻击方
+    required PersionInfo protect = 6;//防守方
+    repeated Common.RewardInfo reward = 7;//奖励
+    required fixed64 battleId = 8;//战斗id
+    required fixed64 id = 9;//ShortInfos中的id是一样的
+}
+
+message M200100{  //竞技场战报列表
+    message S2C{
+        repeated ShortInfos perInfos=1;//个人信息
+        repeated ShortInfos allInfos=2;//全服信息
+    }
+
+    message C2S{  
+        
+    }
+}
+
+message M200101{  //查看战报详细信息,服务器不需要推送200100(优化)
+     message S2C{
+        required int32 rs = 1;
+        optional PerDetailInfos infos = 2;
+        //required fixed64 id = 2;//原样返回
+     }
+
+    message  C2S{  
+        required fixed64 id = 1;
+        required int32 type = 2;//1:个人 2:全服
+    }
+}
+
+message M200102{ //删除个人战报,服务器不需要推送200100(优化)
+    message S2C{
+        required int32 rs = 1;
+    }
+
+    message  C2S{  
+        repeated fixed64 id = 1;
+    }
+}
+
+message M200103 {//请求战斗播放
+    message  S2C{
+        required int32 rs=1;
+    }
+
+    message  C2S{
+        required fixed64 battleId = 1;
+    }
+}
+
+message M200104{//个人战报的更新  每次竞技场战斗之后推送(优化)
+    message  S2C{
+        required ShortInfos perInfos=1;
+    }
+
+    message  C2S{
+    }
+}
+
+
+message M200105{//全服战报的更新  每次打开竞技场模块请求(优化)
+    message  S2C{
+        repeated ShortInfos allInfos=1;
+    }
+
+    message  C2S{
+    }
+}
+
+
+message M200106{//刷新时间验证
+    message  S2C{
+        required int32 remainTime=1;//服务器与客户端的时间差
+    }
+
+    message  C2S{
+        required int32 clientTime=1;//客户端时间
+    }
+}

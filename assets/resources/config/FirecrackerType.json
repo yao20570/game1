@@ -1,0 +1,8 @@
+{
+ "1" : {"ID" : 1 ,"effectgroup" : 1 ,"sort" : 1 ,"recharge" : 88 ,"reward" : [1301,1302,1307]  },
+ "2" : {"ID" : 2 ,"effectgroup" : 1 ,"sort" : 2 ,"recharge" : 588 ,"reward" : [1301,1303,1308]  },
+ "3" : {"ID" : 3 ,"effectgroup" : 1 ,"sort" : 3 ,"recharge" : 1288 ,"reward" : [1301,1304,1309]  },
+ "4" : {"ID" : 4 ,"effectgroup" : 1 ,"sort" : 4 ,"recharge" : 2888 ,"reward" : [1301,1305,1310]  },
+ "5" : {"ID" : 5 ,"effectgroup" : 1 ,"sort" : 5 ,"recharge" : 4888 ,"reward" : [1301,1306,1311]  },
+ "6" : {"ID" : 6 ,"effectgroup" : 1 ,"sort" : 6 ,"recharge" : 9888 ,"reward" : [1301,1306,1312]  }
+}

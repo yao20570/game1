@@ -1,0 +1,8 @@
+{
+ "1" : {"ID" : 1 ,"openlevel" : 1  },
+ "2" : {"ID" : 2 ,"openlevel" : 3  },
+ "3" : {"ID" : 3 ,"openlevel" : 8  },
+ "4" : {"ID" : 4 ,"openlevel" : 1  },
+ "5" : {"ID" : 5 ,"openlevel" : 8  },
+ "6" : {"ID" : 6 ,"openlevel" : 8  }
+}

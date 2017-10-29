@@ -1,0 +1,22 @@
+{
+ "1" : {"ID" : 1 ,"rewardID" : 1 ,"reward" : 10 ,"rate" : 20  },
+ "2" : {"ID" : 2 ,"rewardID" : 1 ,"reward" : 15 ,"rate" : 80  },
+ "3" : {"ID" : 3 ,"rewardID" : 1 ,"reward" : 20 ,"rate" : 450  },
+ "4" : {"ID" : 4 ,"rewardID" : 1 ,"reward" : 25 ,"rate" : 280  },
+ "5" : {"ID" : 5 ,"rewardID" : 1 ,"reward" : 30 ,"rate" : 120  },
+ "6" : {"ID" : 6 ,"rewardID" : 1 ,"reward" : 40 ,"rate" : 50  },
+ "7" : {"ID" : 7 ,"rewardID" : 1 ,"reward" : 50 ,"rate" : 0  },
+ "8" : {"ID" : 8 ,"rewardID" : 1 ,"reward" : 100 ,"rate" : 0  },
+ "9" : {"ID" : 9 ,"rewardID" : 1 ,"reward" : 150 ,"rate" : 0  },
+ "10" : {"ID" : 10 ,"rewardID" : 1 ,"reward" : 200 ,"rate" : 0  },
+ "11" : {"ID" : 11 ,"rewardID" : 2 ,"reward" : 10 ,"rate" : 10  },
+ "12" : {"ID" : 12 ,"rewardID" : 2 ,"reward" : 20 ,"rate" : 10  },
+ "13" : {"ID" : 13 ,"rewardID" : 2 ,"reward" : 30 ,"rate" : 10  },
+ "14" : {"ID" : 14 ,"rewardID" : 2 ,"reward" : 40 ,"rate" : 10  },
+ "15" : {"ID" : 15 ,"rewardID" : 2 ,"reward" : 50 ,"rate" : 10  },
+ "16" : {"ID" : 16 ,"rewardID" : 2 ,"reward" : 60 ,"rate" : 10  },
+ "17" : {"ID" : 17 ,"rewardID" : 2 ,"reward" : 70 ,"rate" : 10  },
+ "18" : {"ID" : 18 ,"rewardID" : 2 ,"reward" : 80 ,"rate" : 10  },
+ "19" : {"ID" : 19 ,"rewardID" : 2 ,"reward" : 90 ,"rate" : 10  },
+ "20" : {"ID" : 20 ,"rewardID" : 2 ,"reward" : 100 ,"rate" : 10  }
+}

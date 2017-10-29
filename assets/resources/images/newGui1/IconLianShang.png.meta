@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "b47edf44-2160-4aab-9b3f-a7f69c43cf57",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "IconLianShang": {
+      "ver": "1.0.3",
+      "uuid": "93405592-a8d2-4fa3-89ba-532120e65cff",
+      "rawTextureUuid": "b47edf44-2160-4aab-9b3f-a7f69c43cf57",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 11,
+      "height": 31,
+      "rawWidth": 11,
+      "rawHeight": 31,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

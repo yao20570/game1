@@ -1,0 +1,44 @@
+package M25;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M25";  //系统相关协议
+
+import "Common.proto";
+import "M20.proto";
+import "M16.proto";
+import "M14.proto";
+
+message PositionInfo{
+    required int32 x = 1;
+    required int32 y = 2;
+}
+
+
+message M250000{  //分享功能
+    message S2C{
+        required int32 rs =1;
+        optional int32 type =2;//1：佣兵分享，2：竞技场战报分享，3：野外战报分享，4：系统公告 ，5军团招募，6军师分享，7世界坐标分享，8道具分享，9宝具分享，10军械分享，11英雄分享
+        optional Common.SoldierInfo soldierInfo = 3;
+        optional M20.PerDetailInfos areanInfo = 4;
+        optional M16.MailDetalInfo reportInfo = 5;
+        optional M14.ChatInfo chat = 6;
+        optional fixed64 id = 7;
+        optional int32 typeId = 8;//佣兵,宝具，英雄，军械，军师分享的时候传typeId，系统公告时传公告id
+        optional int32 shareType =9;//1:世界分享，2：军团分享
+        optional Common.AdviserInfo adviserInfo = 10;//军师
+        optional PositionInfo posInfo = 11;//世界坐标分享
+        optional Common.RewardInfo itemInfo = 12;//道具信息
+        optional Common.HeroInfo heroInfo = 13;//英雄信息
+        optional Common.TreasureInfo treasureInfo = 14;//宝具信息
+        optional Common.OrdnanceInfo ordnanceInfo = 15;//军械信息
+        optional int32 noticeId = 16;//系统公告需要跳转才发公告id
+    }
+
+    message  C2S{  
+        required int32 type =1;//1：佣兵分享，2：竞技场战报分享，3：野外战报分享，4：系统公告，5军团招募，6军师分享，7世界坐标分享，8道具分享，9宝具分享，10军械分享，11英雄分享
+        optional fixed64 id = 2;
+        optional int32 typeId = 3;//佣兵分享的时候传typeId
+        required int32 shareType =4;//1:世界分享，2：军团分享
+        optional PositionInfo postinfo = 5;//世界坐标分享
+    }
+}

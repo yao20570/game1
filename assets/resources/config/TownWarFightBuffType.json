@@ -1,0 +1,6 @@
+{
+ "1" : {"ID" : 1 ,"buffGroundId" : 1 ,"buff" : 10001  },
+ "2" : {"ID" : 2 ,"buffGroundId" : 2 ,"buff" : 10002  },
+ "3" : {"ID" : 3 ,"buffGroundId" : 3 ,"buff" : 10003  },
+ "4" : {"ID" : 4 ,"buffGroundId" : 4 ,"buff" : 10004  }
+}

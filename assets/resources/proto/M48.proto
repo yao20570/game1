@@ -1,0 +1,39 @@
+package M48;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M48";  //世界等级四季相关通用协议
+
+message WorldGlobalInfo{// 世界全局信息 20000
+  	required int32 worldLevelOpen = 1;//世界等级是否开启 0-不开启 1-开启
+  	required int32 worldLevel = 2;//当前世界等级
+  	required int32 playerLevelLimit = 3;//世界玩家等级上限
+  	optional int32 remainTimeOfOpenNextWorld = 4;//开放下一个世界等级的剩余时间
+
+  	required int32 worldSeasonOpen = 5;//世界四季是否开启 0-不开启 1-开启
+  	required int32 season = 6;//当前季节 1-春 2-夏 3-秋 4-冬
+  	required int32 remainTimeOfCurSeason = 7;//当前季节剩余时间
+
+  	optional int32 nextPlayerLevelLimit = 8;//下一个世界玩家等级上限
+}
+
+message M480000{//推送世界等级功能开放
+	 message S2C{
+	 	required int32 rs = 1;
+		required int32 worldLevel = 2;//当前世界等级
+		required int32 playerLevelLimit = 3;//世界玩家等级上限
+  		required int32 remainTimeOfOpenNextWorld = 4;//开放下一个世界等级的剩余时间
+  		optional int32 nextPlayerLevelLimit = 5;//下一个世界玩家等级上限
+	 }
+	 message C2S {
+	}
+}
+
+message M480002{//推送季节变换
+	message S2C{
+		required int32 rs = 1;
+	  	required int32 season = 2;//当前季节 1-春 2-夏 3-秋 4-冬
+	  	required int32 remainTimeOfCurSeason = 3;//当前季节剩余时间
+	}
+	message C2S {
+	}
+}

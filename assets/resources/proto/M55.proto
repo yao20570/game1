@@ -1,0 +1,209 @@
+package M55;
+ 
+option java_package = "com.znl.city.proto";   
+option java_outer_classname = "M55";  // 皇城战协议
+
+//皇战信息
+message EmperorCityInfo{
+	required int32 cityId = 1;//皇城id
+	required string legionName = 2;//归属同盟名字
+	optional int32 cityStatus = 3;//状态  1-未开放, 2-休战期(归属期), 3准备期(保护), 4-争夺期 
+	optional int32 x = 4; // x坐标
+	optional int32 y = 5; // y坐标
+}
+
+
+//防守队伍
+message DefTeamInfo{
+	required int32 headId = 1;//玩家头像id
+	required string name = 2;//名字
+	optional fixed64 playerId = 3;//玩家id
+}
+
+//点击皇城
+message M550000 {
+	message S2C {
+		required int32 rs = 1;
+		optional EmperorCityInfo cityInfo = 2; //皇城信息
+		optional int32 nextStateTime = 3; //下一个状态的剩余时间
+		optional int32 marchTime = 4; //行军时间
+
+		optional int32 integralSpeed = 5;//民忠速度(增长则值为正，衰减则值为负)
+		optional int32 occupyNum = 6;//当前占领值
+
+		optional string defLegionName = 7;//防守同盟名
+		repeated DefTeamInfo defTeamList = 8;//防守队伍列表
+		optional int32 openTime = 9;//下轮战斗的具体时间
+			//收益id（读表配置）
+			//增益id（读表配置）
+			//占领收益（读表配置）
+	}
+
+	message C2S {
+		required int32 cityId = 1; // 皇城id
+	}
+}
+
+
+//皇城状态刷新，实时推送 通过,30105来确定，对应场景类型：4
+message M551000 {  
+	message S2C {
+		required int32 rs =1;
+		required int32 cityId = 2;//皇城id
+		optional string legionName = 3;//占领同盟名
+		optional int32 cityStatus = 4;//状态 1-未开放, 2-休战期(归属期), 3准备期(保护), 4-争夺期 
+		optional int32 nextStateTime = 5; //下一个状态的剩余时间
+		optional int32 integralSpeed = 6;//民忠速度(增长则值为正，衰减则值为负)
+		optional int32 occupyNum = 7;//当前占领值
+		optional string defLegionName = 8;//防守同盟名
+		repeated DefTeamInfo defTeamList = 9;//防守队伍列表
+		optional int32 officeBuff = 10;//官职加成（TODO：另一个功能内容，暂不处理）
+	}
+
+	message C2S {
+
+	}
+}
+
+
+//皇城界面结构体
+message EmperorCityStateInfo{
+	required EmperorCityInfo cityInfo = 1;//皇城信息
+	optional int32 officeBuff = 2;//官职加成（TODO：国家系统内容，暂不处理）
+	optional int32 rewardState = 3;//领取状态，0不可领取，1可领取，2已领取
+}
+
+
+//打开皇城界面获取信息
+message M550001 {
+
+    message S2C {
+        required int32 rs = 1;
+		repeated EmperorCityStateInfo cityStateInfoList = 2;//皇城界面信息
+			//资源奖励（读表配置）
+    }
+
+    message C2S {
+	}
+}
+
+//点击领取
+message M551001 {
+	message S2C {
+        required int32 rs = 1;
+		optional int32 cityId = 2;//皇城id
+		//optional int32 rewardState = 3;//领取状态，0不可领取，1可领取，2已领取
+    }
+
+	message C2S {
+		required int32 cityId = 1;//皇城id
+	}
+}
+
+
+//战报结构体(个人战报从同盟战报中筛选)
+message CityFightInfo{
+	required fixed64 battleId = 1;
+	required string ourSideName = 2;//我方
+	required string enemyName = 3;//敌方
+	required string legionName = 4;//敌方同盟名
+	required int32 result = 5; //战斗结果（0负，1胜）
+	required int32 fightTime = 6;//时间
+	required string positionName = 7;//地点
+}
+
+
+//获取历史战报
+message M550002 {
+	message S2C {
+		required int32 rs = 1;
+        repeated CityFightInfo cityFightInfoList = 2;
+	}
+	
+	message C2S {
+    }
+}
+
+
+//排名数据结构体
+message RankInfo{
+	required int32 rank = 1;//排名
+	required string name = 2;//名字（同盟名/玩家名）
+	required int64 capacity = 3; //战力
+	required int64 militaryValue = 4;//军功值
+}
+
+
+//获取排名
+message M550003 {
+	message S2C {
+        required int32 rs = 1 ;
+        repeated RankInfo legionRankList = 2;//同盟
+		repeated RankInfo personRankList = 3;//个人
+		required int32 rewardState = 4;//领取状态，0不可领取，1可领取，2已领取
+    }
+
+	message C2S {
+    }
+}
+
+//点击领取排名奖励
+message M551003 {
+	message S2C {
+        required int32 rs = 1 ;
+		//optional int32 rewardState = 2;//领取状态，0不可领取，1可领取，2已领取
+    }
+
+	message C2S {
+    }
+}
+
+//获取单独显示用，活动状态和倒计时，特惠讨伐令次数
+message M550004 {
+	message S2C {
+        required int32 rs = 1 ;
+		optional int32 cityStatus = 2;//状态 1-未开放, 2-休战期(归属期), 3准备期(保护), 4-争夺期 
+		optional int32 nextStateTime = 3; //下一个状态的剩余时间
+		optional int32 boughtTimes = 4;//皇城活动的特惠讨伐令已购买次数
+    }
+
+	message C2S {
+    }
+}
+
+//购买特惠讨伐令
+message M550005 {
+	message S2C {
+        required int32 rs = 1 ;
+		optional int32 boughtTimes = 2;//皇城活动的特惠讨伐令已购买次数
+    }
+
+	message C2S {
+		required int32 buyCount = 1; //本次购买次数
+    }
+}
+
+// 推送未读的个人战报数量
+message M550006 {
+	message S2C {
+        required int32 rs = 1 ;
+		optional int32 unread = 2; 	// 未读的数量
+    }
+
+	message C2S {
+    }
+}
+
+// 战报已读（清除未读的数量）
+message M550007 {
+	message S2C {
+        required int32 rs = 1 ;
+    }
+
+	message C2S {
+    }
+}
+
+
+
+

@@ -1,0 +1,7 @@
+{
+ "1" : {"ID" : 1 ,"type" : 1 ,"property" : [] ,"propertyrate" : [10,2] ,"percent" : 20  },
+ "2" : {"ID" : 2 ,"type" : 2 ,"property" : [] ,"propertyrate" : [11,100] ,"percent" : 20  },
+ "3" : {"ID" : 3 ,"type" : 3 ,"property" : [] ,"propertyrate" : [12,100] ,"percent" : 20  },
+ "4" : {"ID" : 4 ,"type" : 4 ,"property" : [] ,"propertyrate" : [33,100] ,"percent" : 20  },
+ "5" : {"ID" : 5 ,"type" : 5 ,"property" : [] ,"propertyrate" : [34,100] ,"percent" : 20  }
+}

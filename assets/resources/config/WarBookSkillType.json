@@ -1,0 +1,20 @@
+{
+ "1" : {"ID" : 1 ,"skilleffect" : 1 ,"oldskill" : 201 ,"newskill" : 601  },
+ "2" : {"ID" : 2 ,"skilleffect" : 1 ,"oldskill" : 202 ,"newskill" : 602  },
+ "3" : {"ID" : 3 ,"skilleffect" : 1 ,"oldskill" : 203 ,"newskill" : 603  },
+ "4" : {"ID" : 4 ,"skilleffect" : 1 ,"oldskill" : 204 ,"newskill" : 604  },
+ "5" : {"ID" : 5 ,"skilleffect" : 1 ,"oldskill" : 205 ,"newskill" : 605  },
+ "6" : {"ID" : 6 ,"skilleffect" : 1 ,"oldskill" : 206 ,"newskill" : 606  },
+ "7" : {"ID" : 7 ,"skilleffect" : 1 ,"oldskill" : 207 ,"newskill" : 607  },
+ "8" : {"ID" : 8 ,"skilleffect" : 1 ,"oldskill" : 208 ,"newskill" : 608  },
+ "9" : {"ID" : 9 ,"skilleffect" : 1 ,"oldskill" : 209 ,"newskill" : 609  },
+ "10" : {"ID" : 10 ,"skilleffect" : 2 ,"oldskill" : 401 ,"newskill" : 701  },
+ "11" : {"ID" : 11 ,"skilleffect" : 2 ,"oldskill" : 402 ,"newskill" : 702  },
+ "12" : {"ID" : 12 ,"skilleffect" : 2 ,"oldskill" : 403 ,"newskill" : 703  },
+ "13" : {"ID" : 13 ,"skilleffect" : 2 ,"oldskill" : 404 ,"newskill" : 704  },
+ "14" : {"ID" : 14 ,"skilleffect" : 2 ,"oldskill" : 405 ,"newskill" : 705  },
+ "15" : {"ID" : 15 ,"skilleffect" : 2 ,"oldskill" : 406 ,"newskill" : 706  },
+ "16" : {"ID" : 16 ,"skilleffect" : 2 ,"oldskill" : 407 ,"newskill" : 707  },
+ "17" : {"ID" : 17 ,"skilleffect" : 2 ,"oldskill" : 408 ,"newskill" : 708  },
+ "18" : {"ID" : 18 ,"skilleffect" : 2 ,"oldskill" : 409 ,"newskill" : 709  }
+}

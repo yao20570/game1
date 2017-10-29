@@ -1,0 +1,11 @@
+{
+ "1" : {"id" : 1 ,"sensitive" : "卖"  },
+ "2" : {"id" : 2 ,"sensitive" : "元宝"  },
+ "3" : {"id" : 3 ,"sensitive" : "充"  },
+ "4" : {"id" : 4 ,"sensitive" : "充值"  },
+ "5" : {"id" : 5 ,"sensitive" : "朋友"  },
+ "6" : {"id" : 6 ,"sensitive" : "q"  },
+ "7" : {"id" : 7 ,"sensitive" : "微信"  },
+ "8" : {"id" : 8 ,"sensitive" : "Q"  },
+ "9" : {"id" : 9 ,"sensitive" : "微"  }
+}

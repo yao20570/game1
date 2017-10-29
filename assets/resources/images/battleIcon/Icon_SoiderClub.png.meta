@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "b096c391-9618-4a91-90ef-4fc92e561c3b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Icon_SoiderClub": {
+      "ver": "1.0.3",
+      "uuid": "f61d6682-506b-4d19-8ce4-0a61407ad381",
+      "rawTextureUuid": "b096c391-9618-4a91-90ef-4fc92e561c3b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 1.5,
+      "offsetY": 0.5,
+      "trimX": 12,
+      "trimY": 4,
+      "width": 49,
+      "height": 61,
+      "rawWidth": 70,
+      "rawHeight": 70,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

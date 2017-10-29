@@ -1,0 +1,230 @@
+package M13;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M13";  //装备军械协议
+
+import "Common.proto";
+
+message M130001  {  //装备升级
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    optional fixed64 id = 3;//升级的装备id原样返回
+	}
+
+	message  C2S{
+       required fixed64 id = 1;//装备id
+       repeated fixed64 useids = 2;  //所选装备的id
+	}
+
+}
+
+
+message M130002  {  //穿戴装备
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	}
+
+	message  C2S{
+       optional fixed64 id = 1;//装备id  
+       required int32 position= 2;//穿戴位置槽位
+       required int32 type=3;//穿戴方式1为穿戴一个，2为一键穿戴
+       optional int32 upproperty=4;//属性位置
+	}
+
+}
+
+message M130003  {  //卸下装备
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	}
+
+	message  C2S{
+       optional fixed64 id = 1;//装备id  
+       
+	}
+
+}
+
+message M130005 {  //装备出售
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	}
+
+	message  C2S{
+       repeated fixed64 id = 1;//装备id
+     
+	}
+
+}
+
+
+message M130006 {  //装备曹调换位置
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	}
+
+	message  C2S{
+       required int32 posione = 1;//装备id
+       required int32 positwo = 2;//装备id
+	}
+
+}
+
+
+message M130007 {  //装备背包扩充
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    required int32 count = 2;//扩充的仓库容量
+	}
+
+	message  C2S{
+     
+	}
+
+}
+
+
+message M130101{  //军械信息
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnanceInfo odInfos=2;
+	}
+
+	message  C2S{
+     
+	}
+
+}
+
+
+message M130102{  //军械碎片合成军械
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnanceInfo odInfos=2;
+	    repeated Common.OrdnancePieceInfo odpInfos=3;
+	}
+
+	message  C2S{
+     required int32 typeid=1;//碎片id
+	}
+
+}
+
+
+message M130103{  //军械碎片分解
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnancePieceInfo odpInfos=2;
+	}
+
+	message  C2S{
+     repeated int32 typeid=1;//碎片id
+     required int32 type=2;//1单个分解，2批量分解
+	}
+
+}
+
+
+message M130104{  //穿上军械
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnanceInfo odInfos=2;
+	}
+
+	message  C2S{
+       required fixed64 id = 1;//装备id
+	}
+
+}
+
+
+message M130105{  //卸下军械
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnanceInfo odInfos=2;
+
+	}
+
+	message  C2S{
+       required fixed64 id = 1;//装备id
+
+	}
+
+}
+
+
+message M130106{  //分解军械
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnanceInfo odInfos=2;
+	  
+	}
+
+	message  C2S{
+       repeated fixed64 id = 1;//装备id
+	}
+
+}
+
+
+message M130107{  //强化军械
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnanceInfo odInfos=2;
+	}
+
+	message  C2S{
+       required fixed64 id = 1;//装备id
+       optional int32 num=2;//增加概率道具的数量
+	}
+
+}
+
+
+message M130108{  //改造军械
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnanceInfo odInfos=2;
+	}
+
+	message  C2S{
+       required fixed64 id = 1;//装备id
+       optional int32 type=2;//0不使用道具，1使用道具
+	}
+
+}
+
+message M130109{  //进化军械
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    repeated Common.OrdnanceInfo odInfos=2;
+	}
+
+	message  C2S{
+       required fixed64 id = 1;//装备id
+     
+	}
+
+}
+
+
+// 晶石兑换物品次数信息
+message OrdnanceSparUseInfo{
+   required int32 typeId = 1; // 配置表id
+   required int32 exchangeTime = 2; // 已兑换次数
+}
+
+// 晶石兑换物品
+message M130110{ 
+	message S2C{
+	    required int32 rs = 1;
+	    optional int32 typeId = 2;//兑换成功原样返回
+	}
+
+	message  C2S{ 
+	    required int32 typeId= 1; // 配置表Id
+	}
+}
+
+
+

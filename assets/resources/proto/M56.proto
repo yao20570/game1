@@ -1,0 +1,203 @@
+package M56;
+ 
+option java_package = "com.znl.city.proto";   
+option java_outer_classname = "M56"; // 国家系统协议
+
+
+// 皇族信息
+message RoyalInfo {
+	required string legionName = 1;  // 同盟名
+	repeated MemberInfo members = 2; // 所有成员信息
+}
+
+// 通缉犯信息
+message Prisoner {
+	required MemberInfo info = 1;    // 通缉犯个人信息
+	repeated BuffInfo buffInfos = 2; // 生效的技能信息
+}
+
+// 成员信息
+message MemberInfo {
+	required string playerName = 1;    // 玩家名字
+	required int32 iconId = 2;         // 玩家头像
+	required int32 positionId = 3;     // 职位ID
+	required int32 level = 4;          // 玩家等级
+	required int32 vipLevel = 5;       // 玩家VIP等级
+	required int64 capacity = 6;       // 玩家国力
+	required fixed64 playerId = 7;  // 玩家ID
+}
+
+// 权利技能信息
+message SkillInfo {
+	required int32 skillId = 1;      // 权利技能ID
+	required int32 remainTimes =2;   // 剩余使用次数
+	required int32 cdTime = 3; 	     // 技能使用冷却时间
+}
+
+// 生效的技能信息
+message BuffInfo {
+	required int32 skillId = 1;      // 生效的技能ID
+	required int32 remainTime =2;   // 生效剩余时间
+}
+
+// 玩家简要信息
+message PlayerSimpleInfo {
+	required string playerName = 1; // 玩家名字
+	required int32 iconId = 2;      // 玩家头像
+	required int32 level = 3;       // 玩家等级
+	required int32 vipLevel = 4;    // 玩家VIP等级
+	required int64 capacity = 5;    // 玩家国力
+	required fixed64 playerId = 6;  // 玩家ID
+}
+
+// 皇族界面信息
+message M560001 {
+	message S2C {
+		required int32 rs = 1;
+		repeated RoyalInfo royalInfos = 2; // 所有皇族、王族信息
+	}
+
+	message C2S {
+	}
+}
+
+// 监狱界面信息
+message M560002 {
+	message S2C {
+		required int32 rs = 1;
+		repeated Prisoner prisoners = 2; // 所有通缉犯的信息
+		optional int32 remainWantedTimes = 3; // 剩余通缉次数
+	}
+
+	message C2S {
+	}
+}
+
+// 获取同盟所有成员的简要信息
+message M560003 {
+	message S2C {
+		required int32 rs = 1;
+		repeated PlayerSimpleInfo infos = 2; // 所有成员简要信息
+	}
+
+	message C2S {	  
+	}
+}
+
+// 获取单个玩家简要信息
+message M560004 {
+	message S2C {
+		required int32 rs = 1;
+		optional PlayerSimpleInfo info = 2; // 玩家简要信息
+	}
+
+	message C2S {	  
+        required string playerName = 1;  // 玩家名字	
+	}
+}
+
+// 获取玩家单个权利技能信息
+message M560005 {
+	message S2C {
+		required int32 rs = 1;
+		optional SkillInfo skillInfo = 2; // 权利技能信息
+	}
+
+	message C2S {	  
+        required int32 skillId = 1;	// 技能ID
+	}
+}
+
+// 国家信息修改
+message M561000 {
+	message S2C {
+		required int32 rs = 1;
+		optional string dynastyName = 2; // 朝代名
+		optional string emperorName = 3; // 皇帝名
+	}
+
+	message C2S {
+	    required string dynastyName = 1; // 朝代名
+		required string emperorName = 2; // 皇帝名
+	}
+}
+
+// 任命官职
+message M562001 {
+	message S2C {
+		required int32 rs = 1;
+		optional int32 cdTime = 2; // 剩余的任命CD时间
+		optional MemberInfo memberInfo = 3;    // 任职成功信息数据
+	}
+
+	message C2S {	  
+        required string playerName = 1;  // 玩家名字	
+	    required int32 positionId = 2;  // 职位ID
+	}
+}
+
+// 通缉玩家
+message M563001 {
+	message S2C {
+		required int32 rs = 1;
+		optional int32 cdTime = 2; // 剩余的CD时间
+		optional Prisoner prisoner = 3; // 通缉犯的信息
+		optional int32 remainWantedTimes = 4; // 剩余通缉次数
+	}
+
+	message C2S {	  
+        required string playerName = 1;  // 玩家名字	
+	    required int32 positionId = 2;   // 职位ID
+	}
+}
+
+// 撤销通缉
+message M563002 {
+	message S2C {
+		required int32 rs = 1;
+		optional int32 remainWantedTimes = 2; // 剩余通缉次数
+	}
+
+	message C2S {	  
+        required int32 positionId = 1;  // 职位ID	
+	}
+}
+
+//卸任官职
+message M563003{
+	message S2C {
+		required int32 rs = 1;
+	}
+
+	message C2S {	  
+        required int32 positionId = 1;  // 职位ID
+	}
+}
+
+// 使用技能
+message M563004{
+	message S2C {
+		required int32 rs = 1;
+		optional int32 positionId = 2;		// 职位ID
+		repeated BuffInfo buffInfos = 3; // 生效的技能信息表
+	}   
+
+	message C2S {	  
+        required int32 positionId = 1;  // 职位ID
+		required int32 skillId = 2;     // 技能ID
+	}
+}
+
+// 使用特殊技能，流放，服务端需要走特殊判断
+message M563005{
+	message S2C {
+		required int32 rs = 1;
+		optional int32 positionId = 2;		// 职位ID
+		repeated BuffInfo buffInfos = 3; // 生效的技能信息表
+	}   
+
+	message C2S {	  
+        required int32 positionId = 1;  // 职位ID
+		required int32 skillId = 2;     // 技能ID
+	}
+}

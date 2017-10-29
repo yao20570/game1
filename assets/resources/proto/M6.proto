@@ -1,0 +1,272 @@
+package M6;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M6";  //副本协议
+
+import "Common.proto";
+
+message DungeoInfo{   //副本信息
+    required int32 id = 1;//副本id
+    required int32 star = 2;//副本获得的星星数
+    required int32 totalStar = 3;//副本的总星星数
+    required int32 haveBox = 4;//是否有可领取宝箱，1：有，0：没有
+    required int32 len = 5; //当前第几关，如果没有，则为-1
+    required int32 count = 6;//当前探险次数，如果没有，则为-1
+    required int32 totalCount = 7;//总探险次数，如果没有，则为-1
+}
+
+
+message EventInfo{   //关卡信息
+    required int32 id = 1;//关卡id
+    required int32 star = 2;//关卡获得的星星数
+   // repeated MonsterInfo monsterInfos = 3;//关卡怪物信息
+   // required int32 force = 4;//怪物战力
+}
+
+message MonsterInfo{   //关卡信息
+    required int32 id = 1;//关卡id
+    required int32 post = 2;//位置
+    required int32 num = 3;//怪物数量
+}
+
+
+
+message M60000  {  //获取副本列表信息
+	message  S2C{
+	    required int32 rs = 1;
+	    repeated DungeoInfo dungeoInfos = 2;     //征战的list
+	    repeated DungeoInfo dungeoExplore = 3;   //探险的list
+	    required int32 isPassAll = 4; //征战界面是否已全部满级,0:未，1：全部通过
+	}
+
+	message  C2S{
+	}
+
+}
+
+
+message dungeonlist {
+	repeated DungeoInfo dungeoInfos = 2;     //征战的list
+	repeated DungeoInfo dungeoExplore = 3;   //探险的list
+	required int32 isPassAll = 4; //征战界面是否已全部满级,0:未，1：全部通过
+
+}
+
+
+
+message M60001  {  //获取副本详细信息
+	message  S2C{
+	    required int32 rs = 1;
+	    repeated EventInfo eventInfo = 2;
+	    repeated int32 boxes = 3;//可领取副本宝箱列表：1 2 3
+	    optional int32 star = 4;//副本获得的星星数
+	    optional int32 totalStar = 5;//副本的总星星数
+	    optional int32 dungeoId = 6;//副本id
+	    optional int32 times = 7;//剩余次数
+	    optional int32 timesTotal = 8;//总次数
+	}
+
+	message  C2S{
+		required int32 id = 1;
+	}
+
+}
+
+message M60002  {  //挑战关卡询问
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+		required int32 evendId = 1;
+		required int32 battleType = 2;//1普通副本；2冒险副本
+	}
+
+}
+
+message M60003  {  //副本宝箱领取
+	message  S2C{
+	    required int32 rs = 1;
+	    repeated int32 boxes = 2;//可领取副本宝箱列表：1 2 3
+	 
+	}
+
+	message  C2S{
+		required int32 boxNum = 1;
+		required int32 dungeoId = 2;
+	}
+
+}
+
+message M60004 { //vip购买冒险次数
+	message S2C{
+		required int32 rs = 1; //元宝不足返回rs=2
+		optional int32 advanceTimes =2;
+		optional int32 money = 3; //元宝数目
+		required int32 type = 4; //类型原样返回
+		optional int32 dungeoId = 5;//原样返回
+	}
+
+	message C2S{
+		required int32 dungeoId = 1;
+		required int32 type = 2;  //1:获取元宝的数目 2:购买请求
+	}
+}
+
+message M60005{//挂机
+	message S2C{
+		required int32 rs = 1;
+		optional int32 result = 2;//1胜利，0失败
+		repeated Common.RewardInfo rewards = 3;//奖励
+		optional int32 costTael = 4;//消耗宝石
+		repeated CostSoldierInfo costInfos = 5;//消耗佣兵
+		optional int32 continue = 6;//0:能继续挂机,1:体力值不足,2:银两不足以修复了,3损耗超过百分之10, 4:挑战次数<10(ps 只用于装备和配件探险),5:装备仓库空余数量＜2,6:配件仓库空余数量＜2，7战斗失败
+		repeated Common.SoldierInfo soldierInfo = 7;//战损的佣兵信息
+	}
+
+	message C2S{
+		required int32 type = 1; //  1:征战,2:探险
+		required int32 id = 2;//副本id
+		repeated Common.FightElementInfo infos = 3;//出战列表
+	}
+}
+
+
+message M60006  {  //更新副本列表信息
+	message  S2C{
+	    required int32 rs = 1;
+	    optional DungeoInfo dungeoInfos = 2;     //征战的list
+	    optional DungeoInfo dungeoExplore = 3;   //探险的list
+	    optional int32 isPassAll = 4; //征战界面是否已全部满级,0:未，1：全部通过
+	    required int32 type=5;//1为征战 , 2探险
+	}
+
+	message  C2S{
+	}
+
+}
+
+message CostSoldierInfo {
+	required int32 typeid = 1;
+	required int32 num = 2;
+}
+
+message IndexInfo{  //排行榜
+	required int32 index = 1;//
+	required string name = 2;
+	required int64 fight = 3;//战力
+	required int32 grade = 4;//进度
+}
+
+message PassInfo{//通关
+	required string name = 1;  //如果木有,则为""
+	required int32 lv = 2;//如果木有,则为0
+	required string time = 3;
+	required fixed64 battleId = 4; //重播
+}
+
+message LimitMonsterInfo{   //
+    required int32 typeid = 1;//
+    required int32 post = 2;//位置
+    required int32 num = 3;//怪物数量
+}
+
+message LimitEventInfo{   //
+    repeated LimitMonsterInfo monsterInfos = 3;		//关卡怪物信息
+    required int32 force = 4;						//怪物战力
+}
+
+message M60100{ //极限探险的信息
+	message S2C{
+		repeated IndexInfo allIndexInfo = 1;	//排行榜
+		optional IndexInfo myIndexInfo = 2;		//玩家自己
+		optional PassInfo firstPass = 3;		//首次通关
+		repeated PassInfo nearPass = 4;			//最近通关
+		optional int32 id = 5;//关卡id
+		optional int32 fightCount = 6;			//剩余挑战次数
+		optional int32 backCount = 7;			//剩余重置次数
+		optional LimitEventInfo eventInfo = 8;	//
+		required int32 rs=9;
+		optional int32 ismop=10;				//0不在扫荡 1在扫荡 扫荡时间读取定时器37，0 ，0
+		optional int32 maxId = 11;				//最大关卡id
+		optional int32 moptime = 12;			//扫荡剩余时间
+	}
+
+	message C2S{
+	}
+}
+
+message M60101{//极限重置
+	message S2C{
+		required int32 rs = 1;
+	}
+
+	message C2S{
+		required int32 id = 1;//关卡id
+	}
+}
+
+
+message M60102{//开始极限扫荡
+	message S2C{
+		required int32 rs = 1;
+	}
+
+	message C2S{
+
+	}
+}
+
+
+message M60103{//停止极限扫荡
+	message S2C{
+		required int32 rs = 1;
+		repeated Common.RewardInfo rewards = 2;//奖励
+	}
+
+	message C2S{
+	
+	}
+}
+
+message M60104{//开启新副本
+	message S2C{
+		required int32 rs = 1;
+	}
+	message C2S{
+	
+	}
+}
+
+
+message M60105{//极限扫荡的倒计时
+	message S2C{
+		required int32 rs = 1;
+		optional int32 moptime=2;	//扫荡剩余时间
+	}
+
+	message C2S{
+	
+	}
+}
+
+
+
+message ristdungeoTimes{   //
+   optional int32 id=1;	//冒险id
+   optional int32 times=2;	//剩余次数
+}
+
+
+
+message M60106{//冒险副本次数4点请求
+	message S2C{
+	    required int32 rs = 1;
+		repeated ristdungeoTimes info=2;//信息
+	}
+
+	message C2S{
+	
+	}
+}
+

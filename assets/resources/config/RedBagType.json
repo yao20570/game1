@@ -1,0 +1,7 @@
+{
+ "1" : {"ID" : 1 ,"effectgroup" : 1 ,"initnote" : 1500 ,"discount" : 90 ,"reward" : [513] ,"price" : 3000 ,"redbag" : 1000 ,"num" : 5 ,"percent" : [30,80]  },
+ "2" : {"ID" : 2 ,"effectgroup" : 2 ,"initnote" : 150 ,"discount" : 80 ,"reward" : [610] ,"price" : 300 ,"redbag" : 150 ,"num" : 5 ,"percent" : [30,80]  },
+ "3" : {"ID" : 3 ,"effectgroup" : 3 ,"initnote" : 400 ,"discount" : 80 ,"reward" : [641] ,"price" : 800 ,"redbag" : 300 ,"num" : 5 ,"percent" : [30,80]  },
+ "4" : {"ID" : 4 ,"effectgroup" : 4 ,"initnote" : 2000 ,"discount" : 90 ,"reward" : [713] ,"price" : 2880 ,"redbag" : 1000 ,"num" : 5 ,"percent" : [30,80]  },
+ "5" : {"ID" : 5 ,"effectgroup" : 5 ,"initnote" : 1100 ,"discount" : 90 ,"reward" : [791] ,"price" : 1680 ,"redbag" : 2800 ,"num" : 16 ,"percent" : [30,80]  }
+}

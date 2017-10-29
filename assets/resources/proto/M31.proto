@@ -1,0 +1,30 @@
+package M31;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M31";  // 全服活动（boss）协议
+import "Common.proto";
+
+message ServerActivityInfo{
+  required int32 activityId = 1;
+  required string name = 2;
+  required int32 icon = 3;
+  required int32 sort = 4;// 活动排序
+  required string info = 5;// 活动描述
+  required int32 type = 6;// 活动类型
+  required int32 state = 7;// 活动状态 2未开启(开服到第一个活动开启的时间) 1开启中 0即将开启
+  required int32 activityType = 8;// 活动类型：201boss活动，202群雄逐鹿
+  optional int32 realState = 9;// 活动内部状态 0活动未开启状态 1报名状态 2，3军团混战状态（军团混战图标显示）
+  optional int32 isLegion = 10;// 是否同盟类型活动  0：不是   1：是
+  optional int32 rewardNum = 11; // 可领奖数
+}
+
+message M310000{// 获得全服活动列表
+     message S2C{
+      required int32 rs=1;// 错误码
+      repeated ServerActivityInfo infos = 2;// 活动列表
+     }
+
+     message C2S{
+     }
+	
+}

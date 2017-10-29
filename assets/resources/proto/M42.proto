@@ -1,0 +1,62 @@
+package M42;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M42";  //点评系统相关通用协议
+
+message CommentInfo{//评论信息
+  required string commentId = 1; //评论id
+  required string areaKey = 2;//区号
+  required int32 typeId = 3;//类型 
+  required int32 childId = 4;//子类id  0-表示没有子类
+  required string playerName = 5;//角色名
+  required int32 time = 6;//时间
+  required string content = 7;//内容
+  required int32 upNum = 8; //点赞数
+  required int32 isUp = 9; //是否已点赞 0-未点赞 1-已点赞
+}
+
+message M420000{//获得评论信息列表
+     message S2C{
+      required int32 rs = 1;//错误码
+	  optional int32 typeId = 2;//类型
+	  optional int32 childId = 3;// 0 -表示没有子类
+      repeated CommentInfo commentInfo = 4; //评论信息列表
+     }
+
+     message C2S{
+        required int32 typeId = 1;//类型  1-兵营 2-武将 3-太学院 4-战法 5-军师 
+        required int32 childId = 2;//子类id 0-表示没有子类
+     }
+}
+
+message M420001{//评论
+     message S2C{
+      required int32 rs = 1;//错误码
+	  optional int32 typeId = 2;//类型
+	  optional int32 childId = 3;//子类id 0-表示没有子类
+      repeated CommentInfo commentInfo = 4; //评论信息列表
+     }
+
+     message C2S{
+      required int32 typeId = 1;//类型
+	  required int32 childId = 2;//子类id 0-表示没有子类
+	  required string content = 3;//内容	  
+     }
+}
+
+message M420002{//点赞
+    message S2C{
+      required int32 rs = 1;//错误码
+	  optional int32 typeId = 2;//类型
+	  optional int32 childId = 3;//子类id 0-表示没有子类
+      optional int32 upNum =4; //当前最新点赞数
+	  optional string commentId = 5; //评论id
+	  repeated string commentIds = 6; //评论id集合
+    }
+
+    message C2S{
+	  required int32 typeId = 1;//类型
+	  required int32 childId = 2;//子类id 0-表示没有子类
+      required string commentId = 3;//评论id
+    }
+}

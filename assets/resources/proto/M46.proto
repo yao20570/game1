@@ -1,0 +1,42 @@
+package M46;
+
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M46";  // 实名制协议
+
+// 实名制信息
+message RealNameInfo {
+		optional string name = 1; // 姓名
+		optional string idNum = 2; // 身份证号
+		optional int32 state = 3; // 认证状态（0：未开启，1：未实名，2：实名未成年，3：实名已成年）
+		optional int32 onlineTime = 4; // 今日已在线时间（秒）
+		optional int32 recharge = 5; // 今日已充值（元）
+		optional int32 debuff = 6; // 减益百分比
+		optional int32 isPunish = 7; // 惩罚开关（0：关，1：开）
+	}
+
+// 申请实名制
+message M460000 {
+	message S2C {
+		required int32 rs = 1;
+		optional RealNameInfo info = 2; // 实名制信息
+	}
+
+	message C2S {
+		required string name = 1; // 姓名
+		required string idNum = 2; // 身份证号
+	}
+	
+}
+
+// 服务端推送实名制开关状态
+message M460001 {
+	message S2C {
+		required int32 rs = 1;
+		optional RealNameInfo info = 2; // 实名制信息
+	}
+
+	message C2S {
+		required int32 switchState = 1; // 开关状态（0：关，1：开）
+	}
+
+}

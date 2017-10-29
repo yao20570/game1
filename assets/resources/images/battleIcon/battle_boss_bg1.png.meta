@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "d1272ef1-5133-4628-8be2-59e33685353a",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "battle_boss_bg1": {
+      "ver": "1.0.3",
+      "uuid": "652ff058-7bfd-42e2-b828-326edca16f88",
+      "rawTextureUuid": "d1272ef1-5133-4628-8be2-59e33685353a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 640,
+      "height": 25,
+      "rawWidth": 640,
+      "rawHeight": 25,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,15 @@
+const MainSceneActionType = {
+    SHOW_OTHER_EVENT: "SHOW_OTHER_EVENT",  //进入其他模块
+    LOAD_COMPLETE: "LOAD_COMPLETE",          //加载完成
+    BUILDING_TOUCH: "BUILDING_TOUCH",        //点击建筑
+    BUILDING_UPGRATE_REQ: "BUILDING_UPGRATE_REQ",    //请求建筑升级
+    BUILDING_UPGRATE_REV: "BUILDING_UPGRATE_REV",    //取消建筑升级
+    BUILDING_UPGRATE_QUICK: "BUILDING_UPGRATE_QUICK",    //请求加速建筑升级
+    BUILDING_PRODUCT_QUICK: "BUILDING_PRODUCT_QUICK",    //请求加速建筑生产
+    BUILDING_REMOVE_FIELD: "BUILDING_REMOVE_FIELD",    //请求拆除野外建筑(包括 兵营，校场，工匠坊，科技的生产)
+    BUILDING_PRODUCT_REQ: "BUILDING_PRODUCT_REQ",    //请求建筑生产
+    BUILDING_PRODUCT_REV: "BUILDING_PRODUCT_REV"    //取消建筑生产
+
+};
+
+export default MainSceneActionType;

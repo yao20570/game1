@@ -1,0 +1,51 @@
+package M21;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M21";  //排行榜协议
+
+import "Common.proto";
+
+message PowerRankInfo{ // 排行榜信息
+    required int32 typeId = 1;      // 排行榜类型
+    required int32 rank = 2;        // 排名
+    required string name = 3;       // 角色名
+    optional int32 level = 4;       // 等级
+    required int64 rankValue = 5;   // power值
+    required fixed64 playerId = 6;  // 玩家Id
+    optional string legionName = 7; // 同盟名称
+}
+
+message M210000{
+    message S2C{
+    repeated  RankListInfo rankListInfo = 1;//所有排行榜信息
+    }
+    message C2S{
+    }
+
+}
+
+message RankListInfo{ //排行榜信息
+       repeated PowerRankInfo powerRankInfo =1; //排行榜信息
+       optional PowerRankInfo myRank =2; //我的排名信息
+       required int32 typeId=3;//排行榜类型
+}
+
+message WorldResRankInfo{ //世界资源攻打排行榜
+    required int32 lv=1;  //等级
+    required int32 type=2;  //资源类型
+    repeated RankPlayerInfo rankPlayerInfos =3;//排名信息
+}
+
+message RankPlayerInfo{ //排名信息
+    required string name =1;//玩家名字
+    required fixed64 playerId=2;  //玩家Id
+}
+
+message M210001{
+    message S2C{
+    repeated  WorldResRankInfo worldResRankInfos = 1;//所有排行榜信息
+    }
+
+    message C2S{
+    }
+}

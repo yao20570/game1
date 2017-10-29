@@ -1,0 +1,27 @@
+{
+  "name": "create_module",
+  "version": "0.0.1",
+  "description": "The package template for getting started.",
+  "author": "Cocos Creator",
+  "main": "main.js",
+  "main-menu": {
+    "i18n:MAIN_MENU.package.title/创建模块/创建": {
+      "message": "create_module:open"
+    }
+  },
+  "panel": {
+    "main": "panel/index.js",
+    "type": "dockable",
+    "title": "create_module",
+    "width": 400,
+    "height": 300
+  },
+  "scene-script": "scene/scene-walker.js",
+  "runtime-resource" : {
+    "path": "templates",
+    "name": "templates"
+  },
+  "reload": {
+    "ignore": ["templates/**/*"]
+  }
+}

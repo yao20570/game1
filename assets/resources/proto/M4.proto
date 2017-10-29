@@ -1,0 +1,44 @@
+package M4;  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M4";  //佣兵协议
+import "Common.proto";
+
+
+
+message M40000{ //刷新佣兵
+	message  S2C{
+		repeated Common.SoldierInfo soldiers = 1;//刷新的佣兵列表
+	}
+
+	message  C2S{
+	}
+}
+
+message FixSoldierInfo{//需要维修的佣兵信息
+	required int32 typeid = 1;
+	required int32 num = 2;
+	required int32 repairMoney = 3; //金币修理费
+	required int32 repairCrys = 4;  //宝石修理费
+}
+
+message M40001{ //战损佣兵列表
+	message  S2C{
+		required int32 rs =1;
+		repeated FixSoldierInfo soldiers = 2;//可修复的佣兵列表
+	}
+
+	message  C2S{
+	}
+}
+
+message M40002{//修复佣兵
+	message  S2C{
+		required int32 rs =1;
+		repeated FixSoldierInfo soldiers = 2;//可修复的佣兵列表
+	}
+
+	message  C2S{
+		required int32 typeid =1;//0的时候为全部修复
+		required int32 type =2;	//修复类型：1金币修复；2宝石修复
+	}
+}

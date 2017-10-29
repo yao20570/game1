@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "f545d46c-dc6e-4b31-a1ab-00b82e6da269",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Bg_woman2": {
+      "ver": "1.0.3",
+      "uuid": "5441fc0f-ff3c-4260-8418-5ac869b25051",
+      "rawTextureUuid": "f545d46c-dc6e-4b31-a1ab-00b82e6da269",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 9,
+      "offsetY": -10.5,
+      "trimX": 18,
+      "trimY": 22,
+      "width": 248,
+      "height": 295,
+      "rawWidth": 266,
+      "rawHeight": 318,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,44 @@
+package M58;
+
+option java_package = "com.znl.city.proto";
+option java_outer_classname = "M58"; // 中原任务相关协议
+
+message PlainsChapterInfo{ // 中原章节信息
+	optional int32 id = 1;					// 章节ID
+	optional int32 state = 2;				// 状态（0：未完成，1：已完成，2：已领取）
+	repeated PlainsTaskInfo taskInfo = 3;	// 中原任务信息
+}
+
+message PlainsTaskInfo{ // 中原任务信息
+	optional int32 id = 1;		// 任务ID
+	optional int64 num = 2;		// 完成度
+	optional int32 state = 3;	// 状态（0：未完成，1：已完成，2：已领取）
+}
+
+message M580000{ // 领取任务奖励
+	message S2C{
+		required int32 rs = 1;						// 错误码
+		optional PlainsChapterInfo chapterInfo = 2;	// 中原章节信息
+	}
+
+	message C2S{
+		optional int32 id = 1;	// 任务ID
+	}
+}
+
+message M580001{ // 领取章节奖励
+	message S2C{
+		required int32 rs = 1;						// 错误码
+		optional PlainsChapterInfo chapterInfo = 2;	// 中原章节信息
+	}
+
+	message C2S{
+		optional int32 id = 1;	// 章节ID
+	}
+}
+
+message M580002{ // 中原任务进度更新时推送
+	message S2C{
+		optional PlainsChapterInfo chapterInfo = 1;	// 中原章节信息
+	}
+}

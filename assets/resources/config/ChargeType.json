@@ -1,0 +1,8 @@
+{
+ "1" : {"ID" : 1 ,"limit" : 6 ,"restore" : 6 ,"saleNum" : 0 ,"addedReward" : [] ,"doubleReward" : 60  },
+ "2" : {"ID" : 2 ,"limit" : 648 ,"restore" : 745 ,"saleNum" : 1 ,"addedReward" : [[401,4601,6],[401,4602,1]] ,"doubleReward" : 6480  },
+ "3" : {"ID" : 3 ,"limit" : 328 ,"restore" : 370 ,"saleNum" : 2 ,"addedReward" : [[401,4601,3],[401,4602,1]] ,"doubleReward" : 3280  },
+ "4" : {"ID" : 4 ,"limit" : 198 ,"restore" : 218 ,"saleNum" : 0 ,"addedReward" : [[401,4601,2],[401,4602,1]] ,"doubleReward" : 1980  },
+ "5" : {"ID" : 5 ,"limit" : 98 ,"restore" : 107 ,"saleNum" : 0 ,"addedReward" : [[401,4601,1],[401,4602,1]] ,"doubleReward" : 980  },
+ "6" : {"ID" : 6 ,"limit" : 30 ,"restore" : 30 ,"saleNum" : 0 ,"addedReward" : [[401,4602,1]] ,"doubleReward" : 300  }
+}

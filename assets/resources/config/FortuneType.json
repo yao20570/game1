@@ -1,0 +1,5 @@
+{
+ "1" : {"ID" : 1 ,"effectID" : 1 ,"freeTimes1" : 0 ,"chargeAmount1" : 5 ,"rewardID1" : 6001 ,"freeTimes2" : 0 ,"chargeAmount2" : 3 ,"rewardID2" : 6002  },
+ "2" : {"ID" : 2 ,"effectID" : 2 ,"freeTimes1" : 0 ,"chargeAmount1" : 5 ,"rewardID1" : 6003 ,"freeTimes2" : 0 ,"chargeAmount2" : 4 ,"rewardID2" : 6004  },
+ "3" : {"ID" : 3 ,"effectID" : 3 ,"freeTimes1" : 0 ,"chargeAmount1" : 5 ,"rewardID1" : 6005 ,"freeTimes2" : 0 ,"chargeAmount2" : 4 ,"rewardID2" : 6006  }
+}

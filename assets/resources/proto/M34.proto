@@ -1,0 +1,56 @@
+package M34;
+
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M34";  //剿匪副本相关协议
+
+import "Common.proto";
+
+message BanditDungeonInfo{  //剿匪副本信息
+    required fixed64 id = 1; //副本唯一标识id
+	required int32 eventId = 2; //对应eventId, 战斗用这个来请求
+	required int32 x = 3;  //对应的x坐标
+	required int32 y = 4;  //对应的y坐标
+	optional int32 remainRestTime = 5; //剩余的休整时间，只有等id为0的时候，才会有值，客户端用来倒计时，请求服务端校验
+}
+
+message M340000{   //副本数据同步，休整时间结束后，才会请求
+	
+	message S2C{
+	    required int32 rs = 1;  //同步成功0返回banditInfo，失败返回时间校验失败错误码remainRestTime  id
+	    optional int32 remainRestTime = 2;
+	    optional fixed64 id = 3;
+	    optional BanditDungeonInfo banditInfo = 4;
+	}
+
+	message C2S{
+	    required fixed64 id = 1; 
+	}
+}
+
+
+message M340001{  //请求剿匪副本战斗，由于请求的id只能是唯一的，所以没法都统一的战斗协议
+
+    message S2C{
+        required int32 rs = 1;
+        optional BanditDungeonInfo banditInfo = 2;  //战斗胜利后，刷新对应的副本信息
+        optional int32 isAllKill = 3;				// 是否已经击杀完毕（0：否，1：是）
+    }
+
+    message C2S{
+        optional fixed64 id = 1; //副本ID
+	    repeated Common.FightElementInfo infos = 2;//出战列表
+	    optional int32 saveTraffic = 3;//节省流量0：关，1：开
+    }
+	
+}
+
+message M340002{  //更新所有的剿匪副本信息
+	
+	message S2C{
+	    repeated BanditDungeonInfo infos = 1;
+	}
+
+	message C2S{
+
+	}
+}

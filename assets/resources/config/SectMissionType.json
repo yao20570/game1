@@ -1,0 +1,7 @@
+{
+ "1" : {"ID" : 1 ,"stype" : 56 ,"finishcond1" : 0 ,"finishcond2" : 250 ,"opencond" : 0  },
+ "2" : {"ID" : 2 ,"stype" : 57 ,"finishcond1" : 0 ,"finishcond2" : 14400 ,"opencond" : 0  },
+ "3" : {"ID" : 3 ,"stype" : 8 ,"finishcond1" : 0 ,"finishcond2" : 1 ,"opencond" : 0  },
+ "4" : {"ID" : 4 ,"stype" : 58 ,"finishcond1" : 1 ,"finishcond2" : 1 ,"opencond" : 0  },
+ "5" : {"ID" : 5 ,"stype" : 59 ,"finishcond1" : 3 ,"finishcond2" : 1 ,"opencond" : 0  }
+}

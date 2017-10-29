@@ -1,0 +1,45 @@
+package M49;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M49";  //充值卡（月卡、周卡）相关通用协议
+
+message ChargeCardInfo{//已购买充值卡信息  
+  required int32 id = 1;//配置表id
+  required int32 remainTimes = 2;//剩余领取次数
+  required int32 isGet= 3;//当天是否已经领取 0- 未领取 1-已领取
+}
+
+message ChargeCardOpenInfo{// 充值卡功能开放信息 2W
+	repeated int32 id = 1;//已开放配置表id
+	repeated ChargeCardInfo chargeCardInfo = 2;//已购买充值卡信息
+}
+
+message M490000{//购买充值卡
+	 message S2C{ 
+		required int32 rs = 1;//错误码
+		optional int32 id = 2;//配置表id
+	 }
+	 message C2S{  
+		required int32 id = 1;//配置表id
+	 }
+}
+
+message M490001{//领取每日奖励
+	 message S2C{  
+		required int32 rs = 1;//错误码
+		optional int32 id = 2;//配置表id
+		optional int32 remainTimes = 3;//剩余领取次数
+	 }
+	 message C2S{  
+		required int32 id = 1;//配置表id
+	 }
+}
+
+message M490002{//推送功能开放
+	 message S2C{  
+		required ChargeCardOpenInfo chargeCardOpenInfo =1;
+	 }
+}
+
+
+

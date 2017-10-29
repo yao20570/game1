@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "e396c397-af3a-40c0-bc7c-99602ccc6e2c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "S9ShangXiaLa": {
+      "ver": "1.0.3",
+      "uuid": "4eda1c85-3b94-4334-9da5-b2bcecbae976",
+      "rawTextureUuid": "e396c397-af3a-40c0-bc7c-99602ccc6e2c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 568,
+      "height": 10,
+      "rawWidth": 568,
+      "rawHeight": 10,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "86da8403-b94a-40bc-97bf-fb3da93c05c9",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "BgPedestal_blue_normal": {
+      "ver": "1.0.3",
+      "uuid": "3b687d2b-c037-40db-866d-430d263c5c61",
+      "rawTextureUuid": "86da8403-b94a-40bc-97bf-fb3da93c05c9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 163,
+      "height": 58,
+      "rawWidth": 165,
+      "rawHeight": 58,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

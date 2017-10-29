@@ -1,0 +1,129 @@
+package M3;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M3";  //系统相关协议
+
+import "Common.proto";
+
+/////////////////////自定义的缓存数据//////////////////////
+
+message WorldCollectionInfos{
+    repeated WorldCollectionInfo infos = 1;
+}
+
+//是否进入过世界
+message EnterWorld{
+    required int32 enter = 1;
+}
+
+//世界收藏信息
+message WorldCollectionInfo{
+    required string name = 1;
+    required int32 iconId = 2;
+    required int32 tileX = 3;
+    required int32 tileY = 4;
+    repeated int32 tags = 5; //标签
+    optional int32 level = 6; //等级
+    optional int32 isPerson = 7;//0:是 1:不是
+    optional int32 pendantId = 8;    //新增：挂件ID  //是玩家则发，是资源不发
+    optional int32 buildingType = 9;    //新增：资源建筑类型  //是玩家不发，是资源则发
+	optional int32 power = 10; //战力
+	optional string legionName = 11; //军团
+    optional fixed64 playerId = 12; //玩家id
+}
+
+
+////////////////////////////////////////////////
+message ClientCacheInfo{ //客户端缓存信息
+    required int32 msgType = 2;  //消息类型，由客户端自定义 类型唯一
+    required bytes msg = 3;
+}
+
+message TimeInfo{ //时间相关信息 
+	required int32 bigtype = 1; //大类
+	required int32 smalltype=2;//小类
+	required int32 othertype=3;//其它类
+	required int32 remainTime = 4; //剩余时间
+    optional int32 lestime = 5;  //从5开始的optional只需要第一次请求的时候发，用来处理数据还原
+    optional int32 lasttime = 6;
+    optional int32 num = 7;
+    optional int32 attr1 = 8;
+    optional int32 attr2 = 9;
+    optional int32 attr3 = 10;
+    optional int32 begintime = 11;
+    optional int32 isReset= 12;  //1的时候只是用来作为还原，不进入客户端的倒计时，发的情况只会在isInit为1时处理，让客户端还原数据
+    optional int32 isAutoBuildLvTrigger = 13; //1表示是由于自动建筑升级所产生的建筑定时信息，用来客户端同步，交由客户端自身去对对应的类型去执行建筑升级逻辑
+    optional int32 delete = 14;//是否执行删除，1是，0否
+}
+
+
+message M30001 {     //客户端触发事件   
+    message S2C{
+
+    }
+    message C2S{
+        required int32 eventId = 1; //事件Id
+    }
+}
+
+message M30100{  //获取缓存信息
+    message S2C{
+        repeated ClientCacheInfo cacheInfos = 1;
+    }
+
+    message C2S{
+        
+    }
+}
+
+message M30101{  //更新缓存信息
+    message S2C{
+        required int32 msgType = 1;//ClientCacheInfo里面的msgType,原样返回
+    }
+
+    message C2S{
+        required ClientCacheInfo cacheInfo = 1;
+    }
+}
+
+
+message M30103{
+    message S2C{
+        required int32 blessStateLog = 1;//每天4点好友祝福状态刷新标识 4为刷新点
+    }
+
+    message C2S{
+
+    }
+}
+
+message M30104{//仓库已满转发邮件的提示
+    message S2C{
+        required int32 rs = 1;
+    }
+    message C2S{
+
+    }
+}
+
+//场景切换协议
+message M30105{
+    message S2C{
+        required int32 rs = 1;
+    }
+    message C2S{
+        required int32 type = 1;  //0进入 1离开
+        required int32 scene = 2; //具体的场景ID
+    }
+}
+
+
+message M30200{  //请求版本信息
+    message S2C{
+        required string versionName = 1;
+    }
+
+    message C2S{
+        required string fileName = 1; //需要校验的文件名
+    }
+}

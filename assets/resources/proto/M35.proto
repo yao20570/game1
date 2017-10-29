@@ -1,0 +1,69 @@
+package M35;
+
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M35";  //宝具相关协议
+
+import "Common.proto";
+
+message M350000{   //宝具穿戴（穿上，卸下，更换）
+	message S2C{
+	    required int32 rs = 1;
+	}
+
+	message C2S{
+	    required fixed64 treasuredId = 1;  //宝具id 
+	    required int32 post = 2;  //部位Id  0是武器，1是马驹
+	    required int32 postId = 3;//槽位id(1-6) 卸下传0
+	}
+}
+
+message M350001{   //宝具洗练
+	message S2C{
+	    required int32 rs = 1;
+	}
+
+	message C2S{
+	    required fixed64 treasuredId = 1;  //宝具id 
+	    required int32 type = 2;  //洗练类型  0是普通洗练，1是至尊洗练
+	    
+	}
+}
+
+message M350002{   //宝具洗练属性恢复
+	message S2C{
+	    required int32 rs = 1;
+	}
+	message C2S{
+	    required fixed64 treasuredId = 1;  //宝具id 
+	    required int32 bestId = 2;  //第几条最优
+	}
+}
+
+message M350003{   //宝具分解
+	message S2C{
+	    required int32 rs = 1;
+	}
+	message  C2S{
+        repeated fixed64 treasuredId = 1;//宝具id
+	}
+}
+
+message M350004{   //宝具碎片分解
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	}
+	message  C2S{
+     repeated int32 typeid=1;//碎片id
+     required int32 type=2;//1单个分解，2批量分解
+	}
+}
+
+message M350005{   //宝具碎片合成宝具
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	}
+
+	message  C2S{
+     required int32 typeid=1;//碎片id
+	}
+}

@@ -1,0 +1,812 @@
+package M22;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M22";  //排行榜协议
+
+import "Common.proto";
+import "M27.proto";
+
+message ArmyShopInfo{//军团可兑换的商店列表信息
+    required int32 canGetId =1;   //可以兑换的id
+    required int32 num =2;       //今天兑换过的次数
+}
+
+message BuildHelpInfo{//军团建筑升级帮助信息
+    required fixed64 id =1;//唯一id
+    required string name =2;   //求助的玩家名字
+    required int32 buildtype =3;       //建筑类型
+    required int32 helpnum=4;//已经帮助的数量
+    required int32 icon=5;//图标
+    required int32 time=6;//结束时间错
+    optional string helpname =7;   //帮助的玩家名字	
+    optional fixed64 playerId =8;   //帮助的玩家id
+}
+
+message M220002{  //军团商店物品兑换
+
+    message S2C{
+        required int32 rs = 1;
+        repeated ArmyShopInfo canGet = 2;   // 可以兑换的列表
+        required int32 myContribute = 3;    // 我的贡献值
+        required int32 type = 4;            // type=0物品面板，type=1珍品面板
+        required int32 legionlv = 5;        // 军团等级
+        optional int32 mySalary = 6;        // 我的俸禄
+    }
+
+    message  C2S{  
+    	required int32 id=1;//要兑换的Id，显示传0，兑换传真实id
+        required int32 opt=2;//操作：0显示，1领取
+        required int32 type=3;//type=0物品面板，type=1珍品面板
+    }
+}
+
+////////////////军团相关信息///////////////////////////
+message LegionShortInfo{ // 军团简要信息，用来显示列表
+    required fixed64 id = 1;
+    required int32 rank = 2;
+    required string name = 3;       // 军团名称
+    required int32 level = 4;
+    required int32 curNum = 5;      // 当前人数
+    required int32 maxNum = 6;      // 最大人数
+    required int64 capacity = 7;    // 战斗力
+    required int32 isCanJoin = 8;   // 是否能否加入 0不可以 1可以
+    required int32 applyState = 9;  // 申请状态，0未申请 1申请中
+    optional int32 oomph = 10;      // 活跃度（1：热闹，2：正常，3：冷清）
+}
+
+message LegionDetailInfo{  //军团详细信息，用来查询
+    required fixed64 id = 1;
+    required string leaderName = 3; //军团长名称
+    required int32 joinType = 4; //加入类型  1为直接加入 2需审核
+    required int32 joinCond1 = 5; //加入条件1 等级条件 0为不需要
+    required int64 joinCond2 = 6; //加入条件2 战斗力条件 0为不需要
+    required string notice = 7; //军团宣言
+    required int32 applyState =8; //申请状态，0未申请 1申请中
+    required int32 iconId = 9;       //军团长头像id
+    required int32 pendantId = 10;    //军团长挂件ID
+    required fixed64 playerId = 11;    //军团长id
+
+}
+
+message M220100{  //军团列表
+    message S2C{
+        required int32 rs = 1;
+        repeated LegionShortInfo shortInfos = 2;
+    }
+
+    message C2S{
+
+    }
+}
+
+message M220105{  //推荐军团列表（换一批）
+    message S2C{
+        required int32 rs = 1;
+        repeated LegionShortInfo recommendInfos = 2;//推荐军团列表
+    }
+
+    message C2S{
+
+    }
+}
+
+
+message M220101{  //查询军团详细信息
+    message S2C{
+        required int32 rs = 1;
+        optional LegionDetailInfo detailInfo = 2;
+    }
+
+    message C2S{
+        required fixed64 id = 1;
+    }
+}
+
+message M220102{  //军团申请 取消申请
+
+    message S2C{
+        required int32 rs = 1;  //操作成功，才会发下面的optional数据
+        optional fixed64 id = 2; //申请军团的id
+        optional int32 type = 3; //1 申请 2 取消申请
+    }
+
+    message  C2S{  
+        required fixed64 id = 1; //申请军团的id
+        required int32 type = 2; //1 申请 2 取消申请
+    }
+}
+
+message M220103{  //创建军团
+
+    message S2C{
+        required int32 rs = 1;
+        optional fixed64 legionId = 2; //创建成功后，发送军团ID
+    }
+
+    message  C2S{  
+        required int32 way = 1;//创建方式 1为金币创建 2资源创建
+        required int32 joinway = 2;//选择的加入方式  1为直接加入 2需审核
+        required string  name = 3;//军团名字
+    }
+}
+
+message M220104{ //军团搜索
+    
+    message S2C{
+        required int32 rs = 1;
+        repeated LegionShortInfo infos = 2;
+    }
+
+    message C2S{
+        required string name = 1; //模糊搜索
+    }
+}
+
+////////////////////////自己的军团信息////////////////////////////////
+message LegionMemberInfo{  //军团成员信息 ()
+    required fixed64 id = 1; //玩家ID
+    required int32 capityrank = 2; //战力排名
+    required string name = 3;  //玩家名称
+    required int32 job = 4;  //对应的职位宏定义 自定义1234 5普通 6 副团长 7团长 职位名称到自定义职位信息中拿
+    required int32 level = 5; //等级
+    required int64 capacity = 6; //战斗力
+    required int32 devote = 7; //个人贡献
+    required int32 isOnline = 8; //是否在线 0在线 不在线则显示离线时间
+    required int32 devotoWeek = 9; //周贡献
+    required int32 sex = 10; //性别
+    required int32 devoterank = 11; //贡献排名
+    required int32 activityrank=12;//活跃排名
+    required int32 activityvalue=13;//活跃度
+    required int32 iconId = 14;       //头像id
+    required int32 pendantId = 15;    //挂件ID
+    required int32 vipLevel = 16;    //vip等级
+    optional int32 welfareTimes = 17; // 今日福利所已被分配次数
+    optional int32 joinTimeEnough = 18; // 加入同盟时间是否足够（0：不足，1：足够）
+}
+
+message LegionCustomJobInfo{ //自定义职位信息
+    required int32 index = 1;  //自定义职位位置 1、2、3、4
+    required int32 levelNeed = 2;  //开放军团等级需求
+    required int32 curNum = 3; //当前拥有改职位的人数总和
+    required string name = 4; //自定义名称
+}
+
+message LegionMineInfo{ //自己的军团详细信息
+    required fixed64 id = 1;  //军团ID
+    required string name = 2; //军团名称
+    required string leaderName = 3; //军团长名称
+    required int32 rank = 4;
+    required int32 level = 5;
+    required int32 curNum = 6; //当前人数
+    required int32 maxNum = 7; //最大人数
+    required int32 joinType = 8; //加入类型  1为直接加入 2需审核
+    required int32 joinCond1 = 9; //加入条件1 等级条件 0为不需要
+    required int64 joinCond2 = 10; //加入条件2 战斗力条件 0为不需要
+    required string notice = 11; //军团宣言
+    required int32 buildDegree = 12; //建设度
+    required int32 mineJob = 13; //自己所属的职位
+    repeated LegionCustomJobInfo customJobInfos = 14; //自定义职位信息
+    optional string affiche = 15; //内部公告
+    required int32 myContribute=16;   //个人贡献
+    optional int32 welfareTimes = 17; // 今日福利所已被分配次数
+    optional int32 joinTimeEnough = 18; // 加入同盟时间是否足够（0：不足，1：足够）
+}
+
+message LegionApplyInfo{  //军团审批信息
+    required fixed64 id = 1; //玩家ID
+    required string name = 2;
+    required int64 capacity = 3; //战斗力
+    required int32 level = 4; //等级
+}
+
+message M220200{ //查看军团信息
+    
+    message S2C{
+        required int32 rs = 1;
+        optional LegionMineInfo mineInfo = 2; //自己军团的信息
+        repeated LegionMemberInfo memberInfos = 3; //军团成员列表信息
+    }
+
+    message C2S{
+
+    }
+}
+
+message M220201{  //军团成员操作 ,（操作成功后，推送给在线的军团成员）
+
+    message S2C{
+        required int32  rs = 1;
+        optional int32  type = 2; //原样返回
+        optional fixed64 id = 3 ; //玩家id  
+        repeated LegionMemberInfo info=4;//发送改变的信息
+    }
+
+    message  C2S{  
+       optional fixed64 id = 1 ;//玩家id
+       required int32  type=2 ;//1 踢出军团 2转让团长 3退出军团
+    }
+}
+
+////////////////////审批相关操作////////////////////////
+
+message M220202{  //查看审批列表
+    
+    message S2C{
+        required int32 rs = 1;
+        repeated LegionApplyInfo applyInfos = 2;
+    }
+
+    message C2S{
+
+    }
+}
+
+message M220203{ //同意加入军团,申请即可加入也发这条协议（操作 同意 成功后，推送给在线的军团成员）
+
+    message S2C{
+        required int32  rs = 1;
+        optional int32 type = 2;  //操作类型 1同意 2拒绝
+        optional fixed64 legionId = 3; //创建成功后，发送军团ID
+        optional fixed64 id = 4;//玩家申请加入成功返回玩家id
+        repeated LegionMemberInfo memberInfo = 5; //附带该军团的全部成员信息
+    }
+
+    message  C2S{  
+       required fixed64 id = 1;//玩家id
+       required int32 type = 2; //操作类型 1同意 2拒绝
+    }
+}
+
+
+message M220204{  //清空申请列
+
+    message S2C{
+        required int32  rs=1;
+        
+    }
+
+    message  C2S{  
+
+    }
+}
+
+message M220205{  //军团申请数量
+
+    message S2C{
+        required int32  rs=1;
+        required int32  num=2;//登陆请求其他服务器推推推 
+        
+    }
+
+    message  C2S{  
+
+    }
+}
+
+message M220206{//玩家申请军团被拒绝通知客户端刷新
+    message S2C{
+       required fixed64 id = 1;//军团id
+       required int32 type = 2;//状态 0 初始化为可申请状态 1 已经申请的状态
+    }
+    message C2S{
+    }
+}
+
+////////////////////////军团编辑相关操作/////////////////////////////////
+
+message M220210{  //军团编辑 （操作成功后，推送给在线的军团成员）
+
+    message S2C{
+        required int32  rs=1;
+        repeated int32 updateList = 2; //所要更新的列表 对应顺序1、2、3、4
+        optional int32 joinType = 3; //加入类型  1为直接加入 2需审核
+        optional int32 joinCond1 = 4; //加入条件1 等级条件 0为不需要
+        optional int64 joinCond2 = 5; //加入条件2 战斗力条件 0为不需要
+        optional string notice = 6; //军团宣言
+        optional string affiche = 7; //军团公告
+    }
+    
+    message  C2S{  
+        repeated int32 updateList = 1; //所要更新的列表 对应顺序1、2、3、4
+        optional int32 joinType = 2; //加入类型  1为直接加入 2需审核
+        optional int32 joinCond1 = 3; //加入条件1 等级条件 0为不需要
+        optional int64 joinCond2 = 4; //加入条件2 战斗力条件 0为不需要
+        optional string notice = 5; //军团宣言
+        optional string affiche = 6; //军团公告
+    }
+}
+
+message M220211{  //军团公告
+
+    message S2C{
+        required int32  rs=1;
+    }
+    
+    message  C2S{  
+        optional string affiche = 1; //内部公告
+    }
+}
+
+////////////////////职位编辑相关操作/////////////////////////////
+
+message LegionCustomJobShortInfo{  //自定义职位简要信息
+    required int32 index = 1 ; //职位 1234 自定义1234 
+    required string name = 2;
+}
+
+message M220220{  //职位编辑
+
+    message S2C{
+        required int32  rs = 1;
+        repeated LegionCustomJobShortInfo infos = 2 ;
+    }
+
+    message  C2S{  
+       repeated LegionCustomJobShortInfo infos = 1 ;
+    }
+}
+
+
+message M220221{  //升职 任命 （操作成功后，推送给在线的军团成员）
+
+    message S2C{
+        required int32  rs=1;
+        optional fixed64 id = 2 ;//玩家id
+        optional int32 job = 3 ; //升职成功后的职位
+        repeated LegionMemberInfo info=4;//发送改变的信息
+        required int32 type = 5 ; //原样返回 操作类型 1军团长任命  2非军团长升职
+    }
+
+    message  C2S{  
+       required int32 type = 1 ; //操作类型 1军团长任命  2非军团长升职
+       optional fixed64 id = 2 ;//玩家id
+       optional int32 job = 3 ; //任命的职位 职位 1234 自定义1234 5普通 6 副团长 7团长
+    }
+}
+
+//////////////////////////////////////////////
+
+////////////////军团福利院////////////////////
+
+message PanelInfo{
+    required int32 welfarelv=1;//福利院等级
+    required int32 buildNeed=2;//升级需要建设度
+    required int32 allBuild=3;//总建设度
+    required int64 myContribute=4;//个人贡献
+    required int32 canGetId=6;//当前可以领取的福利id
+    required int32 activityLv=8;// 军团活跃等级
+    required int32 activityValue=9;//军团活跃度
+    required int32 cangetfood=10;//可领食物
+    required int32 cangetiron=11;//可领石油
+    required int32 cangetstone=12;//可领石头
+    required int32 cangetwood=13;//可领木材
+    required int32 cangettael=14;//可领银两
+    required int32 hasgetfood=15;//已领食物
+    required int32 hasgetiron=16;//已领石油
+    required int32 hasgetstone=17;//已领石头
+    required int32 hasgetwood=18;//已领木材
+    required int32 hasgettael=19;//已领银两
+    required int32 type1=20;//活动类型1
+    required int32 type2=21;//活动类型2
+    required int32 type3=22;//活动类型3
+    required int32 type4=23;//活动类型4
+    required int32 type5=24;//活动类型5
+}
+
+message M220012{  //福利院信息
+    message S2C{
+        required int32 rs=1;
+        optional PanelInfo panelInfo=2;//福利院日常福利面板信息
+        optional int32 iscangetWelf=3;//是否可领取 0可领取 1不可领取
+        repeated LegionMemberInfo menberInfo=4;//玩家信息
+    }
+
+    message C2S{  
+       
+    }
+}
+
+
+
+message M220013{  //福利院升级,领取福利
+    message S2C{
+        required int32 rs=1;
+        optional PanelInfo panelInfo=2;//福利院日常福利面板信息
+        required int32 type =3;//1请求显示,2升级,3领取
+        optional int32 iscangetWelf=4;//是否可领取 0可领取 1不可领取
+    }
+
+    message C2S{  
+        required int32 type =1;//1请求显示,2升级,3领取
+        optional int32 canGetId=2;//当前可以领取的福利id
+    }
+}
+
+message M220015{  //资源福利领取
+    message S2C{
+        required int32 rs=1;
+        optional PanelInfo panelInfo=2;//福利院日常福利面板信息
+    }
+
+    message C2S{  
+
+    }
+}
+
+message WalfareInfo{
+	required int64 power = 1;//资源大类
+	required int64 type = 2;//资源小类
+	required int64 number = 3;//数量
+}
+
+message M220016{  //战事福利列表
+    message S2C{
+		required int32 rs=1;
+		repeated WalfareInfo list = 2;//战事福利列表
+        repeated LegionMemberInfo memberInfos = 3; // 军团成员列表信息
+    }
+
+    message C2S{  
+    }
+}
+
+message M220017{  //资源福利分配
+    message S2C{
+		required int32 rs=1;//成功或失败，0：成功 负数：失败显示对应错误码
+        optional int32 type = 2;//分配的物品类型
+        optional int32 num = 3;//分配的物品数量
+    }
+
+    message C2S{  
+		required WalfareInfo walfareInfo = 1;//道具信息
+		repeated fixed64 playerList = 2;	//玩家列表
+    }
+}
+
+///////////////军团大厅////////////////////
+message M220007{  //军团大厅升级
+    message S2C{
+        required int32 rs=1;
+        optional ArmyInfo armyInfo=2;//军团大厅信息
+        repeated ResInfo resInfo =3;//资源捐献列表，升级的时候不发
+    }
+
+    message C2S{  
+       required int32 opt=1;//0请求，1升级
+    }
+}
+
+message ArmyInfo{  //军团大厅信息
+   required string armyName = 1;    // 军团名
+   required int32 armyLv = 2;       // 军团大厅等级
+   required int32 buildNeed = 3;    // 升级需要建设度
+   required int32 allBuild = 4;     // 总建设度
+   optional int32 oomph = 5;        // 活跃度（1：热闹，2：正常，3：冷清）
+}
+
+///////////////军团捐献////////////////////
+message M220008{  //军团大厅捐献
+    message S2C{
+        required int32 rs=1;
+        optional ArmyInfo armyInfo=2;//军团大厅信息
+        repeated ResInfo resInfo =3;//资源捐献列表
+    }
+
+    message C2S{  
+       required int32 power=1;//捐献类型
+    }
+}
+message M220009{  //科技捐献
+    message S2C{
+        required int32 rs=1;
+        optional TechInfo techInfo=2;//科技大厅信息
+        repeated ResInfo resInfo =3;//资源捐献列表
+        required int32 techId=4;//科技Id
+        required int32 power=5;//捐献类型
+    }
+
+    message C2S{  
+       required int32 techId=1;//科技Id
+       required int32 power=2;//捐献类型
+    }
+}
+
+///////////////军团科技大厅////////////////////
+
+message M220010{  //科技大厅升级
+    message S2C{
+        required int32 rs=1;
+        optional TechInfo techInfo=2;//科技大厅信息
+        repeated ResInfo resInfo =3;//资源捐献列表
+    }
+
+    message C2S{  
+       required int32 opt=1;//0请求，1升级
+    }
+}
+message TechInfo{  //科技大厅信息
+   required int32 techLv =1;//科技大厅等级
+   required int32 buildNeed =2;//升级需要建设度
+   required int32 allBuild =3;//总建设度
+   required int32 myContribute =4;//我的贡献值
+   repeated SubTechsInfo subTech =5;//科技列表
+}
+
+message SubTechsInfo{  //科技信息
+   required int32 subTechId =1;//科技Id 
+   required int32 subTechLv =2;//科技等级
+   required int32 subTechExp =3;//科技经验
+}
+
+message ResInfo{  //科技捐献资源信息
+   required int32 resType =1;//资源类型
+   required int32 curCount =2;//资源每日累计已捐献次数
+}
+
+
+
+message BuildingInfo{  //军团建筑等级信息
+   required int32 id =1;//建筑id  （1=科技大厅，2=军团大厅，3=福利院）
+   required int32 level =2;//建筑等级
+}
+
+message M220000{  //军团建筑等级信息
+    message S2C{
+        required int32 rs=1;
+        repeated BuildingInfo info =2;//军团建筑等级信息
+    }
+
+    message C2S{  
+       
+    }
+}
+
+
+///////////////情报站////////////////////
+
+
+message SituationInfo{  //情报信息
+   optional RoleInfo info1 =1;//第一个玩家
+   optional RoleInfo info2 =2;//第二个玩家 可能不发 
+   required int32 bigtype =3;//1为军情 2 为民情 3荣耀
+   optional int32  smalltype=4;//为民情设定 1试炼场 2 团长发奖3 加入军团 4 退出军团 5 被踢出 6 还团长 7任命，8建筑升级 9军团福利分配 
+   optional int32  dungoeId =5;//为试炼场定义 
+   optional Common.RewardInfo  rewarInfo =6;//为团长发奖定义 
+   optional int64  loseNum =7;//军情里面被掠夺的资源
+   optional int32  result =8;//军情里面的胜负 1为防守胜利 ，0 防守失败
+   required int32 time =9;// 情报时间
+   optional string job=10;//被任命的职位
+   optional string buildup=11;//建筑升级
+   optional string itemNameAndNum = 12;//分配奖励的物品名字以及数量
+   optional int32 honorType = 13;//1群雄逐鹿奖励 ，2盟战奖励
+   optional int32 occupyTownNum = 14;//盟战 占领郡城的个数
+   optional int32 meleeBattleRank = 15;//群雄逐鹿 排名
+}
+
+message RoleInfo{  //玩家信息
+   required string name =1;//玩家名字
+   optional fixed64 playerId = 2; //玩家id
+   optional fixed64 capity=3 ;//战力
+   optional string  legionName =4 ;//军团名
+   optional int32  military   =5 ;//军衔
+   optional int32  degreenow   =6 ;//当前繁荣度
+   optional int32  degreemax   =7 ;//繁荣度上线
+   optional int32  faceIcon   =8;//外观
+}
+
+
+message M220300{  //情报站信息
+    message S2C{
+        required int32 rs=1;
+        repeated SituationInfo stinfos =2;//情报站信息
+    }
+
+    message C2S{  
+       
+    }
+}
+
+message M220400{  //军团招募
+    message S2C{
+        required int32 rs=1;
+    }
+
+    message C2S{  
+       
+    }
+}
+
+
+message M220500{  //获取建筑升级帮助信息
+    message S2C{
+     required int32 rs=1;
+     repeated   BuildHelpInfo infos=2;//帮助的信息
+    }
+
+    message C2S{  
+       
+    }
+}
+
+
+
+message M220501{  //进行帮助
+    message S2C{
+      required int32 rs=1;
+      repeated fixed64 ids=2;//客户端需要清除的id
+    }
+
+    message C2S{  
+       repeated fixed64 ids=1;//帮助ids
+    }
+}
+
+message M220502{  //更新帮助信息
+    message S2C{
+     required int32 rs=1;
+     repeated   BuildHelpInfo infos=2;//帮助的信息
+    }
+
+    message C2S{  
+       
+    }
+}
+
+message M220503{  //军团解散
+    message S2C{
+     required int32 rs = 1;
+    }
+
+    message C2S{  
+     
+    }
+}
+
+message M220018{//军团捐献通知客户端刷新
+    message S2C{
+     required fixed64 id = 1;//捐献玩家id
+     required int32 devotoWeek = 2;//玩家当前周贡献
+    }
+
+    message C2S{
+    }
+}
+
+message M220600{//军团初始化协议
+    message S2C{
+      required int32 rs = 1;
+      optional ArmyInfo armyInfo = 2;//军团大厅信息
+      optional PanelInfo panelInfo = 3;//福利院日常福利面板信息
+      optional int32 iscangetWelf = 4;//是否可领取 0可领取 1不可领取
+      optional LegionMineInfo mineInfo = 5; //自己军团的信息
+      repeated LegionShortInfo shortInfos = 6;//军团简要信息
+      repeated LegionMemberInfo memberInfos = 7; //军团成员信息
+      repeated M27.DungeonInfo dungeonInfos = 8;//试炼场的章节列表信息
+    }
+
+    message C2S{
+
+    }
+}
+
+
+message M220700{//军团公告请求推送
+    message S2C{
+      required int32 rs = 1;
+    }
+
+    message C2S{
+      optional int32 gold=1;//金币捐赠数量 没有可不发
+      optional int32 res=2; //资源捐赠数量 没有可不发
+      required int32 panel=3;//操作界面，1：大厅，2：科技
+    }
+}
+
+
+///////////////////////同盟城池///////////////////////////
+
+// 城池信息
+message CityInfo{  
+    required int32 cityId = 1;		//城池id
+    required string cityName = 2;	//城池名字
+    required string legionOwner = 3;//城池归属同盟
+    required int32 x = 4; 	// x坐标
+    required int32 y = 5; 	// y坐标
+    required int32 cityStatus = 6;	//状态 0未开放1可宣战时期2宣战（可派兵）期间3开战期间4保护期间5休战期间（郡城）
+	repeated fixed64 declareList = 7; // 仅用于郡城，已经宣战的同盟的ID
+}
+
+// 奖励信息
+message RewardInfo{  
+    required int32 power = 1;  	//分类  
+    optional int32 typeid = 2;  //类型
+    required int32 num = 3;     //数量
+    required int32 rest = 4;    //剩余 -1 不是限量  0与其他限量 并且剩余多少份
+}
+
+// 小红点信息
+message RewardRedPoint{  
+   required int32 panel = 1; // 47 郡城 36 都城 55 皇城
+   required int32 num = 2;   //数量
+}
+
+// 郡城界面信息推送
+message M220800{
+    message S2C{
+        required int32 rs = 1;
+        repeated CityInfo cityAllList = 2;
+        optional int32 remainTimes = 3;	//当前剩余宣战次数
+        optional int32 maxTimes = 4;	//最大宣战次数
+        repeated RewardInfo rewardInfoList = 5;	//个人分红奖励组
+        required int32 time = 6;	 // 下次领取时间点
+        required int32 isReward = 7; // 1 已领取 2 未领取
+    }
+
+    message C2S{
+    }
+}
+
+// 都城界面信息
+message M220803{
+    message S2C{
+        required int32 rs = 1;
+        repeated CityInfo cityAllList = 2;
+        repeated RewardInfo rewardInfoList = 3;	//个人分红奖励组
+        required int32 time = 4;	 // 下次领取时间点
+        required int32 isReward = 5; // 1 已领取 2 未领取
+        required int32 isWar = 6;	 // 1 可参战 2 无参战资格
+    }
+
+    message C2S{
+    }
+}
+
+// 皇城界面信息
+message M220804{
+    message S2C{
+        required int32 rs = 1;
+        repeated CityInfo cityAllList = 2;
+        repeated RewardInfo rewardInfoList = 3;	//个人分红奖励组
+        required int32 time = 4;	// 下次领取时间点
+        required int32 nextTime = 5;//下次开启的时间戳
+        required int32 isReward = 6;// 1 已领取 2 未领取
+    }
+
+    message C2S{
+    }
+}
+
+// 个人分红奖励领取
+message M220801{
+    message S2C{
+		required int32 rs = 1;
+        required int32 panel = 2;// 47 郡城 36 都城 55 皇城
+    }
+    
+    message C2S{
+		required int32 panel = 1;// 47 郡城 36 都城 55 皇城
+    }
+}
+
+//单个城池，状态推送刷新
+message M220802{
+    message S2C{
+        required int32 rs = 1;
+        required int32 panel = 2;// 47 郡城 36 都城 55 皇城
+        required CityInfo cityInfo =3;
+    }
+    
+    message C2S{
+    }
+}
+
+// 城池系统奖励小红点推送
+message M220810{
+	message S2C{
+        required int32 rs = 1;
+        repeated RewardRedPoint redPoint = 2;
+    }
+    
+    message C2S{
+    }
+}

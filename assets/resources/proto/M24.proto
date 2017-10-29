@@ -1,0 +1,17 @@
+package M24;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M24";  //系统相关协议
+
+import "Common.proto";
+
+message M240000{  //获取活动列表
+    message S2C{
+        required int32 rs =1;
+        repeated Common.RewardInfo rewards = 2;
+    }
+
+    message  C2S{  
+        required string cdkey =1;
+    }
+}

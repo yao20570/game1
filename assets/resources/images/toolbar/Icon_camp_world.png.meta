@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "9f6702f8-26f2-45e1-b0f0-21ec803bd504",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Icon_camp_world": {
+      "ver": "1.0.3",
+      "uuid": "91c5f767-458b-486f-9c4d-210813e8884c",
+      "rawTextureUuid": "9f6702f8-26f2-45e1-b0f0-21ec803bd504",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 116,
+      "height": 81,
+      "rawWidth": 116,
+      "rawHeight": 82,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

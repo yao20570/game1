@@ -1,0 +1,8 @@
+{
+ "1" : {"ID" : 1 ,"couponTime" : 1800 ,"blackRefreshTime" : 7200 ,"restTime" : 1800 ,"couponID" : 1 ,"rewardID" : 31 ,"reflashShopNum" : 6  },
+ "2" : {"ID" : 2 ,"couponTime" : 1800 ,"blackRefreshTime" : 7200 ,"restTime" : 1800 ,"couponID" : 1 ,"rewardID" : 32 ,"reflashShopNum" : 6  },
+ "3" : {"ID" : 3 ,"couponTime" : 1800 ,"blackRefreshTime" : 7200 ,"restTime" : 1800 ,"couponID" : 1 ,"rewardID" : 33 ,"reflashShopNum" : 6  },
+ "4" : {"ID" : 4 ,"couponTime" : 1800 ,"blackRefreshTime" : 7200 ,"restTime" : 1800 ,"couponID" : 1 ,"rewardID" : 34 ,"reflashShopNum" : 6  },
+ "5" : {"ID" : 5 ,"couponTime" : 1800 ,"blackRefreshTime" : 7200 ,"restTime" : 1800 ,"couponID" : 1 ,"rewardID" : 35 ,"reflashShopNum" : 6  },
+ "6" : {"ID" : 6 ,"couponTime" : 1800 ,"blackRefreshTime" : 7200 ,"restTime" : 1800 ,"couponID" : 1 ,"rewardID" : 36 ,"reflashShopNum" : 6  }
+}

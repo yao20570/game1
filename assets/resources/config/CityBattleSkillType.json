@@ -1,0 +1,6 @@
+{
+ "1" : {"ID" : 1 ,"name" : "扣押[襄阳]" ,"target" : 1 ,"useTimes" : 5 ,"buff" : [141,142]  },
+ "2" : {"ID" : 2 ,"name" : "扣押[太原]" ,"target" : 1 ,"useTimes" : 5 ,"buff" : [141,142]  },
+ "3" : {"ID" : 3 ,"name" : "扣押[建业]" ,"target" : 1 ,"useTimes" : 5 ,"buff" : [141,142]  },
+ "4" : {"ID" : 4 ,"name" : "扣押[成都]" ,"target" : 1 ,"useTimes" : 5 ,"buff" : [141,142]  }
+}

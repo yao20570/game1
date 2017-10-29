@@ -1,0 +1,8 @@
+{
+ "1" : {"ID" : 1 ,"rewardID" : 1 ,"reflashTime" : 21600 ,"reflashShopNum" : 6  },
+ "2" : {"ID" : 2 ,"rewardID" : 1 ,"reflashTime" : 21600 ,"reflashShopNum" : 6  },
+ "3" : {"ID" : 3 ,"rewardID" : 2 ,"reflashTime" : 21600 ,"reflashShopNum" : 6  },
+ "4" : {"ID" : 4 ,"rewardID" : 3 ,"reflashTime" : 21600 ,"reflashShopNum" : 6  },
+ "5" : {"ID" : 5 ,"rewardID" : 4 ,"reflashTime" : 21600 ,"reflashShopNum" : 6  },
+ "6" : {"ID" : 6 ,"rewardID" : 5 ,"reflashTime" : 21600 ,"reflashShopNum" : 6  }
+}

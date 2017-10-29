@@ -1,0 +1,552 @@
+package M36;
+
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M36";  //城主争夺战
+
+import "Common.proto";
+
+//城池信息
+message CityInfo{
+	required int32 	cityId=1;		//主城Id
+	required string legionName=2;	//占据该主城的军团名字
+	required int32 	cityState=3; 	//主城状态 0：关闭，2：准备，3：开启
+	required int32  startTime=4;	//下次争夺时间
+	required int32  rewardState=5;	//归属城池的每日奖励 0=无奖励 1=可领取 2=已领取
+}
+
+//玩家信息
+message MemberInfo{
+    required int64 playerId=1;	   //玩家Id
+    optional int64 voteLegionId=2; //所投票军团Id
+	optional int32 drawVoteTime=3; //领取投票奖励时间,>0：已领取
+	optional int32 attackTime=4;   //进击CD
+	optional int32 defendTime=5;   //防守CD
+	optional int32 rechangeTime=6; //换防CD
+	optional int32 fightTimes=7;   //战斗次数
+	optional int64 bossDamage=8;   //对BOSS的伤害值
+	optional int64 legionDamage=9; //对守军的伤害值
+	optional int64 wallDamage=10;  //对城墙的伤害值
+	optional int32 drawHostTime=11;//领取城主奖励时间
+	optional int32 participate=12; //0:无资格 1：有资格 参与
+	optional int32 score=13; 	   //玩家积分
+	optional int32 isSetTeam=14;   //玩家是否设置了进攻部队/防守部队，0未设置，1已设置
+}
+
+//城主信息
+message CityHost{
+	required int32 	cityId=1;			//主城Id
+	required string hostLegion=2;		//军团名字
+	required string hostCommander=3;	//军团长名字
+	required string viceLegion=4;		//附属军团名字
+	required string viceCommander=5;	//附属军团长名字
+	required int32 	prepareTime=6;		//准备~开启倒计时h
+	required int32 	startTime=7;		//下次争夺开始时间
+    required int64 bossNowHp=8;			//BOSS当前血量（0：BOSS死亡）
+    required int64 wallNowHp=9;			//城墙当前血量（0：城墙推倒）
+	required int32 timeLeft=10;			//活动剩余时间
+	required int32 cityState=11;		//活动状态（0：未开启，1：已开启）
+	optional int64 bossMaxHp=12;	    //BOSS最大血量
+}
+
+//城主战报
+message CityReport{
+	required int32 cityId=1;				//主城Id
+    required int32 type=2;					//战报类型1：BOSS 2：守军 3:城墙
+    required int32 time=3;					//时间(秒）
+    required string attackerName=4;			//进攻击Id
+    required string attackerLegionName=5;	//进攻击军团
+	required string defenderName=6;			//防守者Id（BOSS，守军 城墙）
+	optional string defenderLegionName=7;	//防守者军团
+    required int32 result=8;				//攻击方战斗结果（0：进攻方胜利 1:进攻方失败）
+    required fixed64 battleId=9;			//战斗数据Id
+}
+
+//设置阵型
+message Formation{
+	required int32 typeid = 1;		//佣兵模板id
+	required int32 num = 2;			//数量
+	required int32 post = 3;		//位置
+	optional fixed64 adviserId=4;	//军师id
+}
+
+//鼓舞信息
+message InspireInfo{
+	required int32 id=1;			//鼓舞Id
+	required int32 level=2;			//鼓舞等级
+}
+
+//投票结果列表
+message VoteInfo{
+	required int64 legionId=1;		//军团Id
+	optional string legionName=2;	//军团名称
+	required int64 capacity=3;		//战力
+	required int32 votes=4;			//票数
+}
+
+//防守队伍
+message DefenderInfo{
+	required int32 type=1;		//防守类型 1:BOSS，2：敌军  3：城墙
+	required int64 id=2;		//ID
+	optional string name=3;		//名称（BOSS名称，敌方军团名称，城墙）
+	required int32 level=4;		//等级
+	required int32 icon=5;		//图标
+	required int64 capacity=6;	//战斗力
+	optional int64 hp=7;		//血量 (城墙)
+	optional int64 hpMax=8;		//血量上限(城墙)
+}
+
+//积分排行榜(个人)
+message PlayerDamageRank{ 
+    required int32 		rank=1;  	//排名
+	required fixed64 	playerId=2; //玩家Id
+    optional string 	name=3; 	//角色名
+    optional int32 		level=4;   	//玩家等级
+    required int64 		score=5; 	//积分值（伤害损兵计算）
+	required int32		times=6;   	//战斗次数
+}
+
+//积分排行榜(军团)
+message LegionDamageRank{ 
+    required int32 		rank=1;  	//排名
+	required fixed64 	legionId=2; //军团Id
+    required string 	name=3; 	//军团名
+    optional int32 		level=4;   	//军团等级
+    required int64 		score=5; 	//积分值（伤害损兵计算）
+	required int32		times=6;   	//战斗次数
+}
+
+//参战资格
+message FightQualify{ 
+    required int32 		rank=1;  	//群雄逐鹿排名  排名为0表示只能防守，不能进攻了
+	required string 	legionName=2; //军团名称
+    required int64 	    capacity=3; 	//军团战力
+    required int32 		curNumber=4;   	//成员数量
+    required int64 		maxNumber=5; 	//成员数上限
+}
+
+////////////////////////////协议////////////////////////////
+
+///////准备阶段////////
+
+//城池列表
+message M360010{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		repeated CityInfo cityInfos=2;	//每周的城池列表
+	}
+
+	message C2S{
+	}
+}
+
+//城主信息
+message M360011{
+	message S2C{
+	    required int32 rs=1;			//错误码
+		optional CityHost host=2;		//城主信息
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+//任命副团
+message M360012{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+		required fixed64 legionId=2;		//军团Id
+	}
+}
+
+//鼓舞机制
+message M360013{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+	}
+
+	message C2S{
+		required int32 inspireId = 1;  	//鼓舞表配置id
+		required int32 cityId=2;		//城池Id
+	}
+}
+
+//鼓舞列表
+message M360041{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		repeated InspireInfo infos=2;	//鼓舞列表
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+
+//驻防设置(阵型)
+message M360014{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		optional int32 model = 2;		//界面显示自己部队的model（ArmKinds#model）
+		optional int32 cd=3;			//CD时间
+	}
+
+	message C2S{
+		required int32 cityId=1;	//城池CityBattleType#Id
+		repeated Common.FightElementInfo members = 2;//部队列表
+	}
+}
+
+//投票
+message M360015{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池CityBattleType#Id
+		required int64 legionId=2;		//军团Id
+	}
+}
+
+
+//查看玩家阵型
+message M360016{
+	message S2C{
+	    required int32 rs=1;					//错误码
+		repeated Formation formations=2;		//阵型数据
+	}
+
+	message C2S{
+		required int64 playerId=1;		//玩家 ID
+		required int32 cityId=2;		//城池CityBattleType#Id
+	}
+}
+
+//查看投票结果
+message M360017{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		repeated VoteInfo voteInfos=2;	//投票列表
+		required int64 voteLegionId=3;	//投票军团Id，0：未投票，>1：所投军团Id;
+		required int32 drawVoteTime=4;	//领取时间，0：未领取，>0:已经领取
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池CityBattleType#Id
+	}
+}
+
+//领取投票奖励
+message M360018{
+	message S2C{
+	    required int32 rs=1;			//错误码	
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池CityBattleType#Id
+	}
+}
+
+//撤回驻防(阵型)
+message M360019{   
+	message S2C{
+	    required int32 rs=1;		//错误码
+		optional int32 cd=2; 		//撤防冷却时间
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池CityBattleType#Id
+	}
+}
+
+///////争夺阶段///////
+
+
+//获得防守队伍列表
+message M360020{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		repeated DefenderInfo defenderInfoes=2;	
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+
+//攻打Boss
+message M360021{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		optional int64 hpNow=2;			//剩余血量
+		optional int32 cd=3;			//CD时间
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+		repeated Common.FightElementInfo infos = 2;//出战列表
+	    optional int32 saveTraffic = 3;//节省流量0：关，1：开
+	}
+}
+
+//攻打城墙
+message M360022{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		optional int64 hpNow=2;			//剩余血量
+		optional int32 cd=3;			//CD时间
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+		repeated Common.FightElementInfo infos = 2;//出战列表
+	    optional int32 saveTraffic = 3;//节省流量0：关，1：开
+	}
+}
+
+//攻击防守方
+message M360023{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		optional int32 cd=2;			//CD时间
+	}
+
+	message C2S{
+		required int32 cityId=1;					//城池Id
+		required int64 playerId=2;					//防守玩家ID
+		repeated Common.FightElementInfo infos=3;	//出战列表
+	    optional int32 saveTraffic=4;				//节省流量0：关，1：开
+	}
+}
+
+//清除休整CD时间
+message M360024{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+	}
+
+	message C2S{
+		required int32 type=1;			//清除类型 0：进攻方休整 1：防守方休整
+		required int32 cityId=2;		//城池Id
+	}
+}
+
+//查看个人战斗列表
+message M360025{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		repeated CityReport reports=2;	//战报列表
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+
+//查看全服战斗列表
+message M360026{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		repeated CityReport reports=2;	//战报列表
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+///////结算阶段///////
+
+//领取奖励
+message M360031{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+//个人积分排行榜
+message M360032{   
+	message S2C{
+	    required int32 rs = 1;			//错误码
+		repeated PlayerDamageRank ranks=2;	//排行榜 
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+//军团积分排行榜
+message M360033{   
+	message S2C{
+	    required int32 rs=1;				//错误码
+		repeated LegionDamageRank ranks=2;	//排行榜 
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+//军团成员积分排行榜
+message M360034{   
+	message S2C{
+	    required int32 rs=1;				//错误码
+		repeated PlayerDamageRank ranks=2;	//排行榜 
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+//玩家信息
+message M360042{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		optional MemberInfo infos=2;	//玩家信息
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+	}
+}
+
+//服务端推送更新（城池占领状态变更：占领成功/被抢夺/获得归属权/城墙血量变化/boss血量变化）
+message M360043{   
+	message S2C{
+	    required int32 rs=1;				//错误码
+	    required CityHost host=2;			//城池信息
+		required int32 rechangeTime=3;  	//换防CD
+	}
+
+	message C2S{
+	}
+}
+
+
+//推送防守队伍列表(如：防守部队被击杀/撤防/设防)
+message M360044{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		required int32 cityId=2;		//城池Id
+		repeated DefenderInfo defenderInfoes=3;	//队伍列表
+		required int32 actionType=4;			//防守部队行动类型: 被击杀/撤防/设防 = 0/1/2
+	}
+
+	message C2S{
+	}
+}
+
+
+//服务端推送更新（城墙血量变化/boss血量变化）
+message M360045{   
+	message S2C{
+	    required int32 rs=1;				//错误码
+    	required int32 cityId=2;			//主城Id
+        required int64 bossNowHp=3;		//BOSS当前血量（0：BOSS死亡）
+        required int64 wallNowHp=4;		//城墙当前血量（0：城墙推倒）
+
+	}
+
+	message C2S{
+	}
+}
+
+
+//有参战资格的同盟列表信息
+message M360046{   
+	message S2C{
+	    required int32 rs=1;			//错误码
+		required int32 myQualify=2;		//我的参战资格，0=不可参战，1=可参战
+		repeated FightQualify infos=3;	//参战资格同盟列表信息
+	}
+
+	message C2S{
+	}
+}
+
+//任命副团后推送副团团长确认
+message M360047{
+	message S2C{
+	    required string legionName=1;		//任命同盟名称
+	    required int32 cityId=2;			//城池Id
+	}
+
+	message C2S{
+	}
+}
+
+//副团团长确认被任命结果
+message M360048{
+	message S2C{
+	    required int32 rs=1;		//错误码
+	}
+
+	message C2S{
+		required int32 cityId=1;		//城池Id
+		required int32 result=2;		//1：接受，2：拒绝
+	}
+}
+
+//副团团长确认后推送发起者结果
+message M360049{
+	message S2C{
+	    required string legionName=1;		//任命同盟名称
+	    required int32 result=2;			//1：接受，2：拒绝
+	}
+
+	message C2S{
+	}
+}
+
+//城池信息
+message SkillInfo{
+	required int32 	typeId=1;		//技能id
+	required int32  leesNum=2;	// 技能剩余次数
+}
+
+//技能信息更新替换
+message M360050{
+	message S2C{
+	required int32 rs=1;		//错误码
+	repeated SkillInfo skillInfos=2;// 技能信息
+	}
+
+	message C2S{
+	}
+}
+
+// 使用技能
+message M360051{
+	message S2C{
+	required int32 rs=1;		//错误码
+	optional int32 typeId=2;//技能id原样返回
+	}
+
+	message C2S{
+	optional int32 typeId=1;//技能id
+	optional fixed64 targetPlayerId=2;//使用目标
+	}
+}
+
+message M360052 {
+	message S2C {
+		optional int32 rewardNum = 1; // 可领奖励个数
+	}
+
+	message C2S{
+	}
+}

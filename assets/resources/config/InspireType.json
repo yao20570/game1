@@ -1,0 +1,9 @@
+{
+ "1" : {"ID" : 1 ,"inspiregroup" : 1 ,"startlv" : 0 ,"maxlv" : 4 ,"property" : [8,2500] ,"goldneed" : 20  },
+ "2" : {"ID" : 2 ,"inspiregroup" : 1 ,"startlv" : 0 ,"maxlv" : 4 ,"property" : [6,2500] ,"goldneed" : 20  },
+ "3" : {"ID" : 3 ,"inspiregroup" : 1 ,"startlv" : 0 ,"maxlv" : 4 ,"property" : [28,2500] ,"goldneed" : 20  },
+ "4" : {"ID" : 4 ,"inspiregroup" : 2 ,"startlv" : 0 ,"maxlv" : 5 ,"property" : [8,500] ,"goldneed" : 8  },
+ "5" : {"ID" : 5 ,"inspiregroup" : 2 ,"startlv" : 0 ,"maxlv" : 5 ,"property" : [8,500] ,"goldneed" : 8  },
+ "6" : {"ID" : 6 ,"inspiregroup" : 2 ,"startlv" : 0 ,"maxlv" : 5 ,"property" : [4,400] ,"goldneed" : 8  },
+ "7" : {"ID" : 7 ,"inspiregroup" : 2 ,"startlv" : 0 ,"maxlv" : 5 ,"property" : [5,400] ,"goldneed" : 8  }
+}

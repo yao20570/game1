@@ -1,0 +1,6 @@
+{
+ "1" : {"ID" : 1 ,"cityNum" : 7 ,"debuffId" : 11001  },
+ "2" : {"ID" : 2 ,"cityNum" : 10 ,"debuffId" : 11002  },
+ "3" : {"ID" : 3 ,"cityNum" : 13 ,"debuffId" : 11003  },
+ "4" : {"ID" : 4 ,"cityNum" : 16 ,"debuffId" : 11004  }
+}

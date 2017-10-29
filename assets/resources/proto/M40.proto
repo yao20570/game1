@@ -1,0 +1,96 @@
+package M40;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M40";  //叛军出没活动协议
+
+message RebelArmyInfo{//叛军信息
+  required fixed64 dbID = 1;//唯一id  未出现 传-1
+  required int32 type = 2;//1 喽啰 ，2 精英 ，3 头目
+  required int32 level = 3;
+  required int32 x = 4;//未出现 传-1
+  required int32 y = 5;//未出现 传-1
+  required int32 state = 6;//0 未击杀，1 已击杀，2，未出现
+  optional string killerName = 7;//击杀者名称
+  required int32 nowHp = 8;//当前血量百分比（已经*100了，前端那到后直接加上%即可）
+}
+
+message AlreadyKillInfo{//叛军击杀信息
+  required int32 type = 1;//1 喽啰 ，2 精英 ，3 头目
+  required int32 num = 2;//数量
+}
+
+message RankInfo{//排行榜信息
+  required int32 rank = 1;//排名
+  required string name = 2;//名称
+  repeated AlreadyKillInfo killInfos = 3;//击杀信息
+}
+
+message M400000{//叛军活动信息列表
+     message S2C{
+      required int32 rs = 1;//错误码
+      optional int32 endTime = 2;//结束时间
+      repeated RebelArmyInfo rebelArmyMobinfos = 3;//喽啰 
+      repeated RebelArmyInfo rebelArmyEliteinfos = 4;//精英 
+      repeated RebelArmyInfo rebelArmyHeaderinfos = 5;//头目
+      optional int32 canKill = 6;//可击杀
+      optional int32 alreadyKill = 7;//本轮已击杀
+      optional int32 eliteinTime = 8;//精英出现剩余时间
+      optional int32 headerTime = 9;//头领出现剩余时间
+     }
+
+     message C2S{
+     }
+	
+}
+
+message M400001{//叛军活动信息列表
+     message S2C{
+      required int32 rs = 1;//错误码
+      repeated AlreadyKillInfo alreadyKillInfos = 2;//个人叛军击杀信息
+      repeated AlreadyKillInfo legionAlreadyKillInfos = 3;//军团叛军击杀信息
+      required int32 myRank = 4;//个人排名,未上榜 -1
+      required int32 legionRank = 5;//军团排名,未上榜 -1
+      repeated RankInfo playerAankInfos = 6;//个人排行榜信息
+      repeated RankInfo legionAankInfos = 7;//军团排行榜信息
+     }
+
+     message C2S{
+     }
+  
+}
+
+message M400002{//叛军奖励信息（上一周的奖励 ）
+     message S2C{
+      required int32 rs = 1;//错误码
+      optional RankInfo playerRankInfos = 2;//个人排行榜信息
+      optional RankInfo legionRankInfos = 3;//军团排行榜信息
+      optional int32 playerRewardState = 4;//个人排行榜领取状态 0  未领取  1  已领取 -1 未上榜 
+      optional int32 legionRewardState = 5;//军团排行榜领取状态 0  未领取  1  已领取  -1 未上榜
+
+     }
+
+     message C2S{
+     }
+  
+}
+
+message M400003{//领取奖励（上一周的奖励 ）
+     message S2C{
+      required int32 rs = 1;//错误码
+      required int32 type = 2;//类型  原样返回
+     }
+
+     message C2S{
+      required int32 type = 1;//领取类型 1 个人  2 军团
+     }
+  
+}
+
+message M400004{//可领奖励时推送
+     message S2C{
+     }
+
+     message C2S{
+     }
+  
+}

@@ -1,0 +1,74 @@
+package M7;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M7";  //部队协议
+
+import "Common.proto";
+
+message FormationMember{
+	required int32 typeid = 1;//佣兵模板id
+	required int32 num = 2;//数量
+	required int32 post = 3;//位置
+	optional fixed64 adviserId=4;//军师id
+	optional int32 adviserLv=5;//军师星级 演武场显示用到
+}
+
+message FormationInfo{
+	required int32 type = 1;// 1套用阵型；2防守阵型；3竞技场阵型; 6 pve攻击阵形
+	repeated FormationMember members = 2;//阵型成员信息
+}
+
+
+
+message TeamInfo{
+	required int32 type = 1;// 代表第几套阵型。一共有4套
+	required string name = 2;// 阵型的名字
+	repeated FormationMember members = 3;//阵型成员信息
+}
+
+
+message M70000  {  //佣兵攻击力属性
+	message  S2C{
+	    required int32 rs = 1;
+	    repeated FormationInfo info = 2;
+	}
+
+	message  C2S{
+	}
+
+}
+
+message M70001 {//队伍设置
+	message  S2C{
+	    required int32 rs = 1;
+	    repeated FormationInfo info = 2;
+	}
+
+	message  C2S{
+		required FormationInfo info = 1;
+		required int32 formationCapacity = 2;//阵型战力
+	}
+}
+
+message M70002 {//阵型设置
+	message  S2C{
+	    required int32 rs = 1;
+	    optional TeamInfo info = 2;
+	}
+
+	message  C2S{
+		required TeamInfo info = 1;
+	}
+}
+
+message M70003 {//修改阵型名称
+	message  S2C{
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+		required int32 type = 1;// 代表第几套阵型。一共有4套
+		required string name = 2;// 阵型的名字
+	}
+}
+

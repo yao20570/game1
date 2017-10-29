@@ -1,0 +1,5 @@
+{
+ "1" : {"ID" : 1 ,"timeSlot" : 10 ,"specialReward" : [[401,4404,1]] ,"limitedTimes" : 10  },
+ "2" : {"ID" : 2 ,"timeSlot" : 18 ,"specialReward" : [[401,4404,1]] ,"limitedTimes" : 10  },
+ "3" : {"ID" : 3 ,"timeSlot" : 22 ,"specialReward" : [[401,4404,1]] ,"limitedTimes" : 10  }
+}

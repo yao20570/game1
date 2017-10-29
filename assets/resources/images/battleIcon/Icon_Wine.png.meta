@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "1a79a9bb-4b4a-48b0-b7da-5dfdf42d6ed1",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Icon_Wine": {
+      "ver": "1.0.3",
+      "uuid": "a08e27c1-9ca6-4c15-aaed-00d5c47b7e32",
+      "rawTextureUuid": "1a79a9bb-4b4a-48b0-b7da-5dfdf42d6ed1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 1.5,
+      "trimX": 9,
+      "trimY": 4,
+      "width": 50,
+      "height": 59,
+      "rawWidth": 70,
+      "rawHeight": 70,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

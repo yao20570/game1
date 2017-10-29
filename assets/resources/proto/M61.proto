@@ -1,0 +1,21 @@
+package M61;
+
+option java_package = "com.znl.city.proto";
+option java_outer_classname = "M61"; // 限时活动——聚宝盆相关协议
+
+message CornucopiaInfo{ // 聚宝盆信息
+	required int32 activityId = 1;		// 活动ID
+	optional int32 totalCharge = 2;		// 全服当前充值额度
+	optional int32 times = 3;			// 剩余抽奖次数
+}
+
+message M610000{ // 抽奖
+	message S2C{
+		required int32 rs = 1;
+		optional CornucopiaInfo info = 2;	// 聚宝盆信息
+	}
+
+	message C2S{
+		required int32 activityId = 1;		// 活动ID
+	}
+}

@@ -1,0 +1,291 @@
+package M14;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M14";  //副本协议
+
+import "Common.proto";
+import "M54.proto";
+
+message PrivatePlayerInfo{
+	required fixed64 playerId = 1;			// 玩家ID
+	required string name = 2;				// 玩家名字
+	required int32 iconId = 3;				// 头像id
+	required int32 time = 4;				// 聊天时间戳(最后一次聊天)
+	optional string legionName = 5;			// 招募军团名字
+}
+
+message ChatInfo{
+	required string name = 1;				// 玩家名字
+	required int32 type = 2;				// 聊天频道 0：私聊; 1：世界; 2：军团
+	required int32 iconId = 3;				// 头像id
+	required string context = 4;			// 内容 如果聊天类型为2语音，则不发内容，通过140100请求获取
+	required fixed64 playerId = 5;			// 玩家ID
+	required int32 time = 6;				// 聊天时间戳
+	required int32 vipLevel = 7;			// vip等级
+	optional int32 playerType = 8;			// 0:正常玩家，1新手指导员
+	optional int32 pendantId = 9;			// 玩家挂件id
+	optional string legionName = 10;		// 招募军团名字
+	optional int32 level = 11;				// 玩家等级
+	optional int32 extendValue = 12;		// 扩展字段 默认0:没意义 1:系统发的红包 2:喇叭产生的聊天 3:玩家发的红包
+	optional int32 contextType = 13;		// 内容类型 1普通文本 2语音
+	optional int32 chatId = 14;				// 不用
+	optional string chatClientId = 15;		// 聊天ID 2语音时 发送客户端从过来的
+	optional int32 audioSec = 16;			// 语音长度时间
+	optional fixed64 receivePlayerId = 17;	// 接受者玩家id（私聊才设置）
+	repeated int32 design = 18;				// 称号
+	optional int32 legionJob = 19;			// 同盟职位
+	optional string teacherDesign = 20;		// 师门称号
+	optional int32 frameId = 21;			// 头像框id
+	optional int32 customHeadIcon = 22;		// 是否自定义头像 0否 1是
+	optional M54.RedBagInfo redBag = 23;	// 当内容为红包时使用
+}
+
+message ReportInfo{  //举报信息
+	required fixed64 reportId = 1;//举报信息的id（玩家id+该聊天时间戳）
+	required int32 type = 2;//聊天频道 0：私聊; 1：世界; 2：军团
+	required string context = 3;//内容   语音的不管
+	required fixed64 playerId = 4; //被举报的玩家ID
+	required int32 time = 5;//聊天时间戳
+}
+
+message M140000  {  //聊天
+	message  S2C{
+	    repeated ChatInfo chats = 1;
+	    optional int32 type= 2;//聊天频道 0：私聊; 1：世界; 2：军团 在在线推送的时候，还是需要这个数据的
+	    optional int32 rs = 3; //是否成功发送，不成功，直接赋rs，上面两个数据不需要赋值，推送还是按照之前的逻辑
+	}
+
+	message  C2S{
+		required int32 type = 1;//聊天频道 0：私聊; 1：世界; 2：军团
+		required string context = 2;//聊天内容
+		optional int32 contextType = 3; //内容类型 1普通文本 2语音
+		optional string chatClientId = 4; //2语音时，由客户端创建的唯一id
+		optional int32 audioSec = 5; //语音长度时间
+	}
+
+}
+
+message M140100{  //请求语音信息
+	message S2C{
+	    required int32 rs = 1;
+	    optional string context = 2;//语音内容
+	    optional string chatClientId = 3; //聊天ID
+	    optional int32 audioSec = 4; //聊天ID
+	}
+
+	message C2S{
+	    required int32 type = 1;//聊天频道 0：私聊; 1：世界; 2：军团
+	    required string chatClientId = 2; //聊天ID
+	}
+}
+
+
+message SimplePlayerInfo{
+	required string name =1;
+	required fixed64 playerId = 2; //玩家ID
+	required int32 iconId = 3;//头像id
+	required int32 level = 4;//等级
+	required int64 capacity = 5;//战力
+	required int64 boom = 6;//繁荣度
+	required int64 boomUpLimit = 7;//繁荣度上限
+	required int32 militaryRank = 8;//军衔
+	optional string legion = 9;//军团
+	required int32 x = 10;
+	required int32 y = 11;
+	optional int32 pendantId = 12;//玩家挂件id
+	optional int32 cityIcon = 13;//建筑外观
+	optional int32 vipLv=14;//vip等级
+	optional fixed64 teacherId = 15;//师门id  0-表示没师门
+	optional int32 teacherType = 16; //1-师傅 2-徒弟
+}
+
+message M140001  {  //查看信息
+	message  S2C{
+		required int32 rs = 1;
+	    optional SimplePlayerInfo info = 2;
+	}
+
+	message  C2S{
+		required fixed64 playerId = 1;//对方id，按名字查找的时候发0
+		optional string name = 2;//对方名称
+	}
+
+}
+
+message M140002  {  //私聊
+	message  S2C{
+		required int32 rs = 1;
+	}
+
+	message  C2S{
+		required fixed64 playerId = 1;//对方id
+		required string context =2;//内容
+		optional int32 contextType = 3; //内容类型 1普通文本 2语音
+		optional string chatClientId = 4; //2语音时，由客户端创建的唯一id
+		optional int32 audioSec = 5; //语音长度时间
+	}
+
+}
+
+message M140003  {  //接收到私聊
+	message  S2C{
+		required int32 rs = 1;
+		optional ChatInfo chatInfo = 2;
+	}
+
+	message  C2S{
+	}
+
+}
+
+message M140004  {  //请求到私聊
+	message  S2C{
+		required int32 rs = 1;
+		optional SimplePlayerInfo info = 2;
+	}
+
+	message  C2S{
+		required int32 type = 1;//0:通过id查找，1：通过名字查找
+		optional fixed64 playerId = 2;
+		optional string name =3;//名字
+	}
+
+}
+
+message M140005  {  //添加到屏蔽列表
+	message  S2C{
+		required int32 rs = 1;
+	}
+	message  C2S{
+		required int32 type = 1;//0:邮件，1：聊天
+		optional fixed64 playerId = 2;
+	}
+}
+
+message ShieldInfo{
+	required string name =1;
+	required int32 level = 2;
+	required int32 iconId = 3;//头像id
+	required fixed64 playerId = 4;
+}
+
+message M140006  {  //屏蔽列表请求
+	message  S2C{
+		required int32 rs = 1;
+		repeated ShieldInfo infos = 2;
+	}
+	message  C2S{
+		required int32 type = 1;//0:邮件，1：聊天
+	}
+}
+
+message M140007  {  //移除屏蔽请求
+	message  S2C{
+		required int32 rs = 1;
+	}
+	message  C2S{
+		required int32 type = 1;//0:邮件，1：聊天
+		required fixed64 playerId = 2;
+	}
+}
+
+
+message TrumpeInfo{
+	required string name =1;//名字
+	required string mess = 2;//信息
+	required int32  type=3;//类型
+}
+
+message M140008  {  //喇叭
+	message  S2C{
+		repeated TrumpeInfo info = 1;
+		optional ChatInfo chatInfo=2;
+	}
+	message  C2S{
+		
+	}
+}
+
+message M140009  {  //获取自己的类型：0普通玩家，1新手指导员
+	message  S2C{
+		required int32 type = 1;
+	}
+	message  C2S{
+		
+	}
+}
+
+message M140010 {//举报玩家获取该玩家5分钟内10条聊天信息
+	message S2C{
+    required int32 rs = 1;//错误码
+    repeated ReportInfo reportInfo = 2;//被举报者该频道的5分钟内聊天信息
+	}
+
+	message C2S{
+    required int32 type = 1;//聊天频道 0：私聊; 1：世界; 2：军团
+	required fixed64 playerId = 2; //被举报的玩家id
+	}
+}
+
+message M140011 {//举报提交
+	message S2C{
+    required int32 rs = 1;//错误码
+	}
+
+	message C2S{
+	required int32 reason = 1;//举报原因 1)昵称不雅 2)骚扰谩骂 3)广告刷屏 4)色情暴力 5)反动政治 6)其它
+    required string context = 2;//附加内容
+    repeated ReportInfo reportInfo = 3;//被举报者该频道的聊天信息
+	}
+}
+
+message M140012 {//推送最后的私聊玩家
+	message S2C{
+    	repeated PrivatePlayerInfo privatePlayers = 1;//最后的私聊玩家
+	}
+
+	message C2S{		
+	}
+}
+
+message M140200{  //请求是否可以进行自定义头像操作
+	message S2C{
+        required int32 rs = 1;//错误码
+        optional int32 customCoolTime = 2; //剩余冷却时间，只有错误码-5才有值
+	}
+
+	message C2S{  
+	}
+}
+
+message M140201{ //头像上传成功，通知服务端进行扣除元宝操作，服务端头像进入审核状态
+    message S2C{
+        required int32 rs = 1;//错误码
+        optional int32 customCoolTime = 2; //剩余冷却时间，只有错误码-5才有值
+    }
+
+    message C2S{
+	}
+}
+
+message M140202{  //审核结果推送
+
+    message S2C{
+        required int32 rs = 1;//错误码
+        required int32 status = 2;// 自定义头像最新状态
+        optional int32 newHeadIcon = 3; //只有在status为normal时，才有用
+    }
+	
+	message C2S{
+	}
+}
+
+message M140203{  //头像还原请求，当玩家审核失败，重新下载头像成功后，进行让服务器还原
+	
+	message S2C{
+	    required int32 rs = 1;//错误码
+	}
+
+	message C2S{
+	}
+}

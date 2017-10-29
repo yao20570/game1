@@ -1,0 +1,8 @@
+{
+ "1" : {"ID" : 1 ,"propertype" : 11 ,"pointneed" : 1 ,"parameter" : 5  },
+ "2" : {"ID" : 2 ,"propertype" : 12 ,"pointneed" : 1 ,"parameter" : 5  },
+ "3" : {"ID" : 3 ,"propertype" : 4 ,"pointneed" : 1 ,"parameter" : 5  },
+ "4" : {"ID" : 4 ,"propertype" : 5 ,"pointneed" : 1 ,"parameter" : 5  },
+ "5" : {"ID" : 5 ,"propertype" : 6 ,"pointneed" : 1 ,"parameter" : 5  },
+ "6" : {"ID" : 6 ,"propertype" : 7 ,"pointneed" : 1 ,"parameter" : 5  }
+}

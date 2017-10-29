@@ -1,0 +1,62 @@
+package M43;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M43";  // 热卖相关协议
+
+import "Common.proto";
+
+// 热卖活动具体信息
+message GiftBagInfo{ 
+	required fixed64 activityDbId = 1; // 活动typeDbId
+	required int32 activityTypeId = 2; // 活动typeId
+	required int32 sort = 3; // 礼包排序
+	required int32 uitype = 4; // 礼包UI模板类型
+	required int32 type = 5; // 礼包类型
+	required int32 priceLimit = 6; // 购买额度
+	required int32 buyLimit = 7; // 限购次数
+	required int32 alreadyBuy = 8; // 已购买次数
+    required int32 durationTime = 9; // 持续时间
+	repeated Common.RewardInfo baseRewardList = 10; // 基础奖励
+	repeated Common.RewardInfo extraRewardList = 11; // 额外奖励
+	repeated Common.RewardInfo itemRewardList = 12; // 道具奖励
+    optional int32 isShow = 13; // 时间类型为永久时发1，否则不发
+    required int32 discount = 14; // 折扣
+    optional int32 startTime = 15; // 开始时间
+}
+
+// 热卖活动数据
+message GiftBagDataInfo{ 
+    repeated GiftBagInfo giftBagInfos = 1; // 热卖活动信息
+    required int32 nextOpenTime = 2; // 要开启下一个热卖活动的时间
+}
+
+// 购买后刷新活动
+message M430000{ 
+    message S2C{
+        required GiftBagInfo giftBagInfo = 1; // 热卖活动信息
+    }
+}
+
+ // 检测刷新热卖活动（删除或开启都走这里）
+message M430001{
+    message S2C{
+        required GiftBagDataInfo giftBagDataInfo = 1; // 热卖活动数据
+    }
+    message C2S{
+    }
+}
+
+
+message M430002{  //检测能否购买热卖礼包
+
+    message S2C{
+        required int32 rs = 1;  //可以充值的话，原样返回
+        optional int32 giftType = 2;
+        optional int32 priceLimit = 3; 
+    }
+
+    message C2S{
+        required int32 giftType = 1; //充值类型
+        required int32 priceLimit = 2; //充值额度
+    }
+}

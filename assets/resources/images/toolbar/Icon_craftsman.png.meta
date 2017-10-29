@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "caa375c5-8c41-4f29-b350-89a23ac45b2c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Icon_craftsman": {
+      "ver": "1.0.3",
+      "uuid": "329f1ae8-8c6f-40f8-be6e-fff75a653ab5",
+      "rawTextureUuid": "caa375c5-8c41-4f29-b350-89a23ac45b2c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 72,
+      "height": 72,
+      "rawWidth": 72,
+      "rawHeight": 72,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

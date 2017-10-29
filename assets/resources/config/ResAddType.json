@@ -1,0 +1,8 @@
+{
+ "1" : {"ID" : 1 ,"addeffect" : 5  },
+ "2" : {"ID" : 2 ,"addeffect" : 5  },
+ "3" : {"ID" : 3 ,"addeffect" : 5  },
+ "4" : {"ID" : 4 ,"addeffect" : 8  },
+ "5" : {"ID" : 5 ,"addeffect" : 8  },
+ "6" : {"ID" : 6 ,"addeffect" : 8  }
+}

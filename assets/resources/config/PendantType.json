@@ -1,0 +1,18 @@
+{
+ "101" : {"id" : 101 ,"type" : 1 ,"useneed" : []  },
+ "102" : {"id" : 102 ,"type" : 1 ,"useneed" : []  },
+ "103" : {"id" : 103 ,"type" : 1 ,"useneed" : []  },
+ "104" : {"id" : 104 ,"type" : 1 ,"useneed" : []  },
+ "105" : {"id" : 105 ,"type" : 1 ,"useneed" : []  },
+ "106" : {"id" : 106 ,"type" : 1 ,"useneed" : []  },
+ "107" : {"id" : 107 ,"type" : 1 ,"useneed" : []  },
+ "108" : {"id" : 108 ,"type" : 1 ,"useneed" : []  },
+ "109" : {"id" : 109 ,"type" : 2 ,"useneed" : [114,5]  },
+ "110" : {"id" : 110 ,"type" : 2 ,"useneed" : [114,5]  },
+ "111" : {"id" : 111 ,"type" : 2 ,"useneed" : [114,5]  },
+ "112" : {"id" : 112 ,"type" : 2 ,"useneed" : [114,5]  },
+ "113" : {"id" : 113 ,"type" : 2 ,"useneed" : [114,5]  },
+ "117" : {"id" : 117 ,"type" : 3 ,"useneed" : []  },
+ "118" : {"id" : 118 ,"type" : 3 ,"useneed" : []  },
+ "119" : {"id" : 119 ,"type" : 3 ,"useneed" : []  }
+}

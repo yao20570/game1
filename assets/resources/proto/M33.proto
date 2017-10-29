@@ -1,0 +1,293 @@
+package M33;
+
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M33";  //群雄逐鹿相关协议
+
+import "Common.proto";
+
+message LegionMeleeInfo{  //自己的混战状态信息
+	required int32 state = 1; //状态 0未开启 1报名中 2准备中 3混战中
+	optional int32 nextStateTime = 2; //下一个状态的剩余时间，只有 1、2有值
+	optional int32 isEnroll = 3; //自己是否已经报名了 1报名
+	optional int32 enrollCoolTime = 4; //报名冷却时间
+	optional int32 legionEnrollNum = 5; //军团报名人数
+	optional int32 stateReason=6;//活动状态原因
+	optional int32 nextDate =7;//下次活动开启的日期
+}
+
+message EnrollMemberInfo{ //报名的成员信息
+	required fixed64 playerId = 1; //玩家ID
+	required int32 enrollTime = 2; //报名时间
+	required string name = 3; //玩家名称
+	required int32 level = 4; //玩家等级
+	required int64 capacity = 5; //玩家战力
+}
+
+message PartakeLegionInfo{ //参与的军团信息
+	required fixed64 id = 1; //军团ID
+	required int32 level = 2; //军团等级
+	required string name = 3; //军团名字
+	required int32 memberNum = 4; //参与人数
+	required int64 capacity = 5; //军团总战力
+	optional string service = 6; // 服务器
+}
+
+message MeleeTeamInfo{ //混战队伍信息
+    required fixed64 playerId = 1; //玩家ID
+	required string legionName = 2; //军团名称
+	required string playerName = 3; //玩家名称
+	required int32 percent = 4;  //剩余百分比
+	optional string serverName = 5; // 服务器名
+}
+
+message MeleeFightInfo{  //混战战斗信息
+	required int32 battleId = 1; //战斗ID，可以供战斗回播 停服会删除的，用逻辑ID就可以
+	required MeleeTeamInfo attackTeam = 2; //攻击方
+	required MeleeTeamInfo defendTeam = 3; //防守方
+	required int32 time = 4;  //发生时间
+	required int32 wins = 5; //连胜次数 0表示失败 1胜利 2...连胜xxx
+}
+
+message EliminateInfo{  //军团淘汰信息
+	required string legionName = 1; //淘汰的军团名称
+	required string playerName = 2;  //淘汰军团的玩家名称
+	required int32 rank = 3; //淘汰的军团排名
+	required int32 time = 4;  //发生时间
+	optional string serverName = 5; // 服务器名
+}
+
+message WinnerLegionInfo{//最后获胜军团信息
+	required string legionName=1;//获胜军团名字
+	required int32 time = 2;  //发生时间
+	optional string serverName = 3; // 服务器名
+}
+
+message FightReportInfo{  //战报信息，
+	required int32 type = 1; // 1混战战斗信息 2混战+军团淘汰信息 3最后胜利军团信息
+	optional MeleeFightInfo fightInfo = 2;
+	optional EliminateInfo eliminateInfo = 3;
+	optional WinnerLegionInfo winnerLegionInfo=4;
+}
+
+message WinsRankMemberInfo{  //连胜排行成员信息
+	required fixed64 playerId = 1; //玩家ID
+	required int32 rank = 2; //排名     玩家未上榜的话  rank = 0
+	required string name = 3; //玩家名称
+	required int32 wins = 4; //连胜数
+	required int64 capacity = 5; //战力
+	optional string serverName = 6; // 服务器名
+}
+
+message LegionRankInfo{  //军团排名信息
+	required fixed64 id = 1; //军团ID
+	required int32 rank = 2; //排名   若玩家所在军团未上榜  rank = 0
+	required string name = 3; //军团名字
+	required int32 memberNum = 4; //参与人数
+	required int64 capacity = 5; //军团总战力
+	optional string serverName = 6; // 服务器名
+}
+
+message CombatProgress{//战斗进度
+    required int32 showState = 1;//显示状态 1显示当前场次跟总场次（3，4） 2显示轮询剩余时间（2） 3不需要显示任何混战进度信息
+    optional int32 roundTime = 2;//轮询间隔剩余时间
+    optional int32 totalRound = 3;//当前场次
+    optional int32 allRound = 4;//本次回合总场次
+	
+}
+
+message M330000{ //自己的混战状态信息
+	message S2C{
+	    required int32 rs = 1;
+	    optional LegionMeleeInfo legionMelee = 2;
+		optional int32 activityId = 3; // 活动ID
+		repeated string serverList = 4; // 服务器列表
+	}
+
+	message  C2S{ 
+	    required int32 activityId = 1; //活动ID
+	}
+}
+
+message M330001{  //请求自己军团报名的信息
+	message S2C{
+	    required int32 rs = 1;
+	    optional int32 allMemberNum = 2; //军团成员总数
+	    repeated EnrollMemberInfo memberInfos = 3; //报名的成员信息列表，有多少人报名，通过列表长度算出来
+	    optional int32 activityId = 4; // 活动ID
+	}
+
+	message  C2S{ 
+	    required int32 activityId = 1; //活动ID
+	}
+}
+
+message M330002{  //请求参与的军团信息
+    message S2C{
+        required int32 rs = 1;
+        repeated PartakeLegionInfo legionInfos = 2; //军团列表
+        optional int32 activityId = 3; // 活动ID
+    }
+
+    message  C2S{ 
+	    required int32 activityId = 1; //活动ID
+	}
+}
+
+message M330003{  //请求报名相关
+	
+	message S2C{
+        required int32 rs = 1;
+        optional int32 enrollCoolTime = 2; //报名冷却时间
+        optional int32 isEnroll = 3; //自己是否已经报名了状态 0未报名 1报名
+        optional int32 activityId = 4; // 活动ID
+    }
+
+    message  C2S{ 
+	    required int32 activityId = 1; //活动ID
+	    required int32 type = 2; //0报名 1取消报名
+	    repeated Common.FightElementInfo fightInfos = 3; //出战队列
+	    optional int32 fightTeamCapacity = 4;//出战队列战力
+	    optional int32 curNum = 5;//当前上阵数量
+	    optional int32 maxNum = 6;//最大上阵数量
+	}
+
+}
+
+message M330004{  //请求查看现在设置的部队信息
+	message S2C{
+        required int32 rs = 1;
+        optional int32 activityId = 2; // 活动ID
+        repeated Common.FightElementInfo fightInfos = 3; //出战队列
+	    optional int32 fightTeamCapacity = 4;//出战队列战力
+	    optional int32 curNum = 5;//当前上阵数量
+	    optional int32 maxNum = 6;//最大上阵数量
+    }
+
+    message  C2S{ 
+        required int32 activityId = 1; //活动ID
+    }
+}
+
+message M330005{  //请求战况信息，进入界面时候刷新
+
+    message S2C{
+        required int32 rs = 1;
+        //战报信息列表，直接刷新
+	    repeated FightReportInfo allReportInfos = 2; //全服的
+	    repeated FightReportInfo legionReportInfos = 3; //军团的
+	    repeated FightReportInfo personalReportInfos = 4; //个人的
+	    optional CombatProgress combatProgress = 5;//军团混战进度信息
+	    optional int32 activityId = 6; // 活动ID
+	    repeated FightReportInfo crossReportInfos = 7; // 跨服的
+    }
+	
+	message  C2S{ 
+        required int32 activityId = 1; //活动ID
+    }
+}
+
+message M330006{ //服务端主动推送战况，只有停留在界面的时候才推送
+	message S2C{  //用来 推送刷新 一场战斗结束后，推送
+	    required int32 type = 1; //战报类型 1全服 2全服+军团 3全服+军团+个人 4跨服
+	    required FightReportInfo reportInfos = 2; //战报信息
+	    optional int32 activityId = 3; // 活动ID
+	}
+
+	message  C2S{ 
+	}
+}
+
+message M330007{  //请求连胜排名
+	message S2C{ 
+	    required int32 rs = 1;
+	    optional WinsRankMemberInfo myInfos = 2;  //玩家自己的信息
+	    repeated WinsRankMemberInfo memberInfos = 3; //排行榜
+	    optional int32 rankingreward = 4;//连胜的奖励id
+	    optional int32 activityId = 5; // 活动ID
+
+	}
+
+	message  C2S{ 
+        required int32 activityId = 1; //活动ID
+    }
+}
+
+message M330008{ //请求联盟排名
+	message S2C{ 
+	    required int32 rs = 1;
+	    optional LegionRankInfo myInfos = 2;  //玩家自己的信息
+	    repeated LegionRankInfo memberInfos = 3;
+	    optional int32 rankingreward = 4;//军团的奖励id
+	    optional int32 activityId = 5; // 活动ID
+	    optional int32 rewardGroupId = 6; // 奖励组ID
+	}
+
+	message  C2S{ 
+        required int32 activityId = 1; //活动ID
+    }
+}
+
+message M330009{  //请求战报播放
+
+    message S2C{ 
+	    required int32 rs = 1;
+	}
+	
+	message  C2S{ 
+        required int32 battleId = 1; //战斗逻辑ID
+    }
+}
+
+message M330010{ //领取连胜奖励
+	
+	message S2C{ 
+	    required int32 rs = 1;
+	}
+
+	message  C2S{
+	    required int32 activityId = 1; //活动ID
+	}
+}
+
+message M330100{//全服活动状态推送
+   message S2C{
+   		required int32 activityState=1;//活动状态 0未开启 1报名中 2准备中 3混战中
+		optional int32 activityId = 2; // 活动ID
+   }
+
+   message C2S{
+   		required int32 activityId=1;//活动id
+   }
+}
+
+message M330101{//军团混战进度信息
+	message S2C{
+    	optional CombatProgress combatProgress = 1;//军团混战进度信息
+    	optional int32 activityId = 2; // 活动ID
+	}
+
+	message C2S{
+
+	}
+}
+
+message M330011{ //领取全服奖励
+	
+	message S2C{
+	    required int32 rs = 1;
+	    optional int32 activityId = 2; // 活动ID
+	}
+
+	message C2S{
+	    required int32 activityId = 1; //活动ID
+	}
+}
+
+message M330012{ //推送全服奖励小红点
+	
+	message S2C{
+	}
+
+	message C2S{
+	}
+}

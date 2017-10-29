@@ -1,0 +1,154 @@
+package M15;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M15";  //抽奖协议
+
+import "Common.proto";
+
+message EquipLotterInfo{
+	required int32 type = 1;//抽奖类型  1奇兵探宝2,神兵抽奖3,顶级抽奖
+	required int32 cost = 2;//本次抽奖价格 
+	required int32 freeTimes =3;//免费次数
+	optional int32 time= 4; //倒计时
+	optional int32 willNum=5;//几次后必出
+}
+
+message Taobao{
+	required int32 type=1;
+	required int32 times=2;
+}
+
+message M150000  {  //奇兵探宝历史信息
+	message  S2C{
+	   required int32 rs=1;
+	   optional int32 itemCount=2;//剩余探宝币数量
+	   repeated LotteryHistrory histories=3;//奖励历史记录20条
+	}
+
+	message  C2S{
+	}
+}
+
+
+message M150001  {  //神兵探宝历史信息
+	message  S2C{
+	   required int32 rs=1;
+	   optional int32 itemCount=2;//剩余探宝币数量
+	   repeated LotteryHistrory histories=3;//奖励历史记录20条
+	}
+
+	message  C2S{
+	}
+}
+
+message M150002  {  //探宝
+	message  S2C{
+	   required int32 rs=1;
+	   repeated Common.RewardInfo idlist=2;//可选择的
+	   repeated Common.RewardInfo getid=3;//获取的id
+	   required int32 type = 4;
+	   required int32 tanbaoNum=5;//剩余探宝币数量
+	}
+
+	message  C2S{
+	   required int32 type = 1;//抽奖类型  1普通探宝2,高级探宝
+	   optional int32 num=2;//抽奖次数
+	}
+
+}
+
+
+message M150003 {  //购买探宝币
+	message  S2C{
+	   required int32 rs=1;
+	   optional int32 type=2;//原样返回
+	   repeated Taobao taobaos=3;//
+	   optional int32 autoTenBuy = 4;//是否10连抽 客户端用
+	   optional int32 tanbaoNum=5;//剩余探宝币数量
+	}
+
+	message  C2S{
+	   required int32 type = 1;//抽奖类型  1普通探宝2,高级探宝3,请求免费
+	   optional int32 num=2;//购买的个数
+	   optional int32 autoTenBuy = 3;//是否10连抽 客户端用
+	}
+}
+
+//战将探宝信息
+message HeroLotteryInfo{
+	   required int32 lasttime=1;//最后一次开宝箱的时间（秒）
+	   required int32 status=2;//是否开启宝箱1:开启，0:关闭
+	   required int32 opentimes=3;//今天开宝箱的次数
+	   required int32 refreshtimes=4;//本次开宝箱刷新次数,每开一个宝箱重置为0
+	   required int32 lotterytimes=5;//本次开宝箱抽取次数,每开一个宝箱重置为0
+	   repeated Common.RewardInfo candidates=6; //候选的奖励信息
+	   repeated int32 indexes=7;//已经抽过的下标列表
+	   repeated Common.RewardInfo rewards=8; //已经抽到的奖励信息（对应7的下标）
+}
+
+message LotteryHistrory{
+	required string name=1;//玩家名字
+	required Common.RewardInfo reward=2;//奖励
+}
+
+message M150004 {  //战将信息
+	message  S2C{
+	   required int32 rs=1;
+	   optional HeroLotteryInfo info=2;//战将探宝信息
+	   optional int32 itemCount=3;//剩余探宝币数量
+	   repeated LotteryHistrory histories=4;//奖励历史记录20条
+	}
+
+	message  C2S{
+	}
+}
+
+message M150005 {  //战将开宝箱
+	message  S2C{
+	   required int32 rs=1;
+	   optional HeroLotteryInfo info=2;//战将探宝信息
+	   optional int32 itemCount=3;//剩余探宝币数量
+	}
+
+	message  C2S{
+	}
+}
+
+
+message M150006 {  //战将探宝刷新奖励
+	message  S2C{
+	   required int32 rs=1;
+	   optional HeroLotteryInfo info=2;//战将探宝信息
+	   optional int32 itemCount=3;//剩余探宝币数量
+	}
+
+	message  C2S{
+	}
+}
+
+message M150007 {  //战将探宝抽取奖励
+	message  S2C{
+	   required int32 rs=1;
+	   optional HeroLotteryInfo info=2;//战将探宝信息
+	   repeated Common.RewardInfo rewards=3;//奖励
+	   optional int32 itemCount=4;//剩余探宝币数量
+	   optional int32 index=5;//下标原样返回
+	}
+
+	message  C2S{
+		required int32 index=1;//下标
+	}
+}
+
+message M150008 {  //战将探关闭探宝
+	message  S2C{
+	   required int32 rs=1;
+	   optional HeroLotteryInfo info=2;//战将探宝信息
+	}
+
+	message  C2S{
+		// optional int32 closeType=1;//0=计时结束请求关闭
+	}
+}
+
+

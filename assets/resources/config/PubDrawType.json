@@ -1,0 +1,4 @@
+{
+ "1" : {"ID" : 1 ,"type" : 1 ,"preci1" : 1 ,"preci2" : 3 ,"time" : 1 ,"freemax" : 1 ,"ruleId" : 7 ,"ruleIIId" : 7 ,"singleAward" : [] ,"multiAward" : [] ,"firstMultiAward" : [[406,103,3],[406,203,2],[406,303,2],[406,403,2],[409,109,1],[401,3082,1],[401,1035,1],[401,4013,1],[401,1029,1]]  },
+ "2" : {"ID" : 2 ,"type" : 2 ,"preci1" : 2 ,"preci2" : 4 ,"time" : 2 ,"freemax" : 0 ,"ruleId" : 8 ,"ruleIIId" : 9 ,"singleAward" : [] ,"multiAward" : [] ,"firstMultiAward" : []  }
+}

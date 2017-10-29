@@ -1,0 +1,10 @@
+{
+ "1" : {"ID" : 1 ,"lotteryID" : 1 ,"rewardID" : 10 ,"lotteryPrice" : [3,27] ,"dayTimes" : 10  },
+ "2" : {"ID" : 2 ,"lotteryID" : 1 ,"rewardID" : 11 ,"lotteryPrice" : [5,50] ,"dayTimes" : 10  },
+ "3" : {"ID" : 3 ,"lotteryID" : 1 ,"rewardID" : 12 ,"lotteryPrice" : [5,51] ,"dayTimes" : 10  },
+ "4" : {"ID" : 4 ,"lotteryID" : 1 ,"rewardID" : 13 ,"lotteryPrice" : [5,52] ,"dayTimes" : 10  },
+ "5" : {"ID" : 5 ,"lotteryID" : 2 ,"rewardID" : 10 ,"lotteryPrice" : [3,30] ,"dayTimes" : 10  },
+ "6" : {"ID" : 6 ,"lotteryID" : 2 ,"rewardID" : 11 ,"lotteryPrice" : [5,80] ,"dayTimes" : 10  },
+ "7" : {"ID" : 7 ,"lotteryID" : 2 ,"rewardID" : 12 ,"lotteryPrice" : [5,90] ,"dayTimes" : 10  },
+ "8" : {"ID" : 8 ,"lotteryID" : 2 ,"rewardID" : 13 ,"lotteryPrice" : [5,100] ,"dayTimes" : 10  }
+}

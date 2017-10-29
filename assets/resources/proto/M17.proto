@@ -1,0 +1,115 @@
+package M17;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M17";  //好友协议
+
+import "Common.proto";
+
+message FriendInfo{
+    required fixed64 playerId = 1; //玩家ID
+    required string name = 2; //玩家名称
+    required int32 level = 3; //玩家等级
+    required int32 blessState = 4; //是否祝福过了，0还没有 1已祝福
+    required int64 fight = 5; //玩家的战力
+    required int32 iconId = 6;		 //头像id
+	required int32 pendantId = 7;    //挂件ID
+}
+
+message BlessInfo{  //被好友祝福的信息
+	required fixed64 playerId = 1; //玩家ID
+	required string name = 2; //玩家名称
+    required int32 level = 3; //玩家等级
+    required int32 getState = 4; //领取状态 0未领取 1已领取
+    required int32 iconId = 5; 		 //头像id
+	required int32 pendantId = 6;    //挂件ID
+}
+
+
+message FriendBlessInfos{  //被好友祝福的信息和玩家信息
+        repeated FriendInfo friendInfos = 1;
+	    repeated BlessInfo blessInfos = 2;
+}
+
+message M170000  {  //获取好友相关列表
+	message  S2C{
+	    required int32 rs = 1;
+	    repeated FriendInfo friendInfos = 2;
+	    repeated BlessInfo blessInfos = 3;
+	}
+
+	message  C2S{
+	
+	}
+
+}
+
+message M170001{  //请求添加好友
+	message  S2C{
+	    required int32 rs = 1;
+	    optional FriendInfo friendInfo = 2;
+	}
+
+	message  C2S{
+	    required fixed64 playerId = 1; //玩家ID
+	}
+}
+
+message M170002{  //搜索玩家信息
+	
+	message  S2C{
+        required int32 rs = 1;
+	    optional FriendInfo friendInfo = 2;
+	}
+
+	message  C2S{
+	    required string roleName = 1;//玩家名字
+	}
+}
+
+message M170003{  //请求删除好友
+	message  S2C{
+	    required int32 rs = 1;
+	    optional fixed64 playerId = 2;
+	    required string name = 3; //被删除的玩家名称
+	}
+
+	message  C2S{
+	    required fixed64 playerId = 1; //玩家ID
+	}
+}
+
+///////////////////////祝福相关////////////////
+
+message M170004{  //请求祝福
+
+    message  S2C{
+	    required int32 rs = 1;
+	    repeated fixed64 playerIds = 2;  //已祝福好的玩家ID，这里要通知被祝福的人
+	}
+	
+	message  C2S{
+	    repeated fixed64 playerIds = 1; //玩家ID列表
+	}
+}
+
+message M170005{ //祝福通知
+	
+	message  S2C{
+	    repeated BlessInfo blessInfos = 1;
+	}
+
+	message  C2S{
+	}
+}
+
+message M170006{  //请求领取祝福
+	
+	message  S2C{
+	    required int32 rs = 1;
+	    repeated fixed64 playerIds = 2;  //已祝福好的玩家ID，这里要通知被祝福的人
+	}
+
+	message  C2S{
+	    repeated fixed64 playerIds = 1; //玩家ID列表
+	}
+}

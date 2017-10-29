@@ -1,0 +1,1095 @@
+package M23;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M23";  //系统相关协议
+
+import "Common.proto";
+import "M41.proto";
+import "M57.proto";
+import "M60.proto";
+import "M61.proto";
+
+message ButtonInfo{
+    required int32 type = 1;    //1:跳转模块，2:未领取,3:已领取，4:购买 
+    optional string name = 2;
+    optional string jump = 3;   //跳转信息 module
+    optional string jumpPanel = 4;   //跳转信息 panel
+}
+
+message PriceInfo{
+    required int32 power = 1;    
+    required int32 typeId = 2;
+    required int32 num = 3;   
+}
+
+
+
+message Theleague{//天降神兵信息
+    required int32 activityId = 1; //活动id  
+    required int32 free = 2;//剩余免费次数
+    repeated ActivityAttr attr=3;//属性值列表
+}
+
+message ActivityAttr{//活动定义属性值
+    required int32 type = 1; //属性类型
+    required int32 value = 2;//属性值
+}
+
+message SmashEggInfo{
+    required int32 id = 1;//活动id
+    required int32 remainTimes = 2;//剩余砸蛋次数
+    required int32 spendTimes = 3;//已经砸完蛋的次数
+}
+
+message Turntable{//转盘信息
+    required int32 id = 1; //活动id  
+    required int32 free = 2;//已经使用的免费次数
+    required int32 times= 3; //今日抽奖的次数
+    optional int64 jifen=4;//当前积分
+}
+
+
+message KingReward{//皇帝的封赏
+    required int32 activityId = 1; //活动id 
+    repeated int32 hasgetId=2;//已经领取过的奖励id
+    repeated ChoiceReward choiceInfo=3;//选取过奖励的信息
+}
+
+message ChoiceReward{//
+    required int32 id = 1; //已经领取过的奖励id
+    repeated int32 choiceIds=2;//选择的id
+}
+
+message ActivityEffectInfo{
+    required int32 type = 1;
+    required int32 effectId = 2;
+    optional string conditionName = 3;  //条件名称
+    required int32 sort = 4;    //排序
+    optional string info = 5;   //条件描述
+    required int32 iscanget = 6;    //是否有领取按钮0:无，1有，2购买,3未可领，4已领
+    optional string icon = 7;    //图标ICON
+    optional string jumpbutton = 8; //跳转按钮描述
+    optional string jumpmodule = 9; //跳转模块
+    repeated Common.RewardInfo rewards = 10; //领取奖励
+    optional int32 effecttype = 11; //生效类型
+    optional int32 effect = 12; //生效效果
+    repeated PriceInfo originalprice =13; //原价
+    repeated PriceInfo disprice =14; //现价
+    optional int32 limit =15; //限购次数
+    optional int32 totalLimit =16; //总的次数
+	optional int32 condition2 =17; //对应配置表中condition2
+	optional int32 conditiontype =18; //对应配置表中conditiontype
+    optional int32 condition1 =19; //对应配置表中condition1
+    optional int32 rewardState=20; //0不可领，1可领
+}
+
+message ActivityInfo{ //活动相关信息 
+    required int32 activityId = 1; //配置表活动id
+    required string name = 2;//活动名字
+    required int32 artIcon = 3;
+    required string info = 4;
+    required int32 uitype = 5;  //活动UI模板类型
+    required string title = 6;  //活动小标题
+    required int32 sort = 7; //活动排序
+    repeated ButtonInfo buttons = 8;
+    repeated ActivityEffectInfo effectInfos = 9;//活动效果
+    optional int32 startTime = 10;//开始时间
+    optional int32 endTime = 11;//结束时间
+    required int32 bgIcon = 12;
+    optional int32 already = 13;//已完成,针对进度条
+    optional int32 total = 14;//总共,针对进度条
+    optional int32 conditiontype=15;//活动条件类型
+    optional int32 show=16;//限时活动
+    optional string text=17;//活动文字描述
+    optional int32 endjudge=19; //活动结束判断,0:时间到消失,1:奖励全部领取完消失,2:活动时间到并且奖励全部领取完消失
+    optional int32 lestime= 20;// 关闭剩余倒计时，小于等于0不管
+    optional int32 resettime =21;//重置周期
+    optional int32 reveal=22;//0显示在里面，1显示在外面
+    optional int32 type = 23; // 活动类型 1-充值 2-特卖 3-目标 4-日常
+    optional int32 titleIcon = 24; // 标题ID
+}
+
+message ActivityShowInfo{ //活动相关信息(230007用) 
+    required int32 activityId = 1; //配置表活动id
+    repeated ButtonInfo buttons = 2;
+    repeated ActivityEffectInfo effectInfos = 3;//活动效果
+    optional int32 already = 4;//已完成,针对进度条
+	optional int32 total = 5;  //总共,针对进度条
+}
+
+message LimitActivityInfo{
+    required int32 uitype = 1; //对应的uitype
+    required int32 activityId = 2;//活动id
+    required int32 effectId = 3;//对应的功能id
+    optional string name = 4;//活动名称
+    optional int32 startTime = 5;//开始时间戳
+    optional int32 endTime = 6;//结束时间戳
+    optional int32 bgIcon = 7;//背景边框字段
+    optional string info = 8;//活动文字说明
+    optional int32 lestime= 9;// 关闭剩余倒计时，小于等于0不管
+    optional int32 ordnanceTime=10;//军械神匠已使用的免费次数
+    optional int32 rankId= 11;// 排行榜控制表id
+    optional int32 resetTime = 12; // 重置周期（0：不重置，大于0：每X天重置）
+}
+
+message LaBaInfo{ //拉霸抽奖信息
+    required int32 id = 1; 
+    required int32 free =2;//免费:1是，0否
+    required int32 startTime = 3;//开始时间戳
+    required int32 endTime = 4;//结束时间戳
+    required int32 price =5;//单次抽奖价格
+    required int32 tenPrice =6;//10连抽价格
+    required int32 rewardgroup =7;//奖励组id
+    optional int32 rewardgroupId =8;//奖励id  //查看的时候就不需要,抽奖的时候就需要
+    optional int32 type = 9; // 0.显示信息 1.免费抽 2.单抽 10.十连抽
+    required int32 activityId = 10;
+}
+
+message LegionShareInfo{ //有福同享宝箱信息
+    required int32 id = 1; 
+    required string player = 2;//分享者名字
+    required int32 timeLeft = 3;//剩余时间
+}
+
+message RedBagInfo{ //红包信息
+    required int32 id = 1;//配置表id 
+    required int32 num  = 2;//当前id银票的数量
+}
+
+message RedBagRewardInfo{ //抢到信息
+    required string name = 1;//抢到红包的名字
+    required int32 num  = 2;//银票的数量
+}
+
+message PieceTimes{ //获得碎片信息
+    required int32 type = 1;//碎片类型
+    required int32 times  = 2;//抽到的次数
+}
+
+message VipGoInfo{ //vip总动员信息：每日充值领取状态
+    required int32 effctid = 1;//配置表id
+    required int32 isGet  = 2;//是否已领，0未领，1已领
+}
+
+message VipGoInfoData{ //vip总动员信息
+    required int32 num=1;//今日已充值
+    required int32 allnum=2;//累积充值
+    required int32 allnumGet=3;//累积充值领取状态是否已领，0未领，1已领
+    repeated VipGoInfo vipgoinfo =4;//每日充值领取状态列表
+    required int32 activityid=5;//活动id
+}
+
+message ActivityRankInfo{ //活动排名信息
+    optional int32 activityid = 1; 
+    optional int32 rank= 2;//排名
+}
+
+message VipBoxTimesInfo{//vip宝箱剩余购买次数
+    required int32 activityId=1;//活动id
+    required int32 boxType=2;//类型宝箱
+    required int32 boxTimes=3;//已经购买宝箱次数
+}
+
+message RankInfo{ //排行榜信息
+    required int32 activityid=1;  //活动id
+    required int32 rank=2;  //排名
+    required string name=3; //角色名
+    optional int32 level=4;   //等级
+    required int64 rankValue=5; //power值
+    optional fixed64 id=6;  //玩家Id或者公会id
+    required int32 type=7;  //排行类型：1.玩家排行，2.公会排行
+}
+
+message OrdnanceInfo{//军械神匠抽到的物品信息
+    required int32 power =1;//大类
+    required int32 typeId = 2;//道具id
+    required int32 num = 3;//数量
+    required int32 integral = 4;//物品对应的积分
+}
+
+message M230001{    //领取、购买
+    message S2C{
+        required  int32 rs =1;
+        required  int32 activityId=2;
+        required  int32 effectId=3;
+        repeated ActivityShowInfo activityInfo=4;
+    }
+
+    message  C2S{  
+        required int32 activityId = 1; //配置表活动id
+        required int32 effectId = 2;
+        required int32 sort = 3;
+    }
+}
+
+
+message M230003{ //获取拉霸活动信息
+       message S2C{
+       required int32 rs = 1;
+       optional LaBaInfo labaInfo =2;//拉霸活动信息
+
+    }
+ 
+    message C2S{
+       required int32 activityId = 1;
+       required int32 type = 2; // 0.显示信息 1.免费抽 2.单抽 10.十连抽
+    }
+
+}
+
+message M230005{ //获取有福同享活动信息
+       message S2C{
+        required int32 rs=1;//-1:失败，活动没开启或已过期，0：成功
+        repeated LegionShareInfo legionShareInfo =2;//宝箱箱列表活动信息
+    }
+ 
+    message C2S{
+       
+    }
+}
+
+message M230006{ //请求领取有福同享宝箱奖励
+       message S2C{
+        required int32 result=1;//-1有福同享活动未开启或者已经过期,-2领取有福同享宝箱失败，宝箱不存在或已经过期
+        repeated LegionShareInfo legionShareInfo =2;//宝箱箱列表活动信息
+    }
+ 
+    message C2S{
+        required int32 id=1;//
+    }
+}
+
+message M230007{ //刷新单个普通活动内容
+    message S2C{
+        repeated ActivityShowInfo activityInfo=1;
+    }
+}
+
+message M230008{ //删除一个活动
+    message S2C{
+        repeated int32 activityIds=1;//要删除的活动id
+    }
+    message C2S{
+        repeated int32 checkActivityIds=1;//要校验的活动id
+    }
+}
+
+
+message M230010{ //检测一个普通活动是否开启
+    message S2C{
+        required int32 rs=1;//检测结果:0.没有开放，1.开放
+        repeated ActivityInfo activityInfo=2;//开启的活动
+        optional int32 nextOpenId=3;//下一个要开启的活动id
+        optional int32 nextOpenTime=4;//下一个要开启的时间
+    }
+    message C2S{
+        required int32 checkActivityIds=1;//要校验的活动id
+    }
+}
+
+
+message M230011{ //开放的所有的限时活动信息
+    message S2C{
+        required int32 rs=1;//检测结果:0.没有开放，1.开放
+        repeated LimitActivityInfo activityInfo=2;//已开启的所有活动
+        optional int32 nextOpenId=3;//下一个要开启的活动id
+        optional int32 nextOpenTime=4;//下一个要开启的时间
+
+        //跟20000的协议名称一样，下发所有开启的活动信息
+        repeated M23.RedBagInfo redBagInfo =5;//派送大礼包
+        repeated M23.VipBoxTimesInfo vipBoxTimesInfo =6;//vip宝箱活动信息
+        repeated M23.VipGoInfoData vipgoInfoData =7;//vip总动员活动信息
+        repeated M23.Turntable turntableInfos=8;//每日转盘信息        
+        repeated M23.KingReward  kindreward=9;//皇帝的封赏
+        repeated M23.Theleague   theleague=10;//缇天降神兵        
+        repeated M23.SquibInfo squibInfos=11;//爆竹信息
+        repeated M23.NewRedBagInfo newRedBagInfos=12;//新红包信息
+        repeated M23.SmashEggInfo smashEggInfos = 13;//金鸡砸蛋信息        
+        repeated M23.MartialInfo martialInfos=14;//武学讲坛信息
+        repeated M23.CookingWineInfo cookInfos=15;//煮酒英雄信息
+        repeated M23.ContinuousRecharge continuousRechargeInfo=16;//连续充值信息
+        repeated M23.BroadSealInfo  broadSealInfs=17;//国之重器信息
+        repeated M23.CourteousActivityInfo courteousActivityInfos=18;//礼贤下士信息
+        repeated M23.LeoneInfo leoneInfo = 19; // 雄狮轮盘信息        
+        repeated M23.TombInfo tombInfos = 20; // 精绝古城信息
+        repeated M23.RechargeInfo rechargeInfos = 21; // 充值返利信息
+        repeated M23.LegionRichInfo legionRichInfos = 22; // 同盟致富信息
+        repeated M23.LuckyCorona luckyCoronaInfos = 23; // 幸运轮盘信息
+        repeated M23.Fortune fortuneInfos = 24; // 招财转运信息
+        repeated M57.RichManorInfo richManorInfos = 25; // 富贵豪庄信息
+        repeated M60.BullionInfo bullionInfos = 26; // 财源广进信息
+        repeated M61.CornucopiaInfo cornucopiaInfos = 27; // 聚宝盆信息
+    }
+    message C2S{
+        required int32 checkActivityIds=1;//要校验的活动id
+    }
+  
+}
+
+message M230012{ //校验在线礼包开启
+    message S2C{
+        required int32 rs=1;
+        required int32  totalOnlineTime=2;//玩家在线时长（秒）在线好礼活动专用
+    }
+    message C2S{
+
+    }
+}
+
+message M230013{ //刷新活动排行榜排名
+    message S2C{
+        required int32 rs=1;
+        repeated ActivityRankInfo  activityRankInfo=2;
+    }
+    message C2S{
+
+    }
+}
+
+message M230014{ //购买vip宝箱活动
+    message S2C{
+     required int32 rs=1;
+     optional VipBoxTimesInfo vipBoxInfo=2;//vip宝箱信息
+    }
+
+    message C2S{
+     required int32 type=1;//购买的vip宝箱类型
+     required int32 activityId=2;//活动id
+	 required int32 num = 3;//数量
+    }
+    
+}
+
+
+
+message M230015{ //更新派送大礼包的信息
+       message S2C{
+       required int32 rs=1;
+       optional RedBagInfo redBagInfo =2;//派送大礼包
+    }
+ 
+    message C2S{
+       
+    }
+}
+
+message M230016{ //购买派送大礼包
+       message S2C{
+         required int32 rs = 1;//
+    }
+ 
+    message C2S{
+         required int32 id = 1;//需要购买的id
+    }
+}
+
+message M230017{//军械神匠活动
+    message S2C{
+        required int32 rs=1;
+        repeated OrdnanceInfo ordnanceInfo =2;//奖励物品信息
+        optional int64 jifen=3;//当前积分
+        optional int32 type = 4;//打造类型：0免费，1单次，10十连抽
+    }
+
+    message C2S{
+        required int32 type = 1;//打造类型：0免费，1单次，10十连抽
+        required int32 activityId = 2;//活动id
+        }
+    
+}
+
+
+message M230018{ //执行抢红包
+       message S2C{
+         required int32 rs = 1;// 错误码
+         optional int32 getMoney=2;// 抢到的额度
+         repeated RedBagRewardInfo rbrInfo =3;//抢到的信息
+         optional int32 bagid = 4 ;//配置表的红包id
+    }
+ 
+    message C2S{
+        optional int64 Id=1;//所抢红包唯一id
+    }
+}
+
+
+
+
+message M230019{//活动排行榜信息
+    message S2C{
+    repeated RankInfo activityRankInfos= 1;//活动排行榜信息
+    optional RankInfo myRankInfo= 2;//我的排行信息
+    }
+    message C2S{  
+    required int32 activityid=1;  //活动id
+    }  
+}
+
+message M230020{ //推送vip总动员活动推送充值更新
+    message S2C{
+       required int32 num=1;//今日已充值
+       required int32 allnum=2;//累积充值
+    }
+ 
+    message C2S{
+       
+    }
+}
+
+message M230021{ //推送vip总动员活动领取
+    message S2C{
+        required int32 rs=1;
+        optional VipGoInfo info  = 2;
+        optional int32 allnumGet = 3;//累积充值领取状态 0未领取，1已领取
+        optional int32 activtyid=4;
+    }
+ 
+    message C2S{
+       required int32 id=1;
+       required int32 activtyid=2;
+    }
+}
+
+
+
+message M230022{ //每日转盘抽奖
+    message S2C{
+       required int32 rs=1;
+       repeated int32 rewards =2;//抽到的奖励id
+       optional int64 jifen=3;//当前积分
+    }
+ 
+    message C2S{
+       required int32 times=1;//抽奖次数
+       required int32 activityId=2;//活动id
+    }
+}
+
+
+message M230023{ //领取皇帝的封赏
+    message S2C{
+        required int32 rs=1;//0的时候领取成功客户端自己改变按钮变化
+        optional int32 id=2;//领取的id原样返回
+        repeated int32 choiceIds=3;//选择的奖励原样返回
+    }
+ 
+    message C2S{
+       required int32 id=1;//领取的id
+       required int32 activityId=2;//活动id
+       repeated int32 choiceIds=3;//选择的奖励
+    }
+}
+
+
+message M230024{ //天降神兵抽奖
+    message S2C{
+        required int32 rs=1;//
+        repeated ActivityAttr attr=2;//属性值列表
+        repeated PieceTimes times=3;//抽到碎片的次数
+    }
+ 
+    message C2S{
+        required int32 activityId = 1; //活动id 
+        required int32 times=2;//1 单抽 10 为10连抽
+    }
+}
+
+
+message M230025{ //天降神兵训练
+    message S2C{
+        required int32 rs=1;//
+        optional ActivityAttr attr=2;//属性值列表
+        optional int32 id=3;//SynthesizeItem表的id原样返回
+    }
+ 
+    message C2S{
+        required int32 activityId = 1; //活动id 
+        required int32 id=2;//SynthesizeItem表的id
+    }
+}
+
+
+message SquibInfo{//爆竹酉礼信息20000初始化
+    required int32 activityId=1;//活动id
+    repeated int32 pos=2;//点燃位置
+}
+
+message M230026{ //爆竹酉礼领取
+    message S2C{
+        required int32 rs=1;//错误码
+        required int32 activityId=2;//原样返回 活动id 
+    }
+ 
+    message C2S{
+        required int32 activityId = 1; //活动id
+        required int32 pos=2;//位置 
+    }
+}
+
+message NewRedBagInfo{//新红包信息20000初始化
+    required int32 id=1;//红包功能id
+    required int32 time=2;//个人冷却时间
+    required int32 endTime=3;//结束时间倒计时
+    required int32 num=4;//红包剩余数量
+}
+
+
+message M230027{ //抢红包
+    message S2C{
+        required int32 rs=1;//错误码
+        required int32 id=2;//原样返回 活动id 
+        required int32 time=3;//冷却时间
+        optional Common.RewardInfo rewards=4;//奖励,目前只有一个
+    }
+ 
+    message C2S{
+        required int32 id = 1; //活动id 
+    }
+}
+
+message M230028{//红包功能推送新增跟消失 
+    message S2C{
+        required int32 rs=1;//错误码
+        required NewRedBagInfo newRedBagInfo=2;
+        required int32 opt=3;//0去除，1增加
+    }
+ 
+    message C2S{
+       
+    }
+}
+
+message M230029{//红包数量变更服务器3秒主动推送，当检查有数据更变的时候
+    message S2C{
+        required int32 rs=1;//错误码
+        required int32 id=2;//红包功能id
+        required int32 num=4;//红包剩余数量
+    }
+ 
+    message C2S{
+       
+    }
+}
+
+
+message M230030{//金鸡砸蛋
+    message S2C{
+       required int32 rs =1;//错误码
+       required int32 activityId = 2; //原样返回活动id
+       repeated Common.RewardInfo rewardList = 3;//奖励组物品信息
+    }
+
+    message C2S{
+       required int32 activityId = 1; //活动id
+       required int32 times = 2;//需要砸蛋的次数 
+    }
+    
+}
+
+message M230031{//迎春集福
+    message S2C{
+       required int32 rs = 1;//错误码
+       required int32 activityId = 2;//原样返回活动id
+    }
+
+    message C2S{
+       required int32 activityId = 1;//活动id
+       required int32 blessId = 2;//需要兑换的福字id
+    }
+}
+
+message MartialInfo{//武学讲坛信息 20000初始化 排行榜参考230019
+    required int32 activityId = 1; //活动id  
+    required int32 free = 2;//已经使用的免费次数
+    optional int64 learnTimes=3;//累计总共学习次数 成功的时候发
+}
+
+
+message M230032{//武学讲坛学习
+    message S2C{
+       required int32 rs = 1;//错误码
+       required int32 activityId = 2;//原样返回活动id
+       optional int64 learnTimes=3;//累计总共学习次数
+       repeated Common.RewardInfo rewardList = 4;//奖励组物品信息
+    }
+
+    message C2S{
+       required int32 activityId = 1;//活动id
+       required int32 times = 2;//0,表示免费学习，其它学习根据表
+       required int32 type=3;//学习类型 天地圣
+    }
+}
+
+
+
+
+message CookingWineInfo{//煮酒信息 20000初始化 排行榜参考230019
+    required int32 activityId = 1; //活动id  
+    required int32 free = 2;//已经使用的免费煮酒次数
+    required int64 integral=3;//积分
+    repeated CookingPosInfo info=4;//煮酒槽位信息
+}
+
+message CookingPosInfo{//煮酒槽位信息
+    required int32 pos=1;//位置
+    required int32 fidelity=2;//忠诚度
+    required int32 typeId=3;//英雄id
+}
+
+
+message M230033{//更换煮酒英雄
+    message S2C{
+       required int32 rs = 1;//错误码
+       optional int32 activityId = 2;//原样返回活动id
+       optional int32 pos = 3;//1，2英雄位置
+       optional int32 typeId=4;//英雄id
+    }
+
+    message C2S{
+       required int32 activityId = 1;//活动id
+       required int32 pos = 2;//1，2英雄位置
+       required int32 typeId=3;//英雄id
+    }
+}
+
+
+
+message M230034{//敬酒
+    message S2C{
+       required int32 rs = 1;//错误码
+       optional int32 activityId = 2;//原样返回活动id
+       optional int64 integral=3;//积分
+       repeated CookingPosInfo info=4;//煮酒槽位信息
+       repeated Common.RewardInfo rewardList = 5;//奖励组物品信息
+    }
+
+    message C2S{
+       required int32 activityId = 1;//活动id
+       required int32 times=2;//煮酒次数
+    }
+}
+
+
+message M230036{ //校验活动在线时间
+    message S2C{
+        required int32 rs=1;
+        required int32 time=2;//已经在线时间
+        required int32 activityId = 3;//活动Id
+    }
+    message C2S{
+        required int32 activityId = 1;//活动Id
+    }
+}
+
+
+message ContinuousRecharge{//连续充值信息
+    required int32 activityId = 1; //活动id 
+    repeated int32 hasgetId = 2;//已经领取过的奖励组id
+    repeated int32 day = 3;//签到天数
+    required int32 nowDay = 4;//当前天数
+}
+
+message M230037{//连续充值补签
+    message S2C{
+    required int32 rs = 1;//错误码
+    required int32 activityId = 2;//原样返回活动Id
+    }
+
+    message C2S{
+    required int32 activityId = 1;//活动Id
+    }
+}
+
+message M230038{//连续充值领取奖励
+    message S2C{
+    required int32 rs = 1;//错误码
+    required int32 activityId = 2;//原样返回活动Id
+    repeated int32 getRewardId = 3;//原样返回领取奖励id
+    }
+    message C2S{
+    required int32 activityId = 1;//活动Id
+    repeated int32 getRewardId = 2;//领取奖励id 
+    }
+}
+
+message ShoperInfo{//商人信息
+  required int32 activityId = 1;//活动id
+  repeated M41.ItemInfo itemInfos = 2;//商品信息
+  optional int32 remainTime = 3;//刷新时间
+}
+
+message M230039{//洛阳闹市特卖信息
+    message S2C{
+        required int32 rs = 1;//错误码
+        repeated ShoperInfo shoperInfos = 2;//商人信息
+    }
+
+    message C2S{
+    } 
+}
+
+message M230040{//洛阳闹市特卖购买
+    message S2C{
+        required int32 rs = 1;//错误码
+        required int32 activityId = 2;//活动id
+        required int32 goodsId = 3;//商品id
+        required int32 num = 4;//剩余商品数量
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+        required int32 goodsId = 2;//商品id
+        required int32 num = 3;//商品数量
+    } 
+}
+
+message CourteousActivityInfo{//礼贤下士信息
+    required int32 activityId =1;//活动id
+    required int32 freeTime =2;//已使用的免费次数
+    required int32 intimacy =3;//亲密度
+    required int64 score =4; // 积分
+}
+
+message M230041{//礼贤下士礼贤
+    message S2C{
+        required int32 rs = 1; // 错误码
+        repeated CourteousActivityInfo courteousActivityInfo = 2; // 礼贤下士信息
+        repeated int32 getids = 3; // 抽到的军师id
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+        required int32 time = 2;//礼贤次数
+     
+    } 
+}
+
+
+message BroadSealInfo{//国之重器信息
+    required int32 activityId =1;//活动id
+    required int32 freeTime =2;//已使用的免费次数
+    repeated BroadPostInfo broadPostInfos=3;//槽位信息
+}
+
+message BroadPostInfo{//国之重器槽位信息
+    required int32 pos=1;//位置1到9 没有默认0
+    required int32 num=2;//位置的数量
+}
+
+
+message M230042{//国之重器收集
+    message S2C{
+        required int32 rs = 1;//错误码
+        optional int32 activityId=2;//活动id原样返回rs=0
+        repeated BroadPostInfo posInfos = 3;//位置信息返回rs=0才返回
+        required int32 time = 4;//收集次数原样返回rs=0
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+        required int32 time = 2;//收集次数
+     
+    } 
+}
+
+message M230043{//国之重器指定槽位购买
+    message S2C{
+        required int32 rs = 1;//错误码
+        optional int32 activityId=2;//活动id原样返回rs=0
+        optional int32 pos = 3;//购买的位置rs=0才返回
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+        required int32 pos = 2;//购买的位置
+        
+    } 
+}
+
+message M230044{//国之重器组装
+    message S2C{
+        required int32 rs = 1;                      // 错误码
+        optional int32 activityId=2;                // 活动id原样返回rs=0
+        repeated Common.RewardInfo rewardList = 3;  // 奖励组物品信息
+        optional int32 times = 4;                   // 组装次数
+    }
+
+    message C2S{
+        required int32 activityId = 1;              //活动id
+    } 
+}
+
+// 雄狮轮盘信息
+message LeoneInfo{
+    required int32 activityId = 1; // 活动id
+    required int32 freeTime = 2; // 已使用的免费次数
+    required int32 lastSoldierType = 3; // 上一次抽到的兵种类型
+    optional int32 soldierNum = 4; // 上一次抽到的兵种数量
+}
+
+// 雄狮征召
+message M230045{
+    message S2C{
+        required int32 rs = 1; // 错误码
+        optional LeoneInfo info = 2; // 雄狮轮盘信息
+        required int32 draftType = 3; // 征召类型，1 单次，10 十次
+    }
+
+    message C2S{
+        required int32 activityId = 1; // 活动id
+        required int32 draftType = 2; // 征召类型，1 单次，10 十次
+        optional int32 lockType = 3; // 锁定兵种类型
+    } 
+}
+
+
+message TombItemInfo{ //道具抽奖信息
+	required Common.RewardInfo rewardInfo = 1;//奖励信息
+	required int32 pos = 2; //位置1到9   0表示还没有去点
+	
+}
+
+message TombMergeInfo{//正常道具合成信息
+	required int32 typeId = 1; //配置表id
+	required int32 times = 2; //已用合成次数
+}
+
+message TombInfo{ //精绝古城信息
+	required int32 activityId = 1; //活动id
+	required int32 freeTimes = 2; //已用免费次数
+	required int32 num = 3; //特殊物品总数量
+	repeated TombItemInfo itemList = 4; //道具抽奖信息
+	repeated TombMergeInfo mergeList = 5;//正常道具合成信息
+	required int32 buy = 6; // 是否已购买去蒙板（免费包括在内）0-未购买 1-已购买
+	required int64 integral = 7; //积分
+}
+
+
+message M230046{ //精绝古城购买（去蒙板）
+	message S2C{ 
+      required int32 rs = 1;//错误码  
+	  optional int32 activityId=2;//返回原来活动id
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+    } 
+}
+
+message M230047{//精绝古城抽奖
+    message S2C{ 
+        required int32 rs = 1;//错误码
+		optional int32 activityId=2;//返回原来活动id
+		optional int32 freeTimes = 3; //已用免费次数
+		repeated TombItemInfo itemList = 4;//道具抽奖信息
+		optional int32 num = 5; //特殊物品总数量
+		optional int32 buy = 6; // 是否已购买去蒙板（免费包括在内）0-未购买 1-已购买  
+		optional int64 integral = 7; //积分
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+        required int32 type = 2;//抽奖类型 0 -单抽 1 -全开
+		optional int32 pos = 3; //位置1到9
+    } 
+}
+
+message M230048{//精绝古城手动重置
+    message S2C{ 
+        required int32 rs = 1;//错误码   
+		optional int32 activityId=2;//返回原来活动id
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+
+    } 
+}
+
+message M230049{ //精绝古城兑换
+	message S2C{
+		required int32 rs = 1; //错误码
+		optional int32 activityId=2;//返回原来活动id
+		repeated TombMergeInfo mergeList = 3; //正常道具合成信息
+		optional int32 num = 4; //特殊物品总数量
+		
+	}
+	
+	message C2S{
+        required int32 activityId = 1;//活动id
+		required int32 typeId = 2;//配置表id
+    } 
+}
+
+
+message RechargeInfo{ //充值返利信息
+	required int32 activityId = 1; //活动id
+	required int32 currentGold = 2; //当前充值金币
+	required int32 condition = 3;//当前充值条件
+	required int32 rebate = 4;//当前充值返利比例
+	required int32 freeTime = 5;//已使用的免费次数	
+}
+
+message M230050{//充值返利转盘
+    message S2C{ 
+        required int32 rs = 1;//错误码   
+		optional int32 activityId = 2;//返回原来活动id
+		optional RechargeInfo info = 3; // 结果信息
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+
+    } 
+}
+
+message M230051{//充值返利领取返利
+    message S2C{ 
+        required int32 rs = 1;//错误码   
+		optional int32 activityId = 2;//返回原来活动id
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+
+    } 
+}
+
+message M230052{//服务器主动推送 充值后返利信息
+    message S2C{ 
+		required RechargeInfo info = 1; // 结果信息
+    }
+
+    message C2S{
+        
+    } 
+}
+
+
+message LegionRichInfo{ //同盟致富信息
+	required int32 activityId = 1; //活动id
+	repeated LegionRichMission missionInfos = 2; // 任务信息列表
+}
+
+message LegionRichMission{ //当前任务进度
+	required int32 id = 1;// 配置表id
+	required int64 gather = 2; //当前采集数量
+    required int32 remainTimes = 3;//剩余可领取次数
+}
+
+message M230053{//领取同盟致富任务奖励
+    message S2C{ 
+        required int32 rs = 1;//错误码   
+		optional int32 activityId = 2;//返回原来活动id
+		optional int32 id = 3;// 配置表id
+		optional LegionRichInfo info = 4; // 结果信息		
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+		required int32 id = 2;// 配置表id
+    } 
+}
+
+message MemberGatherInfo{ //成员采集量
+	required int32 rank = 1;// 序号
+	required string name = 2;// 玩家角色名
+	required int64 gather = 3; //当前采集数量
+	optional fixed64 playerId = 4; //玩家id
+}
+
+message M230054{ // 查看资源点采集信息
+    message S2C{ 
+        required int32 rs = 1;                        // 错误码   
+		optional int32 activityId = 2;                // 返回原来活动id
+		optional int32 id =3;                         // 配置表id
+		optional int32 myRank = 4;                    // 我的排行
+		optional int64 myGather = 5;                  // 我的采集量			
+		repeated MemberGatherInfo gatherInfos = 6;    // 成员采集信息
+        optional int32 firstOpen = 7;                 // 如果返回1，隔一秒后再请求并显示
+    }
+
+    message C2S{
+        required int32 activityId = 1;//活动id
+		required int32 id = 2; // 配置表id
+    } 
+}
+
+message M230055{//服务器主动推送 最新任务
+    message S2C{ 
+        optional int32 activityId = 1;//活动id
+		optional LegionRichInfo info = 2; //最新任务	
+    }
+}
+
+message M230056{//打开同盟致富活动界面
+    message S2C{ 
+		required int32 rs = 1;//错误码   
+		optional int32 activityId = 2;//返回原来活动id
+		optional LegionRichInfo legionRichInfo = 3;// 同盟致富信息
+    }
+	
+	message C2S{
+        required int32 activityId = 1;//活动id
+    } 
+}
+
+message LuckyCorona{ // 好运轮盘信息
+    optional int32 id = 1; // 活动id
+    optional int32 currentGold = 2; // 当前充值金币
+    optional int32 times= 3; // 剩余次数(包含了免费次数)
+    optional int32 freeTimes = 4; // 剩余免费次数
+}
+
+message M230057{ // 好运轮盘抽奖
+    message S2C{
+        required int32 rs = 1;                      // 错误码
+        optional int32 rewardId = 2;                // 抽到的奖励id，十连抽的时候下发第十个奖励的id
+        optional LuckyCorona luckyCoronaInfo = 3;   // 好运轮盘信息
+        repeated Common.RewardInfo rewards = 4;     // 抽到的所有奖励
+    }
+
+    message C2S{
+        required int32 activityId = 1; // 活动id
+		required int32 type = 2;	   // 1.单抽 10.十连抽
+    }
+}
+
+message M230058{ // 充值后推送好运轮盘信息
+    message S2C{ 
+        repeated LuckyCorona luckyCoronaInfos = 1; // 好运轮盘信息
+    }
+
+    message C2S{
+    } 
+}
+
+message Fortune{ // 招财转运信息
+    optional int32 id = 1; // 活动id
+    optional int32 times1 = 2; // 剩余次数1(不含免费次数)
+    optional int32 freeTimes1 = 3; // 剩余免费次数1
+    optional int32 times2 = 4; // 剩余次数2(不含免费次数)
+    optional int32 freeTimes2 = 5; // 剩余免费次数2
+}
+
+message M230059{ // 招财转运抽奖
+    message S2C{
+        required int32 rs = 1; // 错误码
+        optional int32 rewardId = 2; // 抽到的奖励id
+        optional Fortune fortuneInfo = 3; // 招财转运信息
+    }
+
+    message C2S{
+        required int32 activityId = 1; // 活动id
+        required int32 type = 2; // 档位（1、2对应配置的两个额度）
+    }
+}
+
+message M230060{ // 充值后推送招财转运信息
+    message S2C{ 
+        repeated Fortune fortuneInfos = 1; // 招财转运信息
+    }
+
+    message C2S{
+    } 
+}

@@ -1,0 +1,152 @@
+package M30;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M30";  //英雄协议
+import "Common.proto";
+
+message M300000{//武将上阵或更换
+     message S2C{
+     required int32 rs=1;//错误码
+     }
+
+     message C2S{
+       required fixed64 heroId=1;//武将id
+	   required int32 position=2;//武将槽位
+     }
+	
+}
+
+message M300001{  // 武将升级/升星
+	message  S2C{
+	    required int32 rs = 1;//错误码
+	    optional fixed64 heroId = 2;//升级的武将id原样返回
+	}
+
+	message  C2S{
+       required fixed64 heroId = 1;//武将id
+       required int32 upType = 2;//升级类型 1 升级，2 升星
+       repeated HeroUpgradeUse useInfo = 3;  //武将升级消耗
+       optional int32 useSuper=4;// 0不使用万能碎片 ，1 使用
+	}
+
+}
+
+message HeroUpgradeUse{ //武将升级消耗
+     required fixed64 heroId=1;//武将id
+     required int32 num=2;//数量
+}
+
+message M300002{//阵法升级
+  message S2C{
+   required int32 rs=1;//错误码
+   required int32 Id=2;//阵法id原样返回
+  }
+
+  message C2S{
+  required int32 formationId=1;//阵法id
+  }
+}
+
+message M300003{//武将兵法升级
+  message S2C{
+   required int32 rs=1;//错误码
+  }
+
+  message C2S{
+  required fixed64 heroId=1;//武将id
+  required int32 strategicsId=2;//兵法id
+  }
+}
+
+message M300004{//阵法解锁通知
+  message S2C{
+   repeated Common.FormationInfo formationInfo = 1;//战法信息
+  }
+
+  message C2S{
+  }
+}
+
+message HeroPositionInfo{ //槽位信息
+     required fixed64 heroId=1;//武将id
+     required int32 position=2;//武将槽位
+}
+
+message M300005{//英雄槽位更换
+  message S2C{
+    required int32 rs = 1;//错误码
+  }
+  message C2S{
+    repeated HeroPositionInfo heroPositionInfo = 1;
+  }
+}
+
+message M300006{//出战槽位上宝具槽位的升阶
+  message S2C{
+    required int32 rs = 1;//错误码
+    optional int32 time = 2;//自动进阶次数
+  }
+  message C2S{
+     required int32 postId = 1;//出战槽位id（1-6）
+     required int32 treasurePostId = 2;//宝具槽位ID 0是武器，1是马驹
+     required int32 typeId = 3;//升级类型，0是自动升阶（多次），1是金币进阶（单次）
+  }
+}
+
+
+
+message M300007{//打开图鉴请求当有任务类型为47并且该任务未完成时才请求
+    message S2C{
+      
+    }
+
+    message C2S{
+       
+    }
+  
+}
+
+
+
+
+message M300100{//武将碎片合成
+    message S2C{
+      required int32 rs = 1;//错误码
+    }
+
+    message C2S{
+       required int32 typeId = 1;//武将碎片配置表id
+    }
+}
+
+message M300101{//武将碎片分解
+  message S2C{
+    required int32 rs = 1;//错误码
+  }
+
+  message C2S{
+    optional fixed64 id = 1;//分解碎片武将id
+  }
+}
+
+
+message M300102{//武将分解奖励预览
+  message S2C{
+    required int32 rs = 1;//错误码
+    repeated Common.RewardInfo cr = 2;//奖励信息
+  }
+
+  message C2S{
+    optional fixed64 id = 1;//分解碎片武将id
+  }
+}
+
+message M300103{//武将经验书出售
+  message S2C{
+    required int32 rs = 1;//错误码
+  }
+
+  message C2S{
+    required fixed64 id = 1;//武将经验书id
+  }
+}

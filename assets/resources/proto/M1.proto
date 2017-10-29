@@ -1,0 +1,115 @@
+package M1;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M1";  //登陆协议
+
+import "Common.proto"; 
+
+message M8888{  //心跳包
+
+    message  S2C{
+        required int32 serverTime = 1; //服务器时间
+    }
+
+    message C2S{
+    }
+	
+}
+
+message M9998{  //强制踢下线操作
+
+    message  S2C{
+        required int32 rs = 1;   //1顶号 2禁号
+        optional string reason = 2;
+    }
+
+    message C2S{
+    }
+	
+}
+
+message M9988{  //退出排队
+  message  S2C{
+  }
+
+  message C2S{
+  }
+}
+
+message M9999{  //登陆网关协议 重连
+	message  S2C{
+		optional int32 rs = 1; //0：登陆成功 1：需要重新连接，不允许重连 
+		optional fixed64 id = 2; 
+    optional int32 queueNum = 3; // 排队人数
+	}
+
+	message C2S{
+	    required string account = 1;
+	    required int32 type = 2;  //1正常连接，2重连连接
+	    required int32 areId = 3; //区id
+      optional uint32 sign = 4; //登录校验码
+	}
+}
+
+message M10000  {  //登陆协议
+	message  S2C{
+		optional int32 rs = 1;  //5:表示登录成功，但是没领取新手礼包
+    optional int32 serverTime = 2; //登录的时候 同步一下服务器时间
+    optional string reason = 3;    //登录不成功原因
+	}
+  	
+	message  C2S{
+  		required string account = 1;
+  		required int32 areId =2;//区id
+  		optional string utma = 3;//手机唯一标识:md5(imei+手机机型+网卡mac)
+  		optional string imei = 4;//IMEI
+  		optional string screen = 5;//分辨率
+  		optional int32 os = 6;//手机系统 1、android；2、ios；3、其他
+  		optional string model = 7;//手机机型
+  		optional string net = 8;//网络 1、2G；2、3G；3、wifi；4、其他
+  		optional string operators = 9;//运营商 1、移动；2、联通；3、电信；4、其他
+  		optional string location = 10;//地理坐标
+  		optional string package_name = 11;//游戏包名称
+  		optional string package_size = 12;//游戏包大小(字节数)
+  		optional string fill_register_msg_times = 13;//平台账号注册填写信息时间(秒)
+  		optional int32 startup_times = 14;//启动时间(秒)，android核加载flash到游戏启动时间
+  		optional int32 plat_id = 15;//平台ID
+      optional string user_ip =16;//玩家IP
+      optional string game_version =17;//游戏版本
+      optional string pushChannelId = 18;  //推送唯一ID
+	    optional int32 channal_id = 19;//子渠道
+      optional string os_version = 20; //手机操作系统版本号
+	}
+	
+	optional S2C s2c = 1;
+	optional C2S c2s = 2;
+}  
+
+message M10001  {  //创建角色协议
+	message  S2C{
+		optional int32 rs = 1;
+		//optional Common.ActorInfo actorInfo = 2;
+		optional string errorText = 3;
+	}
+  	
+	message  C2S{
+  		required string accountName = 1;
+  		required string name = 2;
+  		required int32 sex = 3;
+  		required int32 icon = 4;
+	}
+	
+	optional S2C s2c = 1;
+	optional C2S c2s = 2;
+} 
+
+message M10002{  //登录后的事件ID 只能记录登录成功的
+
+  message  S2C{
+    required int32 rs = 1;
+  }
+  
+  message  C2S{
+      required int32 eventId = 1;
+  }
+}

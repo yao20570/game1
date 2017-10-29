@@ -1,0 +1,39 @@
+package M51;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M51"; // 军工所相关协议
+
+message MilitaryInfo{ // 军工所信息
+	optional int32 type = 1;		// 类型（1骑兵，2刀兵，3枪兵，4弓兵）
+	optional int32 segment = 2;	// 段数
+	optional int32 level = 3;	// 等级
+	optional int32 rank = 4;	// 阶数
+}
+
+message M510000{ // 升段
+	message S2C{
+		required int32 rs = 1;			// 错误码
+		optional MilitaryInfo info = 2;	// 军工所信息（只发当前类型）
+	}
+
+	message C2S{
+		required int32 type = 1;	// 类型（1骑兵，2刀兵，3枪兵，4弓兵）
+	}
+}
+
+message M510001{ // 升阶
+	message S2C{
+		required int32 rs = 1;			// 错误码
+		optional MilitaryInfo info = 2;	// 军工所信息（只发当前类型）
+	}
+
+	message C2S{
+		required int32 type = 1;	// 类型（1骑兵，2刀兵，3枪兵，4弓兵）
+	}
+}
+
+message M510002 { // 升级后开放功能时推送
+	message S2C{
+		repeated MilitaryInfo info = 1; // 军工所信息
+	}
+}

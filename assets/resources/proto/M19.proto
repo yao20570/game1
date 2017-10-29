@@ -1,0 +1,99 @@
+package M19;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M19";  //任务协议
+
+import "Common.proto";
+
+
+/** message TaskInfo{    //任务信息 
+    required int32 tableType = 1; //任务类型 1，主线任务，2每日任务，3每日活跃
+    required int32 typeId = 2; //任务对应表的Id
+    optional int64  num= 3; //完成度
+    optional int32 state = 4; //状态 0未完成 1已经完成 2领取过了 3要删除的
+    optional int32 accept = 5; //状态 0未接受 ，1接受
+} **/
+
+message M190000{  //任务初始化信息 更新
+
+    message S2C{
+        repeated Common.TaskInfo taskInfos = 1; //
+        optional int32 dayliynum=2;//日常任务任务完成数
+        optional int32 dayActivityId=3;//日常活跃Id
+        required int32 rs=4;//错误吗
+        optional int32 hasGetMaxId=5;//已经领取活跃最大id
+    }
+
+    message  C2S{  
+
+    }
+}
+
+
+
+
+message M190001{  //任务领取
+
+    message S2C{
+        required int32 rs=1;//错误吗
+        repeated Common.TaskInfo taskInfos = 2; //更新数据
+        optional int32 dayliynum=3;//日常任务任务完成数
+        required int32 tableType = 4; //原样返回
+    }
+
+    message  C2S{  
+       required int32 tableType = 1; //任务类型 1，主线任务
+       required int32 typeId = 2; //任务对应表的Id 
+     
+
+    }
+}
+
+
+message M190002{  //日常任务操作
+
+    message S2C{
+        required int32 rs=1;//错误吗
+        repeated Common.TaskInfo taskInfos = 2; //更新数据
+        required  int32 dayliynum=3;//日常任务任务完成数
+         required  int32  type=4;//原样返回给客户端
+
+    }
+
+    message  C2S{  
+        required int32 type=1;//操作类型 1接受任务 2放弃任务 ，3 重置任务，4刷新任务,5用金币完成任务
+         optional int32 typeId=2;//任务Id
+    }
+}
+
+
+message M190003{  //领取日常活跃
+
+    message S2C{
+        required int32 rs=1;//错误吗
+        repeated Common.TaskInfo taskInfos = 2; //更新数据
+        required int32 dayActivityId=3;//日常活跃Id
+        optional int32 hasGetMaxId=4;//已经领取活跃最大id
+    }
+
+    message  C2S{  
+      
+    }
+}
+
+
+message M190004{  //领取军功奖励
+
+    message S2C{
+        required int32 rs=1;//错误吗
+        required int32 id=2;//领取id  原样返回
+    }
+
+    message  C2S{  
+        required int32  id=1;//领取id
+    }
+}
+
+
+
+

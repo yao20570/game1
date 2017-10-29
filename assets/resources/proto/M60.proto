@@ -1,0 +1,44 @@
+package M60;
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M60"; // 限时活动——财源广进相关协议
+
+message BullionInfo{ // 财源广进信息
+	required int32 activityId = 1;			// 活动ID
+	repeated LotteryInfo lotteryInfo = 2;	// 抽奖信息
+	repeated ExchangeInfo exchangeInfo = 3;	// 兑换信息
+}
+
+message LotteryInfo{ // 抽奖信息
+	optional int32 id = 1;		// 抽奖表ID
+	optional int32 times = 2;	// 已抽奖次数
+}
+
+message ExchangeInfo{ // 兑换信息
+	optional int32 id = 1;		// 兑换表ID
+	optional int32 times = 2;	// 已兑换次数
+}
+
+message M600000{ // 博彩
+	message S2C{
+		required int32 rs = 1;			// 错误码
+		optional BullionInfo info = 2;	// 财源广进信息
+	}
+
+	message C2S{
+		required int32 activityId = 1;	// 活动ID
+		optional int32 lotteryId = 2;	// 抽奖表ID
+	}
+}
+
+message M600001 { // 兑换
+	message S2C{
+		required int32 rs = 1;			// 错误码
+		optional BullionInfo info = 2;	// 财源广进信息
+	}
+
+	message C2S{
+		required int32 activityId = 1;	// 活动ID
+		required int32 exchangeId = 2;	// 兑换表ID
+	}
+}

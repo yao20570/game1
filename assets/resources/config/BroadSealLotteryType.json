@@ -1,0 +1,20 @@
+{
+ "1" : {"ID" : 1 ,"lotteryID" : 1 ,"type" : 1 ,"time" : 5 ,"probability" : 84  },
+ "2" : {"ID" : 2 ,"lotteryID" : 1 ,"type" : 2 ,"time" : 5 ,"probability" : 72  },
+ "3" : {"ID" : 3 ,"lotteryID" : 1 ,"type" : 3 ,"time" : 5 ,"probability" : 48  },
+ "4" : {"ID" : 4 ,"lotteryID" : 1 ,"type" : 4 ,"time" : 5 ,"probability" : 84  },
+ "5" : {"ID" : 5 ,"lotteryID" : 1 ,"type" : 5 ,"time" : 5 ,"probability" : 72  },
+ "6" : {"ID" : 6 ,"lotteryID" : 1 ,"type" : 6 ,"time" : 5 ,"probability" : 42  },
+ "7" : {"ID" : 7 ,"lotteryID" : 1 ,"type" : 7 ,"time" : 5 ,"probability" : 84  },
+ "8" : {"ID" : 8 ,"lotteryID" : 1 ,"type" : 8 ,"time" : 5 ,"probability" : 72  },
+ "9" : {"ID" : 9 ,"lotteryID" : 1 ,"type" : 9 ,"time" : 5 ,"probability" : 42  },
+ "10" : {"ID" : 10 ,"lotteryID" : 1 ,"type" : 1 ,"time" : 10 ,"probability" : 56  },
+ "11" : {"ID" : 11 ,"lotteryID" : 1 ,"type" : 2 ,"time" : 10 ,"probability" : 48  },
+ "12" : {"ID" : 12 ,"lotteryID" : 1 ,"type" : 3 ,"time" : 10 ,"probability" : 32  },
+ "13" : {"ID" : 13 ,"lotteryID" : 1 ,"type" : 4 ,"time" : 10 ,"probability" : 56  },
+ "14" : {"ID" : 14 ,"lotteryID" : 1 ,"type" : 5 ,"time" : 10 ,"probability" : 48  },
+ "15" : {"ID" : 15 ,"lotteryID" : 1 ,"type" : 6 ,"time" : 10 ,"probability" : 28  },
+ "16" : {"ID" : 16 ,"lotteryID" : 1 ,"type" : 7 ,"time" : 10 ,"probability" : 56  },
+ "17" : {"ID" : 17 ,"lotteryID" : 1 ,"type" : 8 ,"time" : 10 ,"probability" : 48  },
+ "18" : {"ID" : 18 ,"lotteryID" : 1 ,"type" : 9 ,"time" : 10 ,"probability" : 28  }
+}

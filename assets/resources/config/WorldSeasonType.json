@@ -1,0 +1,6 @@
+{
+ "1" : {"ID" : 1 ,"type" : 1 ,"seasonEffect" : [20001] ,"time" : 172800  },
+ "2" : {"ID" : 2 ,"type" : 2 ,"seasonEffect" : [20002] ,"time" : 172800  },
+ "3" : {"ID" : 3 ,"type" : 3 ,"seasonEffect" : [20003] ,"time" : 172800  },
+ "4" : {"ID" : 4 ,"type" : 4 ,"seasonEffect" : [20004] ,"time" : 86400  }
+}

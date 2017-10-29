@@ -1,0 +1,160 @@
+package M32;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M32";  //boss协议
+import "Common.proto";
+import "M7.proto";
+
+message BossActivityInfo{
+  required int32 activityId = 1;
+  optional string name = 2;
+  optional int64 totalHp = 3;
+  optional int64 nowHp = 4;//当前血量
+  required int32 state = 7;//活动状态 0未开启 1准备中 2开启中
+  optional int32 coldDownTime = 8;//冷却时间
+  optional int32 teamIcon = 9;//自己的部队图标，没有则0
+  optional int32 readTime = 10;//准备完毕倒计时（准备->开始）
+  optional int32 endTime = 11;//活动结束倒计时（开始->结束）
+  optional int64 myDamage = 12;//我的伤害
+  optional int64 myRank = 13;//我的排行
+  repeated Common.FightElementInfo members = 14;//部队列表
+  optional int32 autoFight = 15;//是否自动战斗中
+  repeated string killerName = 16;//上次击杀的玩家名字
+  optional int32 monsterId = 17;//怪物表id
+  repeated InSpireInfo inSpireinfos = 18;//鼓舞等级
+  optional int32 bossIcon = 19;//怪物icon
+  optional int32 endActivityTime = 20;//结束时间（时间点）
+}
+
+message M320000{//查看具体的boss活动
+     message S2C{
+      required int32 rs=1;//错误码
+      optional BossActivityInfo info = 2;
+     }
+
+     message C2S{
+      required int32 activityId = 1;
+     }
+	
+}
+
+message DamageInfo{
+  required fixed64 fighterId = 1;
+  required string name = 2;
+  required int64 damage = 3;
+  required int64 icon = 4;
+}
+
+
+message InSpireInfo{
+  required int32 inSpireId = 1;
+  required int32 level = 2;
+}
+
+message M320001{  // 挑战
+	message  S2C{
+	    required int32 rs = 1;//错误码
+      optional int32 activityId = 2;
+      optional int32 state = 3;//活动状态 0未开启 1准备中 2开启中
+      optional int32 coldDownTime = 4;//冷却时间
+      optional int64 myDamage = 5;//我的伤害
+      optional int64 myRank = 6;//我的排行
+      optional int64 nowHp = 7;//当前血量
+	}
+
+	message  C2S{
+	}
+
+}
+
+
+message M320002{ //鼓舞
+  message  S2C{
+      required int32 rs = 1;//错误码
+  }
+
+  message  C2S{
+       required int32 typeId = 1;//鼓舞表配置id
+  }
+}
+
+message M320003{ //设置阵型
+  message  S2C{
+      required int32 rs = 1;//错误码
+      optional int32 icon = 2;//boss界面显示自己部队的icon
+  }
+
+  message  C2S{
+       repeated Common.FightElementInfo members = 1;//部队列表
+  }
+}
+
+message M320004{ //战斗伤害推送,用于前端飘血
+  message  S2C{
+      repeated DamageInfo infos = 1;
+      required int64 nowHp = 2;
+      required int32 myRank = 3;
+  }
+
+  message  C2S{
+  }
+}
+
+message M320005{ //结束通知
+  message  S2C{
+  required int32 isKill = 1;//是否被击杀：0为未击杀，1为已击杀
+  repeated string killerName = 2;//上次击杀的玩家名字
+  }
+
+  message  C2S{
+  }
+}
+
+message DamageRankInfo{ //排行榜信息
+    required int32 rank=1;  //排名
+    required string name=2; //角色名
+    optional int32 level=3;   //等级
+    required int64 damage=5; //power值
+    required fixed64 playerId=6;  //玩家Id
+}
+
+message M320006{//排行榜信息
+  message  S2C{
+      required int32 rs = 1;//错误码
+      repeated DamageRankInfo ranks = 2;
+      required int32 rankId=3; //排行榜奖励id
+  }
+
+  message  C2S{
+      required int32 monsterId = 1;//bossID
+  }
+}
+
+message M320007{//进入和退出boss场景，有进入才能收到伤害推送协议
+  message  S2C{
+      required int32 rs = 1;//错误码
+  }
+
+  message  C2S{
+      required int32 type = 1;//1进入boss场景，2退出boss场景
+  }
+}
+
+message M320008{//设置自动战斗
+  message  S2C{
+      required int32 rs = 1;//错误码
+      optional int32 type = 2;//0关 1开
+  }
+  message  C2S{
+      required int32 type = 1;//0关 1开
+  }
+}
+
+message M320009{//消除冷却
+  message  S2C{
+      required int32 rs = 1;//错误码
+  }
+  message  C2S{
+      
+  }
+}

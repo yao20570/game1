@@ -1,0 +1,40 @@
+package M12;  
+  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M12";  //技能协议
+
+import "Common.proto";
+
+
+message SkillInfo{    				//技能信息
+	required int32 skillId = 1; 	//技能的ID
+	required int32 level = 2; 		//技能等级
+	required int32 soldierType = 3; //作用于部队的类型
+}
+
+
+message M120001  {  //技能升级 
+	message  S2C{
+	    required int32 rs = 1;			//错误码
+	    optional SkillInfo skillInfo=2; //升级完成后技能信息
+	}
+
+	message  C2S{
+       required int32 skillId = 1;		//技能的ID
+       required int32 type = 2;			//升级类型 0技能书，1金币
+	}
+
+}
+
+message M120002  {  //技能重置 
+	message  S2C{
+	    required int32 rs = 1;			//错误码
+	    repeated SkillInfo skillInfo=2; //重置后技能信息
+	}
+
+	message  C2S{
+       		
+	}
+
+}
+

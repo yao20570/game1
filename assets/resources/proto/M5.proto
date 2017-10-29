@@ -1,0 +1,157 @@
+package M5;  
+option java_package = "com.znl.city.proto";  
+option java_outer_classname = "M5";  //战斗协议
+import "Common.proto";
+message AttackAttr{
+	required int32 type = 1;
+	required int32 value = 2;
+}
+ 
+message PuppetAttr{
+    required int32 index = 1;
+    required int32 modelList = 2;
+    required int32 hp = 4;  //初始化血量
+    repeated AttackAttr attackAttrList = 5;
+    optional string name = 6; //名字  弃用！！
+    repeated int32 colorList = 7; //品质列表  //不用
+    repeated Buff buffs = 8;  //出生buff
+    repeated SkillInfo skillInfos = 9; //默认技能列表 //不用
+    optional int32 num = 10;//数量
+    optional int32 heroId = 11; //英雄ID
+    optional int32 star = 12;//军师星等
+}
+
+message Puppet{
+    required PuppetAttr attr = 1;
+}
+
+message Bloods{
+	required int32 state = 1;
+	required int32 delta = 2;
+	optional int32 hp = 3; //不用
+}
+
+message Target{
+	required int32 index = 1;
+	optional int32 effect = 2; //攻击的效果 闪避、暴击等 不用
+	repeated Bloods bloods = 3; //多段伤害
+	optional int32 status = 4; //不用
+	optional int32 curMp = 5; //不用
+	optional string name = 6;
+	optional int32 num = 7;//剩余数量
+}
+
+message AttrMap{
+	required int32 key = 1;
+	required int32  value = 2;
+	required int32 delta = 3;
+	optional int32 num = 4; //key是血量的时候才发
+}
+
+message Buff{
+	required int32 id = 1;
+	optional int32 lastRound = 2; //剩余回合数 0表示被删除
+	optional int32 iconId = 3; //图标ID
+}
+
+message RoleBuff{
+	required int32 index = 1;
+	repeated Buff buffs = 2; //不用
+	repeated AttrMap attrMaps = 3; //属性改变map //不用
+}
+
+message SkillInfo{
+	required int32 skillId = 1;
+	required int32 curCoolingRound = 2; //当前冷却回合
+}
+
+message RoleSkillInfo{
+	required int32 index = 1;
+	repeated SkillInfo skillInfos = 2;
+}
+
+
+message Round{
+	required int32 index = 1;  //攻击者位置
+	required int32 skillId = 2;
+	repeated Bloods bloods = 3; //自己的血量变化 //不用
+	optional int32 cur_hp = 4; //不用
+	optional int32 status = 5;   //当前回合的状态 1活 2死 //不用
+	optional int32 attack_type = 6; //不用
+	optional int32 curMp = 7; //不用
+
+	repeated Target targets = 8;
+    repeated RoleBuff startRoleBuffs = 9; //不用
+    repeated RoleBuff hitRoleBuffs = 10; //不用
+    repeated RoleBuff endRoleBuffs = 11; //不用
+
+    optional string name = 12; //不用
+ 
+    repeated RoleSkillInfo roleSkillInfos = 13; //不用
+	optional int32 num = 14;//剩余数量
+}
+
+
+message Reward{
+    repeated Common.RewardInfo rewardInfo = 1;
+    optional int32 star = 2; //战斗星等
+}
+
+message WarBookFight{
+	optional int32 talentActivateId = 1;//WarBookSequence配置表的Id
+	optional int32 warBookFightId = 2;//国策战斗表现Id
+	optional int32 skillLevel1 = 3;//技能等级1
+	optional int32 skillLevel2 = 4;//技能等级2
+}
+
+message Battle{
+    required int32 id = 1;  //战斗唯一ID
+	repeated Puppet puppets = 2;
+	repeated Round rounds = 3;
+	optional Reward reward = 4;
+	optional int32 type = 5;//战斗类型
+	optional int32 totalSoldierNum = 6;//出战总数
+	optional int32 loseSoldierPercent = 7;//战损
+	optional int32 dodgePercent = 8;//闪避率
+	optional int32 critPercent = 9;//暴击率率
+	optional int32 bgIcon = 10;
+	optional string leftName = 11; //左边名字
+	optional string rightName = 12; //右边名字
+	optional int32 firstL = 13; //左边先手值
+	optional int32 firstR = 14; //右边先手值
+	optional WarBookFight warBookFightL = 15; //国策战斗UI表现数据(左边)
+	optional WarBookFight warBookFightR = 16; //国策战斗UI表现数据(右边)
+	optional int32 headIconL = 17;    //左边头像
+	optional int32 headIconR = 18;    //右边头像
+	optional fixed64 headIdL = 19;    //左边头像
+	optional fixed64 headIdR = 20;    //右边头像
+}
+
+message M50000  {  //请求战斗
+	message  S2C{
+	    required int32 rc = 1;  //负数为错误码 0胜利 1失败 -1战斗出错了 2战斗播报
+	    optional Battle battle = 2;
+	    optional int32 waitTime = 3; //下一场战斗的等待时间
+	    optional int32 saveTraffic = 4;//节省流量0：关，1：开
+	    optional int32 damage = 5 ;//本次战斗伤害：世界BOSS专用
+	    optional int32 failed = 6; //西域远征专用，0：无作用，1：未能达到通关条件而失败
+	    optional int32 type = 7;//战斗类型1、普通副本 2、冒险副本（装备探险和军械探险）6,同盟副本 10、西域远征 
+	}
+
+	message C2S{
+	    required int32 type = 1;  //战斗类型1、普通副本 2、冒险副本（装备探险和军械探险）10、西域远征
+	    optional int32 id = 2; //副本ID
+	    repeated Common.FightElementInfo infos = 3;//出战列表
+	    optional int32 saveTraffic = 4;//节省流量0：关，1：开
+	}
+}
+
+message M50001  {  //请求战斗结束
+	message  S2C{
+	    required int32 rc = 1;  //错误码
+	}
+
+	message C2S{
+	    required int32 id = 1; //战斗ID
+	}
+}

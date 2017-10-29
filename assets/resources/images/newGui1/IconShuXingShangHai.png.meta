@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "57e8436a-44b1-43ef-a245-a313246464d3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "IconShuXingShangHai": {
+      "ver": "1.0.3",
+      "uuid": "5a91b444-e687-48df-b02a-6f2d029fb0e9",
+      "rawTextureUuid": "57e8436a-44b1-43ef-a245-a313246464d3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 3,
+      "trimY": 5,
+      "width": 24,
+      "height": 21,
+      "rawWidth": 30,
+      "rawHeight": 30,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
